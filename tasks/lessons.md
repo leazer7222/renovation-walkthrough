@@ -1,3 +1,20 @@
+## Visual Style Picker (April 2, 2026)
+
+### Exact-Count Multi-Select UX
+- **Lesson**: "Select up to N" is ambiguous; "pick exactly N" creates a clear goal and a satisfying completion state.
+- **Evidence**: Capping at 3 and showing a live counter + dynamic button label ("Select 2 more") gave the step a clear finish line.
+- **Impact**: Users know exactly when they're done and what action to take next.
+
+### Dimming Non-Selectable Options
+- **Lesson**: Hiding options when a limit is reached is jarring; dimming them is softer and still communicates the constraint.
+- **Evidence**: 40% opacity on unselected cards once 3 are chosen made the UI self-explanatory without removing choices.
+- **Impact**: No need for a tooltip or error message — the visual state speaks for itself.
+
+### Asset Serving: Public Folder Duplication
+- **Lesson**: Any new asset folder added to `visualization-library` must also be copied to `webapp/public/` to be served by Vite.
+- **Evidence**: Style images were untracked and not in public until explicitly copied; the component rendered broken images otherwise.
+- **Impact**: Both locations must be kept in sync and both committed to git.
+
 ## Productized Copy & UX (April 2, 2026)
 
 ### Strategic Tone Shift

@@ -46,6 +46,15 @@
 - Polished React webapp with sequential challenger game logic.
 - Config-driven architecture for landing and onboarding copy.
 
+## Major Updates (April 2, 2026 - Iteration 4)
+
+### Visual Style Picker (Step 3 Onboarding)
+- **Image Grid**: Replaced 4 generic text cards with all 15 actual kitchen style images in a 5-column × 3-row grid.
+- **Exact Selection**: Users must pick exactly 3 styles; unselected cards dim to 40% opacity once the limit is reached.
+- **Feedback**: Blue checkmark badge on selected cards, live "X / 3 selected" counter, and a dynamic button label ("Select 2 more" → "Continue").
+- **Assets**: Copied style PNGs to `webapp/public/` for Vite serving; also committed source images to `visualization-library/`.
+- **Deployed**: Committed and pushed to GitHub; Netlify auto-deployed.
+
 ## Next Steps
 - Phase 4: Expansion to additional rooms (Bathroom, Living Room, etc.).
 - Phase 5: Result persistence and contractor matching integration.

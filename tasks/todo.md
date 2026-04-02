@@ -27,6 +27,14 @@
 - [x] Persistent "Current Selections" bar (thumb + label)
 - [x] Visual Hero image reveal at the end
 
+## Phase 3.7: Visual Style Picker ✅ COMPLETE
+- [x] Replace generic text options with 15 kitchen style image cards
+- [x] 5-column × 3-row CSS grid layout
+- [x] Enforce exactly 3 selections (dim + block extras, checkmark badge, live counter)
+- [x] Copy style images to webapp/public for asset serving
+- [x] Commit source images to visualization-library
+- [x] Push to GitHub and deploy to Netlify
+
 ## Phase 3.6: Professional Onboarding & Deployment ✅ COMPLETE
 - [x] Productized landing screen copy (Headline, Subheadline, CTA)
 - [x] Enhanced onboarding with subtitles and descriptors
