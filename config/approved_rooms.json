@@ -1,0 +1,46 @@
+[
+  {
+    "display_name": "Living Room",
+    "slug": "living-room"
+  },
+  {
+    "display_name": "Bedroom",
+    "slug": "bedroom"
+  },
+  {
+    "display_name": "Kitchen",
+    "slug": "kitchen"
+  },
+  {
+    "display_name": "Bathroom",
+    "slug": "bathroom"
+  },
+  {
+    "display_name": "Dining Room",
+    "slug": "dining-room"
+  },
+  {
+    "display_name": "Home Office",
+    "slug": "home-office"
+  },
+  {
+    "display_name": "Kids Room",
+    "slug": "kids-room"
+  },
+  {
+    "display_name": "Garage",
+    "slug": "garage"
+  },
+  {
+    "display_name": "Walk-in Closet",
+    "slug": "walk-in-closet"
+  },
+  {
+    "display_name": "Balcony",
+    "slug": "balcony"
+  },
+  {
+    "display_name": "Mudroom",
+    "slug": "mudroom"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "flooring_options": [
+    "light-oak",
+    "dark-walnut",
+    "large-format-tile",
+    "microcement"
+  ],
+  "countertop_options": [
+    "dark-quartz",
+    "marble",
+    "granite",
+    "butcher-block"
+  ],
+  "cabinet_options": [
+    "warm-wood",
+    "matte-black",
+    "shaker",
+    "flat-panel-white"
+  ],
+  "total_combinations": 64
+}

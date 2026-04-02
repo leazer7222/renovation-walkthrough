@@ -1,0 +1,25 @@
+{
+  "workbook_path": "C:\\Users\\cjlea\\AI-Projects\\RenovationWalkthrough\\Excel Inputs\\ReformAI_Visualization_Styles_Rooms.xlsx",
+  "sheets_inspected": [
+    "Styles",
+    "Rooms"
+  ],
+  "chosen_sheets": [
+    "Styles",
+    "Rooms"
+  ],
+  "residential_filter_applied": true,
+  "counts": {
+    "styles_extracted": 15,
+    "residential_rooms_extracted": 11,
+    "total_rooms_in_sheet": 65,
+    "total_styles_in_sheet": 762
+  },
+  "warnings": [
+    "Duplicate style names may exist - check for variants",
+    "Style and room names normalized to lowercase with hyphens",
+    "Run this script after Excel updates to refresh structure"
+  ],
+  "extraction_timestamp": "2026-04-01T17:05:44.178565",
+  "script_version": "1.0"
+}

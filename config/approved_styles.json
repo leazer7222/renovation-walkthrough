@@ -1,0 +1,63 @@
+[
+  {
+    "display_name": "Modern",
+    "slug": "modern"
+  },
+  {
+    "display_name": "Contemporary",
+    "slug": "contemporary"
+  },
+  {
+    "display_name": "Minimalist",
+    "slug": "minimalist"
+  },
+  {
+    "display_name": "Industrial",
+    "slug": "industrial"
+  },
+  {
+    "display_name": "Midcentury Modern",
+    "slug": "midcentury-modern"
+  },
+  {
+    "display_name": "Farmhouse",
+    "slug": "farmhouse"
+  },
+  {
+    "display_name": "Coastal",
+    "slug": "coastal"
+  },
+  {
+    "display_name": "Japandi",
+    "slug": "japandi"
+  },
+  {
+    "display_name": "Rustic",
+    "slug": "rustic"
+  },
+  {
+    "display_name": "Bohemian",
+    "slug": "bohemian"
+  },
+  {
+    "display_name": "Biophilic",
+    "slug": "biophilic"
+  },
+  {
+    "display_name": "French Country",
+    "slug": "french-country"
+  },
+  {
+    "display_name": "Japanese",
+    "slug": "japanese"
+  },
+  {
+    "display_name": "Neoclassic",
+    "slug": "neoclassic"
+  },
+  {
+    "display_name": "Vintage",
+    "slug": "vintage"
+  },
+  
+]

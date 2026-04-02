@@ -1,0 +1,74 @@
+{
+  "kitchen": {
+    "flooring": {
+      "light-oak": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "dark-walnut": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "large-format-tile": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "microcement": {
+        "tiers": ["budget", "balanced", "premium"]
+      }
+    },
+    "countertops": {
+      "quartz": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "marble": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "granite": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "butcher-block": {
+        "tiers": ["budget", "balanced", "premium"]
+      }
+    },
+    "cabinets": {
+      "flat-panel": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "shaker": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "handleless": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "open-shelving": {
+        "tiers": ["budget", "balanced", "premium"]
+      }
+    },
+    "backsplash": {
+      "subway-tile": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "zellige": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "slab": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "patterned": {
+        "tiers": ["budget", "balanced", "premium"]
+      }
+    },
+    "appliances": {
+      "stainless-standard": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "panel-ready": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "matte-black": {
+        "tiers": ["budget", "balanced", "premium"]
+      },
+      "professional": {
+        "tiers": ["budget", "balanced", "premium"]
+      }
+    }
+  }
+}

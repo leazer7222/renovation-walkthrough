@@ -1,0 +1,77 @@
+[
+  {
+    "display_name": "Modern",
+    "slug": "modern",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Contemporary",
+    "slug": "contemporary",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Minimalist",
+    "slug": "minimalist",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Industrial",
+    "slug": "industrial",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Midcentury Modern",
+    "slug": "midcentury-modern",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Farmhouse",
+    "slug": "farmhouse",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Coastal",
+    "slug": "coastal",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Japandi",
+    "slug": "japandi",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Rustic",
+    "slug": "rustic",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Bohemian",
+    "slug": "bohemian",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Biophilic",
+    "slug": "biophilic",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "French Country",
+    "slug": "french-country",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Japanese",
+    "slug": "japanese",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Neoclassic",
+    "slug": "neoclassic",
+    "source_sheet": "Styles"
+  },
+  {
+    "display_name": "Vintage",
+    "slug": "vintage",
+    "source_sheet": "Styles"
+  }
+]

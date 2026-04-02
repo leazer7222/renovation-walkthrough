@@ -1,0 +1,13 @@
+{
+  "kitchen": ["flooring", "cabinets", "countertops", "backsplash", "appliances"],
+  "bathroom": ["flooring", "vanity", "fixtures", "shower", "lighting"],
+  "living-room": ["flooring", "walls", "furniture", "lighting", "windows"],
+  "bedroom": ["flooring", "bed", "storage", "lighting", "windows"],
+  "dining-room": ["flooring", "table", "chairs", "lighting", "storage"],
+  "home-office": ["desk", "chair", "storage", "lighting", "flooring"],
+  "kids-room": ["flooring", "bed", "storage", "walls", "lighting"],
+  "garage": ["flooring", "storage", "doors", "lighting", "organization"],
+  "walk-in-closet": ["flooring", "shelves", "lighting", "organization"],
+  "balcony": ["flooring", "railing", "furniture", "lighting", "plants"],
+  "mudroom": ["flooring", "storage", "bench", "lighting", "hooks"]
+}

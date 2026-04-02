@@ -1,0 +1,57 @@
+[
+  {
+    "display_name": "Balcony",
+    "slug": "balcony",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Bathroom",
+    "slug": "bathroom",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Bedroom",
+    "slug": "bedroom",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Dining Room",
+    "slug": "dining-room",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Garage",
+    "slug": "garage",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Home Office",
+    "slug": "home-office",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Kids Room",
+    "slug": "kids-room",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Kitchen",
+    "slug": "kitchen",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Living Room",
+    "slug": "living-room",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Mudroom",
+    "slug": "mudroom",
+    "source_sheet": "Rooms"
+  },
+  {
+    "display_name": "Walk-in Closet",
+    "slug": "walk-in-closet",
+    "source_sheet": "Rooms"
+  }
+]

@@ -1,0 +1,89 @@
+{
+  "room": "kitchen",
+  "decision_flow": [
+    {
+      "round": 1,
+      "category": "flooring",
+      "question": "Which flooring option do you prefer?",
+      "options": [
+        {
+          "id": "light-oak",
+          "name": "Light Oak Hardwood",
+          "description": "Warm, natural hardwood flooring",
+          "visual_path": "visualization-library/comparison/kitchen/flooring/light-oak/tiers/balanced.jpg"
+        },
+        {
+          "id": "large-format-tile",
+          "name": "Large Format Tile",
+          "description": "Clean, minimalist large tiles",
+          "visual_path": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/balanced.jpg"
+        }
+      ],
+      "winner": "large-format-tile",
+      "reasoning": "User preferred cleaner, more spacious look"
+    },
+    {
+      "round": 2,
+      "category": "flooring",
+      "sub_round": "tier_selection",
+      "question": "Which price tier for Large Format Tile?",
+      "winner": "large-format-tile",
+      "tiers": [
+        {
+          "id": "budget",
+          "name": "Budget",
+          "price_range": "$3-5/sq ft",
+          "description": "Basic quality, standard installation",
+          "visual_path": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/budget.jpg"
+        },
+        {
+          "id": "balanced",
+          "name": "Balanced",
+          "price_range": "$5-8/sq ft",
+          "description": "Good quality, professional installation",
+          "visual_path": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/balanced.jpg"
+        },
+        {
+          "id": "premium",
+          "name": "Premium",
+          "price_range": "$8-15/sq ft",
+          "description": "High-end materials, premium installation",
+          "visual_path": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/premium.jpg"
+        }
+      ],
+      "selected_tier": "balanced",
+      "reasoning": "User chose balanced quality for good value"
+    },
+    {
+      "round": 3,
+      "category": "countertops",
+      "question": "Which countertop material?",
+      "options": [
+        {
+          "id": "quartz",
+          "name": "Quartz",
+          "description": "Durable, low-maintenance surface",
+          "visual_path": "visualization-library/comparison/kitchen/countertops/quartz/tiers/balanced.jpg"
+        },
+        {
+          "id": "marble",
+          "name": "Marble",
+          "description": "Natural stone with elegant veining",
+          "visual_path": "visualization-library/comparison/kitchen/countertops/marble/tiers/balanced.jpg"
+        }
+      ],
+      "winner": "marble",
+      "reasoning": "User preferred natural material over synthetic"
+    }
+  ],
+  "final_selections": {
+    "flooring": {
+      "option": "large-format-tile",
+      "tier": "balanced"
+    },
+    "countertops": {
+      "option": "marble",
+      "tier": "balanced"
+    }
+  }
+}

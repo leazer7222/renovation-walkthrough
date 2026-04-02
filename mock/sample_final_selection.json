@@ -1,0 +1,51 @@
+{
+  "project_id": "sample_project_001",
+  "user_id": "sample_user",
+  "timestamp": "2026-04-01T12:00:00Z",
+  "final_selections": {
+    "kitchen": {
+      "style": "modern",
+      "components": {
+        "flooring": "large_format_tiles",
+        "cabinets": "handleless_white",
+        "countertops": "marble_carrara",
+        "backsplash": "subway_tiles",
+        "appliances": "stainless_steel"
+      },
+      "confidence_score": 0.85
+    },
+    "living_room": {
+      "style": "contemporary",
+      "components": {
+        "flooring": "wide_plank_hardwood",
+        "walls": "neutral_paint",
+        "furniture": "mid_century_modern",
+        "lighting": "track_lighting",
+        "windows": "floor_to_ceiling"
+      },
+      "confidence_score": 0.78
+    },
+    "bathroom": {
+      "style": "minimalist",
+      "components": {
+        "flooring": "large_format_porcelain",
+        "vanity": "floating_vanity",
+        "fixtures": "brushed_nickel",
+        "shower": "frameless_glass",
+        "lighting": "led_recessed"
+      },
+      "confidence_score": 0.92
+    }
+  },
+  "decision_summary": {
+    "total_decisions_made": 12,
+    "rooms_completed": 3,
+    "average_confidence": 0.85,
+    "style_consistency_score": 0.76
+  },
+  "next_steps": [
+    "Generate 3D visualization",
+    "Create detailed material specifications",
+    "Prepare contractor bid package"
+  ]
+}

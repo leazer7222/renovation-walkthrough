@@ -1,0 +1,166 @@
+room,room_slug,style,style_slug,asset_type,file_name,file_path,status,notes
+Balcony,balcony,Modern,modern,base,,visualization-library/balcony/modern/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Contemporary,contemporary,base,,visualization-library/balcony/contemporary/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Minimalist,minimalist,base,,visualization-library/balcony/minimalist/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Industrial,industrial,base,,visualization-library/balcony/industrial/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Midcentury Modern,midcentury-modern,base,,visualization-library/balcony/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Farmhouse,farmhouse,base,,visualization-library/balcony/farmhouse/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Coastal,coastal,base,,visualization-library/balcony/coastal/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Japandi,japandi,base,,visualization-library/balcony/japandi/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Rustic,rustic,base,,visualization-library/balcony/rustic/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Bohemian,bohemian,base,,visualization-library/balcony/bohemian/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Biophilic,biophilic,base,,visualization-library/balcony/biophilic/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,French Country,french-country,base,,visualization-library/balcony/french-country/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Japanese,japanese,base,,visualization-library/balcony/japanese/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Neoclassic,neoclassic,base,,visualization-library/balcony/neoclassic/base/,pending,Placeholder - base assets to be added
+Balcony,balcony,Vintage,vintage,base,,visualization-library/balcony/vintage/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Modern,modern,base,,visualization-library/bathroom/modern/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Contemporary,contemporary,base,,visualization-library/bathroom/contemporary/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Minimalist,minimalist,base,,visualization-library/bathroom/minimalist/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Industrial,industrial,base,,visualization-library/bathroom/industrial/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Midcentury Modern,midcentury-modern,base,,visualization-library/bathroom/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Farmhouse,farmhouse,base,,visualization-library/bathroom/farmhouse/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Coastal,coastal,base,,visualization-library/bathroom/coastal/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Japandi,japandi,base,,visualization-library/bathroom/japandi/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Rustic,rustic,base,,visualization-library/bathroom/rustic/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Bohemian,bohemian,base,,visualization-library/bathroom/bohemian/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Biophilic,biophilic,base,,visualization-library/bathroom/biophilic/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,French Country,french-country,base,,visualization-library/bathroom/french-country/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Japanese,japanese,base,,visualization-library/bathroom/japanese/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Neoclassic,neoclassic,base,,visualization-library/bathroom/neoclassic/base/,pending,Placeholder - base assets to be added
+Bathroom,bathroom,Vintage,vintage,base,,visualization-library/bathroom/vintage/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Modern,modern,base,,visualization-library/bedroom/modern/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Contemporary,contemporary,base,,visualization-library/bedroom/contemporary/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Minimalist,minimalist,base,,visualization-library/bedroom/minimalist/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Industrial,industrial,base,,visualization-library/bedroom/industrial/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Midcentury Modern,midcentury-modern,base,,visualization-library/bedroom/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Farmhouse,farmhouse,base,,visualization-library/bedroom/farmhouse/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Coastal,coastal,base,,visualization-library/bedroom/coastal/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Japandi,japandi,base,,visualization-library/bedroom/japandi/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Rustic,rustic,base,,visualization-library/bedroom/rustic/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Bohemian,bohemian,base,,visualization-library/bedroom/bohemian/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Biophilic,biophilic,base,,visualization-library/bedroom/biophilic/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,French Country,french-country,base,,visualization-library/bedroom/french-country/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Japanese,japanese,base,,visualization-library/bedroom/japanese/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Neoclassic,neoclassic,base,,visualization-library/bedroom/neoclassic/base/,pending,Placeholder - base assets to be added
+Bedroom,bedroom,Vintage,vintage,base,,visualization-library/bedroom/vintage/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Modern,modern,base,,visualization-library/dining-room/modern/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Contemporary,contemporary,base,,visualization-library/dining-room/contemporary/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Minimalist,minimalist,base,,visualization-library/dining-room/minimalist/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Industrial,industrial,base,,visualization-library/dining-room/industrial/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Midcentury Modern,midcentury-modern,base,,visualization-library/dining-room/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Farmhouse,farmhouse,base,,visualization-library/dining-room/farmhouse/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Coastal,coastal,base,,visualization-library/dining-room/coastal/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Japandi,japandi,base,,visualization-library/dining-room/japandi/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Rustic,rustic,base,,visualization-library/dining-room/rustic/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Bohemian,bohemian,base,,visualization-library/dining-room/bohemian/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Biophilic,biophilic,base,,visualization-library/dining-room/biophilic/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,French Country,french-country,base,,visualization-library/dining-room/french-country/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Japanese,japanese,base,,visualization-library/dining-room/japanese/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Neoclassic,neoclassic,base,,visualization-library/dining-room/neoclassic/base/,pending,Placeholder - base assets to be added
+Dining Room,dining-room,Vintage,vintage,base,,visualization-library/dining-room/vintage/base/,pending,Placeholder - base assets to be added
+Garage,garage,Modern,modern,base,,visualization-library/garage/modern/base/,pending,Placeholder - base assets to be added
+Garage,garage,Contemporary,contemporary,base,,visualization-library/garage/contemporary/base/,pending,Placeholder - base assets to be added
+Garage,garage,Minimalist,minimalist,base,,visualization-library/garage/minimalist/base/,pending,Placeholder - base assets to be added
+Garage,garage,Industrial,industrial,base,,visualization-library/garage/industrial/base/,pending,Placeholder - base assets to be added
+Garage,garage,Midcentury Modern,midcentury-modern,base,,visualization-library/garage/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Garage,garage,Farmhouse,farmhouse,base,,visualization-library/garage/farmhouse/base/,pending,Placeholder - base assets to be added
+Garage,garage,Coastal,coastal,base,,visualization-library/garage/coastal/base/,pending,Placeholder - base assets to be added
+Garage,garage,Japandi,japandi,base,,visualization-library/garage/japandi/base/,pending,Placeholder - base assets to be added
+Garage,garage,Rustic,rustic,base,,visualization-library/garage/rustic/base/,pending,Placeholder - base assets to be added
+Garage,garage,Bohemian,bohemian,base,,visualization-library/garage/bohemian/base/,pending,Placeholder - base assets to be added
+Garage,garage,Biophilic,biophilic,base,,visualization-library/garage/biophilic/base/,pending,Placeholder - base assets to be added
+Garage,garage,French Country,french-country,base,,visualization-library/garage/french-country/base/,pending,Placeholder - base assets to be added
+Garage,garage,Japanese,japanese,base,,visualization-library/garage/japanese/base/,pending,Placeholder - base assets to be added
+Garage,garage,Neoclassic,neoclassic,base,,visualization-library/garage/neoclassic/base/,pending,Placeholder - base assets to be added
+Garage,garage,Vintage,vintage,base,,visualization-library/garage/vintage/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Modern,modern,base,,visualization-library/home-office/modern/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Contemporary,contemporary,base,,visualization-library/home-office/contemporary/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Minimalist,minimalist,base,,visualization-library/home-office/minimalist/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Industrial,industrial,base,,visualization-library/home-office/industrial/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Midcentury Modern,midcentury-modern,base,,visualization-library/home-office/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Farmhouse,farmhouse,base,,visualization-library/home-office/farmhouse/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Coastal,coastal,base,,visualization-library/home-office/coastal/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Japandi,japandi,base,,visualization-library/home-office/japandi/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Rustic,rustic,base,,visualization-library/home-office/rustic/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Bohemian,bohemian,base,,visualization-library/home-office/bohemian/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Biophilic,biophilic,base,,visualization-library/home-office/biophilic/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,French Country,french-country,base,,visualization-library/home-office/french-country/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Japanese,japanese,base,,visualization-library/home-office/japanese/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Neoclassic,neoclassic,base,,visualization-library/home-office/neoclassic/base/,pending,Placeholder - base assets to be added
+Home Office,home-office,Vintage,vintage,base,,visualization-library/home-office/vintage/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Modern,modern,base,,visualization-library/kids-room/modern/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Contemporary,contemporary,base,,visualization-library/kids-room/contemporary/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Minimalist,minimalist,base,,visualization-library/kids-room/minimalist/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Industrial,industrial,base,,visualization-library/kids-room/industrial/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Midcentury Modern,midcentury-modern,base,,visualization-library/kids-room/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Farmhouse,farmhouse,base,,visualization-library/kids-room/farmhouse/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Coastal,coastal,base,,visualization-library/kids-room/coastal/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Japandi,japandi,base,,visualization-library/kids-room/japandi/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Rustic,rustic,base,,visualization-library/kids-room/rustic/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Bohemian,bohemian,base,,visualization-library/kids-room/bohemian/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Biophilic,biophilic,base,,visualization-library/kids-room/biophilic/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,French Country,french-country,base,,visualization-library/kids-room/french-country/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Japanese,japanese,base,,visualization-library/kids-room/japanese/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Neoclassic,neoclassic,base,,visualization-library/kids-room/neoclassic/base/,pending,Placeholder - base assets to be added
+Kids Room,kids-room,Vintage,vintage,base,,visualization-library/kids-room/vintage/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Modern,modern,base,,visualization-library/kitchen/modern/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Contemporary,contemporary,base,,visualization-library/kitchen/contemporary/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Minimalist,minimalist,base,,visualization-library/kitchen/minimalist/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Industrial,industrial,base,,visualization-library/kitchen/industrial/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Midcentury Modern,midcentury-modern,base,,visualization-library/kitchen/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Farmhouse,farmhouse,base,,visualization-library/kitchen/farmhouse/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Coastal,coastal,base,,visualization-library/kitchen/coastal/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Japandi,japandi,base,,visualization-library/kitchen/japandi/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Rustic,rustic,base,,visualization-library/kitchen/rustic/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Bohemian,bohemian,base,,visualization-library/kitchen/bohemian/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Biophilic,biophilic,base,,visualization-library/kitchen/biophilic/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,French Country,french-country,base,,visualization-library/kitchen/french-country/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Japanese,japanese,base,,visualization-library/kitchen/japanese/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Neoclassic,neoclassic,base,,visualization-library/kitchen/neoclassic/base/,pending,Placeholder - base assets to be added
+Kitchen,kitchen,Vintage,vintage,base,,visualization-library/kitchen/vintage/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Modern,modern,base,,visualization-library/living-room/modern/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Contemporary,contemporary,base,,visualization-library/living-room/contemporary/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Minimalist,minimalist,base,,visualization-library/living-room/minimalist/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Industrial,industrial,base,,visualization-library/living-room/industrial/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Midcentury Modern,midcentury-modern,base,,visualization-library/living-room/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Farmhouse,farmhouse,base,,visualization-library/living-room/farmhouse/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Coastal,coastal,base,,visualization-library/living-room/coastal/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Japandi,japandi,base,,visualization-library/living-room/japandi/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Rustic,rustic,base,,visualization-library/living-room/rustic/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Bohemian,bohemian,base,,visualization-library/living-room/bohemian/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Biophilic,biophilic,base,,visualization-library/living-room/biophilic/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,French Country,french-country,base,,visualization-library/living-room/french-country/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Japanese,japanese,base,,visualization-library/living-room/japanese/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Neoclassic,neoclassic,base,,visualization-library/living-room/neoclassic/base/,pending,Placeholder - base assets to be added
+Living Room,living-room,Vintage,vintage,base,,visualization-library/living-room/vintage/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Modern,modern,base,,visualization-library/mudroom/modern/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Contemporary,contemporary,base,,visualization-library/mudroom/contemporary/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Minimalist,minimalist,base,,visualization-library/mudroom/minimalist/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Industrial,industrial,base,,visualization-library/mudroom/industrial/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Midcentury Modern,midcentury-modern,base,,visualization-library/mudroom/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Farmhouse,farmhouse,base,,visualization-library/mudroom/farmhouse/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Coastal,coastal,base,,visualization-library/mudroom/coastal/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Japandi,japandi,base,,visualization-library/mudroom/japandi/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Rustic,rustic,base,,visualization-library/mudroom/rustic/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Bohemian,bohemian,base,,visualization-library/mudroom/bohemian/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Biophilic,biophilic,base,,visualization-library/mudroom/biophilic/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,French Country,french-country,base,,visualization-library/mudroom/french-country/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Japanese,japanese,base,,visualization-library/mudroom/japanese/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Neoclassic,neoclassic,base,,visualization-library/mudroom/neoclassic/base/,pending,Placeholder - base assets to be added
+Mudroom,mudroom,Vintage,vintage,base,,visualization-library/mudroom/vintage/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Modern,modern,base,,visualization-library/walk-in-closet/modern/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Contemporary,contemporary,base,,visualization-library/walk-in-closet/contemporary/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Minimalist,minimalist,base,,visualization-library/walk-in-closet/minimalist/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Industrial,industrial,base,,visualization-library/walk-in-closet/industrial/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Midcentury Modern,midcentury-modern,base,,visualization-library/walk-in-closet/midcentury-modern/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Farmhouse,farmhouse,base,,visualization-library/walk-in-closet/farmhouse/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Coastal,coastal,base,,visualization-library/walk-in-closet/coastal/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Japandi,japandi,base,,visualization-library/walk-in-closet/japandi/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Rustic,rustic,base,,visualization-library/walk-in-closet/rustic/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Bohemian,bohemian,base,,visualization-library/walk-in-closet/bohemian/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Biophilic,biophilic,base,,visualization-library/walk-in-closet/biophilic/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,French Country,french-country,base,,visualization-library/walk-in-closet/french-country/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Japanese,japanese,base,,visualization-library/walk-in-closet/japanese/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Neoclassic,neoclassic,base,,visualization-library/walk-in-closet/neoclassic/base/,pending,Placeholder - base assets to be added
+Walk-in Closet,walk-in-closet,Vintage,vintage,base,,visualization-library/walk-in-closet/vintage/base/,pending,Placeholder - base assets to be added

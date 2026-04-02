@@ -1,0 +1,91 @@
+{
+  "comparison": {
+    "kitchen": {
+      "base": [
+        "visualization-library/comparison/kitchen/base/neutral_kitchen.jpg"
+      ],
+      "flooring": {
+        "light-oak": {
+          "tiers": {
+            "budget": "visualization-library/comparison/kitchen/flooring/light-oak/tiers/budget.jpg",
+            "balanced": "visualization-library/comparison/kitchen/flooring/light-oak/tiers/balanced.jpg",
+            "premium": "visualization-library/comparison/kitchen/flooring/light-oak/tiers/premium.jpg"
+          }
+        },
+        "large-format-tile": {
+          "tiers": {
+            "budget": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/budget.jpg",
+            "balanced": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/balanced.jpg",
+            "premium": "visualization-library/comparison/kitchen/flooring/large-format-tile/tiers/premium.jpg"
+          }
+        }
+      },
+      "countertops": {
+        "quartz": {
+          "tiers": {
+            "budget": "visualization-library/comparison/kitchen/countertops/quartz/tiers/budget.jpg",
+            "balanced": "visualization-library/comparison/kitchen/countertops/quartz/tiers/balanced.jpg",
+            "premium": "visualization-library/comparison/kitchen/countertops/quartz/tiers/premium.jpg"
+          }
+        },
+        "marble": {
+          "tiers": {
+            "budget": "visualization-library/comparison/kitchen/countertops/marble/tiers/budget.jpg",
+            "balanced": "visualization-library/comparison/kitchen/countertops/marble/tiers/balanced.jpg",
+            "premium": "visualization-library/comparison/kitchen/countertops/marble/tiers/premium.jpg"
+          }
+        }
+      }
+    }
+  },
+  "style-reference": {
+    "kitchen": {
+      "modern": {
+        "base": [
+          "visualization-library/style-reference/kitchen/modern/base/modern_kitchen_main.jpg"
+        ],
+        "refs": [
+          "visualization-library/style-reference/kitchen/modern/refs/modern_kitchen_1.jpg",
+          "visualization-library/style-reference/kitchen/modern/refs/modern_kitchen_2.jpg"
+        ],
+        "thumbnails": [
+          "visualization-library/style-reference/kitchen/modern/thumbnails/thumb_1.jpg",
+          "visualization-library/style-reference/kitchen/modern/thumbnails/thumb_2.jpg"
+        ]
+      },
+      "farmhouse": {
+        "base": [
+          "visualization-library/style-reference/kitchen/farmhouse/base/farmhouse_kitchen_main.jpg"
+        ],
+        "refs": [
+          "visualization-library/style-reference/kitchen/farmhouse/refs/farmhouse_kitchen_1.jpg"
+        ],
+        "thumbnails": [
+          "visualization-library/style-reference/kitchen/farmhouse/thumbnails/thumb_1.jpg"
+        ]
+      }
+    },
+    "living-room": {
+      "contemporary": {
+        "base": [
+          "visualization-library/style-reference/living-room/contemporary/base/contemporary_living_main.jpg"
+        ],
+        "refs": [
+          "visualization-library/style-reference/living-room/contemporary/refs/contemporary_living_1.jpg"
+        ],
+        "thumbnails": [
+          "visualization-library/style-reference/living-room/contemporary/thumbnails/thumb_1.jpg"
+        ]
+      }
+    }
+  },
+  "final-renders": {
+    "kitchen": [
+      "visualization-library/final-renders/kitchen/styled_kitchen_1.jpg",
+      "visualization-library/final-renders/kitchen/styled_kitchen_2.jpg"
+    ],
+    "living-room": [
+      "visualization-library/final-renders/living-room/styled_living_1.jpg"
+    ]
+  }
+}

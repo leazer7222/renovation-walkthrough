@@ -1,0 +1,66 @@
+# Lessons Learned - RenovationWalkthrough Project
+
+## User Flow & Contextual Feedback (April 2, 2026)
+
+### Transition Screens as Context Drivers
+- **Lesson**: Sudden shifts between categories can be disorienting.
+- **Evidence**: Moving directly from Flooring to Countertop without a "pause" felt abrupt.
+- **Impact**: Dedicated transition screens that confirm the previous selection and set the stage for the next one (e.g., "Now let's choose a countertop that works with your floor") improve the cognitive flow.
+- **Prevention**: Insert "breather" screens in long multi-step decision processes.
+
+### Persistent Status Visibility
+- **Lesson**: Users forget their previous choices in deep decision trees.
+- **Evidence**: During the Cabinet round, users often wanted to see their selected Flour/Countertop for coordination.
+- **Impact**: A persistent "Current Selections" bar with thumbnails reduces memory load and increases confidence in the current choice.
+- **Prevention**: Always show chosen state during subsequent selection steps.
+
+### Onboarding for Personalization
+- **Lesson**: Personalizing the experience early increases user investment.
+- **Evidence**: Asking for room, budget, and style before the game starts makes the "Final Reveal" feel more earned.
+- **Impact**: Capturing intent in state allows for future style inference and more relevant contractor matching.
+
+## UI/UX & Asset Lessons (April 2, 2026)
+
+
+### Aspect Ratio & Focal Points
+- **Lesson**: Standard wide aspect ratios (16:9) can crop critical floor details in renovation scenes.
+- **Evidence**: Initial 16:9 260px fixed height cut off flooring in front of the island.
+- **Impact**: Fixing to 3:2 or 4:3 with `object-position: bottom` ensures critical details are visible.
+- **Prevention**: Use aspect-ratio-based layouts and focal point settings from the start.
+
+### Asset Normalization & Typo Fixing
+- **Lesson**: Source assets often have inconsistent naming patterns (e.g., underscores vs. dots).
+- **Evidence**: `flooring_light-oak_01.png` vs `dark-walnut_marble_shaker.01.png` and `lilght-oak`.
+- **Impact**: Asset resolver should use a strict normalization script that renames files based on their folder hierarchy to ensure 100% consistency.
+- **Prevention**: Aggressively normalize all leaf filenames during initial asset setup or copying.
+
+### Serving External Assets
+- **Lesson**: Standard Vite dev servers cannot easily serve files outside the project root without symlinking or copying.
+- **Evidence**: Symlinking required admin rights, which failed in the restricted environment.
+- **Impact**: Copying the directory to `webapp/public/` proved to be the most reliable workaround.
+- **Prevention**: Anticipate environment-specific permission issues; plan for either copying or custom server configuration.
+
+### Premium Aesthetics
+- **Lesson**: Professional renovation apps require "Rich Aesthetics" to build trust.
+- **Evidence**: Adding Glassmorphism and better HSL-based styling significantly improved the feel.
+- **Impact**: High completion rates depend on visual quality and confidence.
+- **Prevention**: Implement a cohesive design system (typography, colors, shadows) early.
+
+## Project Structure Lessons
+
+### Three-Layer Asset Architecture
+- **Lesson**: Separate concerns between comparison, reference, and final assets.
+- **Evidence**: Decision flow requires neutral comparisons first, then style application.
+- **Impact**: Cleaner separation allows for better user flow and modular asset updates.
+
+### Excel Sheet Naming & Case Sensitivity
+- **Lesson**: Always verify exact sheet names and data cases in source Excel files.
+- **Evidence**: Sheet name was "Styles" (plural), while floor filter was "Residential".
+- **Impact**: Initial extraction failed due to case mismatch and pluralization.
+- **Prevention**: Print unique values from filter columns before applying code.
+
+### Idempotent Setup Scripts
+- **Lesson**: Automation scripts should be safe to run multiple times without data loss.
+- **Evidence**: Used `exist_ok=True` and relative paths throughout Python scripts.
+- **Impact**: Easy to rebuild entire structure from Excel source without fear of breaking progress.
+- **Prevention**: Design all file system operations to be idempotent.
