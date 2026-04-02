@@ -184,7 +184,7 @@ button:hover {
 /* Onboarding Styles */
 .onboarding-screen {
   padding: 4rem 2rem;
-  max-width: 800px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -351,6 +351,100 @@ button:hover {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text);
+}
+
+/* Styles Grid (5×3 image picker) */
+.style-selection-count {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+.styles-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.style-card {
+  cursor: pointer;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  background: white;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.style-card:hover:not(.disabled) {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.style-card.selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15), var(--shadow-lg);
+}
+
+.style-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.style-card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.style-card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.style-card:hover:not(.disabled) .style-card-image-wrap img {
+  transform: scale(1.08);
+}
+
+.style-card-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.style-card-label {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.style-card.selected .style-card-label {
+  color: var(--primary);
 }
 
 /* Transition Screen */

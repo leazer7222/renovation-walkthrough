@@ -5,6 +5,7 @@ interface Option {
   label: string;
   description: string;
   value: string;
+  image?: string;
 }
 
 interface Step {
@@ -42,14 +43,25 @@ const steps: Step[] = [
   {
     id: "styles",
     stepLabel: "Style",
-    title: "What style do you prefer?",
-    subtitle: "Select one or more styles that inspire you.",
+    title: "Pick 3 styles that inspire you.",
+    subtitle: "Your selections will shape the look and feel of your renovation.",
     multi: true,
     options: [
-      { label: "Modern", description: "Clean lines and bold contrast", value: "modern" },
-      { label: "Warm", description: "Natural wood and soft tones", value: "warm" },
-      { label: "Minimal", description: "Simple, uncluttered spaces", value: "minimal" },
-      { label: "Luxury", description: "High-end finishes and detail", value: "luxury" },
+      { label: "Biophilic", description: "Nature-inspired elements", value: "biophilic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Biophilic.png" },
+      { label: "Bohemian", description: "Eclectic and free-spirited", value: "bohemian", image: "/visualization-library/comparison/kitchen/prototype/Styles/Bohemian.png" },
+      { label: "Coastal", description: "Breezy, light, and airy", value: "coastal", image: "/visualization-library/comparison/kitchen/prototype/Styles/Coastal.png" },
+      { label: "Contemporary", description: "Current, curated, and refined", value: "contemporary", image: "/visualization-library/comparison/kitchen/prototype/Styles/Contemporary .png" },
+      { label: "Farmhouse", description: "Warm, rustic, and welcoming", value: "farmhouse", image: "/visualization-library/comparison/kitchen/prototype/Styles/Farmhouse.png" },
+      { label: "French Country", description: "Elegant and pastoral charm", value: "french-country", image: "/visualization-library/comparison/kitchen/prototype/Styles/French Country.png" },
+      { label: "Industrial", description: "Raw materials and edge", value: "industrial", image: "/visualization-library/comparison/kitchen/prototype/Styles/Industrial.png" },
+      { label: "Japandi", description: "Japanese-Scandi minimalism", value: "japandi", image: "/visualization-library/comparison/kitchen/prototype/Styles/Japandi.png" },
+      { label: "Japanese", description: "Serene, ordered, and natural", value: "japanese", image: "/visualization-library/comparison/kitchen/prototype/Styles/Japanese.png" },
+      { label: "Midcentury Modern", description: "Retro lines and warmth", value: "midcentury-modern", image: "/visualization-library/comparison/kitchen/prototype/Styles/Midcentury_modern.png" },
+      { label: "Minimalist", description: "Less is more", value: "minimalist", image: "/visualization-library/comparison/kitchen/prototype/Styles/Minimalist.png" },
+      { label: "Modern", description: "Clean lines and bold contrast", value: "modern", image: "/visualization-library/comparison/kitchen/prototype/Styles/Modern.png" },
+      { label: "Neoclassic", description: "Timeless elegance reimagined", value: "neoclassic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Neoclassic.png" },
+      { label: "Rustic", description: "Earthy, natural, and textured", value: "rustic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Rustic.png" },
+      { label: "Vintage", description: "Nostalgic and characterful", value: "vintage", image: "/visualization-library/comparison/kitchen/prototype/Styles/Vintage.png" },
     ],
   },
   {
@@ -81,6 +93,8 @@ export function OnboardingScreen({
 
   const step = steps[currentStep];
 
+  const MAX_STYLES = 3;
+
   const handleSelect = (optionValue: string) => {
     if (step.multi) {
       const currentStyles = [...answers.styles];
@@ -88,6 +102,7 @@ export function OnboardingScreen({
       if (index > -1) {
         currentStyles.splice(index, 1);
       } else {
+        if (currentStyles.length >= MAX_STYLES) return;
         currentStyles.push(optionValue);
       }
       setAnswers({ ...answers, styles: currentStyles });
@@ -118,7 +133,7 @@ export function OnboardingScreen({
     }
   };
 
-  const canContinue = step.multi ? answers.styles.length > 0 : !!answers[step.id];
+  const canContinue = step.multi ? answers.styles.length === MAX_STYLES : !!answers[step.id];
 
   return (
     <main className="screen center onboarding-screen">
@@ -131,21 +146,40 @@ export function OnboardingScreen({
           <p className="question-subtitle">{step.subtitle}</p>
         </header>
         
-        <div className="options-grid">
-          {step.options.map((opt) => (
-            <div
-              key={opt.value}
-              className={`option-card ${
-                step.multi
-                  ? answers.styles.includes(opt.value) ? "selected" : ""
-                  : answers[step.id] === opt.value ? "selected" : ""
-              }`}
-              onClick={() => handleSelect(opt.value)}
-            >
-              <div className="option-label">{opt.label}</div>
-              <div className="option-description">{opt.description}</div>
-            </div>
-          ))}
+        {step.multi && (
+          <p className="style-selection-count">
+            {answers.styles.length} / {MAX_STYLES} selected
+          </p>
+        )}
+        <div className={step.multi ? "styles-grid" : "options-grid"}>
+          {step.options.map((opt) => {
+            const isSelected = step.multi
+              ? answers.styles.includes(opt.value)
+              : answers[step.id] === opt.value;
+            const isDisabled = step.multi && !isSelected && answers.styles.length >= MAX_STYLES;
+            return opt.image ? (
+              <div
+                key={opt.value}
+                className={`style-card ${isSelected ? "selected" : ""} ${isDisabled ? "disabled" : ""}`}
+                onClick={() => !isDisabled && handleSelect(opt.value)}
+              >
+                <div className="style-card-image-wrap">
+                  <img src={opt.image} alt={opt.label} />
+                  {isSelected && <div className="style-card-check">✓</div>}
+                </div>
+                <div className="style-card-label">{opt.label}</div>
+              </div>
+            ) : (
+              <div
+                key={opt.value}
+                className={`option-card ${isSelected ? "selected" : ""}`}
+                onClick={() => handleSelect(opt.value)}
+              >
+                <div className="option-label">{opt.label}</div>
+                <div className="option-description">{opt.description}</div>
+              </div>
+            );
+          })}
         </div>
 
         <div className="onboarding-nav">
@@ -155,12 +189,12 @@ export function OnboardingScreen({
             </button>
           )}
           {step.multi && (
-            <button 
-              className="btn-large" 
-              onClick={handleNext} 
+            <button
+              className="btn-large"
+              onClick={handleNext}
               disabled={!canContinue}
             >
-              Continue
+              {canContinue ? "Continue" : `Select ${MAX_STYLES - answers.styles.length} more`}
             </button>
           )}
         </div>
