@@ -190,34 +190,59 @@ button:hover {
 
 .onboarding-step {
   animation: fadeIn 0.5s ease-out;
+  width: 100%;
+}
+
+.onboarding-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.step-indicator {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
 }
 
 .question-title {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-weight: 800;
-  margin-bottom: 2rem;
-  text-align: center;
-  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.question-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 0;
 }
 
 .options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
 }
 
 .option-card {
   background: white;
   border: 2px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem 1.5rem;
+  border-radius: 20px;
+  padding: 1.75rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 700;
-  font-size: 1.1rem;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
 .option-card:hover {
@@ -226,11 +251,51 @@ button:hover {
   box-shadow: var(--shadow-lg);
 }
 
+.option-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.option-description {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .option-card.selected {
   border-color: var(--primary);
-  background: rgba(37, 99, 235, 0.05);
+  background: rgba(37, 99, 235, 0.04);
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), var(--shadow-lg);
+}
+
+.option-card.selected .option-label {
   color: var(--primary);
 }
+
+.onboarding-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3.5rem;
+}
+
+.onboarding-footer {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.speed-reinforcement {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  opacity: 0.7;
+}
+
 
 /* Selections Bar */
 .selections-bar {
@@ -405,4 +470,12 @@ button:hover {
 .screen {
   animation: fadeIn 0.4s ease-out;
 }
+
+.microcopy {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 
