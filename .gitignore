@@ -47,3 +47,6 @@ webapp/dist/
 brain/
 knowledge/
 .gemini/
+
+# Local Netlify folder
+.netlify

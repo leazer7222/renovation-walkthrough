@@ -1,6 +1,22 @@
-# Lessons Learned - RenovationWalkthrough Project
+## Productized Copy & UX (April 2, 2026)
+
+### Strategic Tone Shift
+- **Lesson**: Terminology like "Game" can undermine the perceived value of a professional tool.
+- **Evidence**: Changing "Kitchen Decision Game" to "A Smarter Way to Plan Your Renovation" immediately shifted the app from a toy to a utility.
+- **Impact**: Higher user trust and clearer project-based intent.
+
+### Data Model Decoupling (Label vs. Value)
+- **Lesson**: Tying logic (state keys) to UI labels (strings) makes the app brittle and hard to translate or clear for analytics.
+- **Evidence**: Initial onboarding used labels as values; adding a dedicated `value` field allowed for "Budget-Friendly" (UI) to be mapped to "low" (Logic) safely.
+- **Impact**: Stable identifiers for style matching, analytics, and filtering logic without breaking the UI.
+
+### Navigation Persistence
+- **Lesson**: Users expect to refine early choices without losing progress.
+- **Evidence**: Implementing the "Back" button required ensuring the centralized state was correctly updated and read back into the multi-select styles.
+- **Impact**: Reduced user anxiety and improved friction-less onboarding.
 
 ## User Flow & Contextual Feedback (April 2, 2026)
+
 
 ### Transition Screens as Context Drivers
 - **Lesson**: Sudden shifts between categories can be disorienting.
