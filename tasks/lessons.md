@@ -1,3 +1,17 @@
+## CI/CD & Netlify Configuration (April 2, 2026)
+
+### Root netlify.toml is Required for GitHub Auto-Deploy
+- **Lesson**: Deploying via the Netlify CLI does not set up GitHub auto-deploys — those require a `netlify.toml` at the repo root.
+- **Evidence**: The site was manually deployed via CLI; subsequent GitHub pushes triggered no new builds.
+- **Impact**: Adding `netlify.toml` at the root with `base`, `command`, and `publish` fields enables true CI/CD on every push.
+- **Prevention**: Always add `netlify.toml` to the repo root during initial Netlify setup.
+
+### Publish Path is Relative to Base, Not Repo Root
+- **Lesson**: When `base` is set in `netlify.toml`, the `publish` path is resolved relative to `base` — not the repo root.
+- **Evidence**: Setting `base = "webapp"` and `publish = "webapp/dist"` caused Netlify to look for `webapp/webapp/dist`, which doesn't exist.
+- **Impact**: Build failed with "Deploy directory does not exist" error. Fix was to set `publish = "dist"`.
+- **Prevention**: When using `base`, always write `publish` as a path relative to that base directory.
+
 ## Visual Style Picker (April 2, 2026)
 
 ### Exact-Count Multi-Select UX

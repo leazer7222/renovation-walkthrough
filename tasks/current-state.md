@@ -1,9 +1,23 @@
 # Current State - RenovationWalkthrough Project
 
-## Project Status: PHASE 3 COMPLETE — LIVE ON NETLIFY 🚀
+## Project Status: PHASE 3.7 COMPLETE — LIVE ON NETLIFY 🚀
 
 **Date**: April 2, 2026
-**Phase**: Phase 3.6 (Professional Onboarding & Deployment) - 100% Complete & Verified
+**Phase**: Phase 3.7 (Visual Style Picker + CI/CD) - 100% Complete & Verified
+
+## Major Updates (April 2, 2026 - Iteration 4)
+
+### Visual Style Picker (Step 3 Onboarding)
+- **Image Grid**: Replaced 4 generic text cards with all 15 actual kitchen style images in a 5-column × 3-row grid.
+- **Exact Selection**: Users must pick exactly 3 styles; unselected cards dim to 40% opacity once the limit is reached.
+- **Feedback**: Blue checkmark badge on selected cards, live "X / 3 selected" counter, and a dynamic button label ("Select 2 more" → "Continue").
+- **Assets**: Copied style PNGs to `webapp/public/` for Vite serving; also committed source images to `visualization-library/`.
+
+### CI/CD via GitHub → Netlify
+- **Root netlify.toml**: Added `netlify.toml` at repo root so Netlify auto-deploys on every push to `master`.
+- **Config**: `base = "webapp"`, `command = "npm run build"`, `publish = "dist"` (relative to base), plus SPA redirect rule.
+- **Fix**: Corrected doubled publish path (`webapp/webapp/dist` → `dist`) caused by Netlify resolving relative to `base`.
+- **Result**: GitHub pushes now trigger automatic Netlify builds — no more manual CLI deploys required.
 
 ## Major Updates (April 2, 2026 - Iteration 3)
 
@@ -18,10 +32,6 @@
 - **Navigation**: Added a functional "Back" button with full selection persistence.
 - **Visual Polish**: Refined card selection behavior with 1.02x scale transitions and subtle glows.
 
-### Deployment & CI/CD
-- **GitHub**: Initialized a public Git repository ([leazer7222/renovation-walkthrough](https://github.com/leazer7222/renovation-walkthrough)) and pushed all source code and public assets.
-- **Netlify**: Successfully built and deployed the production bundle to a live environment ([reformai-renovationwalkthrough.netlify.app](https://reformai-renovationwalkthrough.netlify.app/)).
-
 ## Major Updates (April 2, 2026 - Iteration 2)
 ### Onboarding & Personalization
 - **New Sequence**: Implemented a 4-step onboarding flow (Room → Budget → Style Multi-select → Priority).
@@ -34,8 +44,15 @@
 
 ## What Exists Now
 
+### ✅ CI/CD Pipeline (Phase 3.7)
+- Root `netlify.toml` connects GitHub pushes to automatic Netlify builds.
+- No manual deploys required going forward.
+
+### ✅ Visual Style Picker (Phase 3.7)
+- 15 kitchen style image cards in a 5×3 grid with exact 3-pick enforcement.
+
 ### ✅ Live Deployment (Phase 3.6)
-- Publicly accessible production site on Netlify.
+- Publicly accessible production site on Netlify ([reformai-renovationwalkthrough.netlify.app](https://reformai-renovationwalkthrough.netlify.app/)).
 - Verified asset serving and mobile-responsive layout.
 
 ### ✅ Onboarding & Flow (Phase 3.5)
@@ -46,21 +63,13 @@
 - Polished React webapp with sequential challenger game logic.
 - Config-driven architecture for landing and onboarding copy.
 
-## Major Updates (April 2, 2026 - Iteration 4)
-
-### Visual Style Picker (Step 3 Onboarding)
-- **Image Grid**: Replaced 4 generic text cards with all 15 actual kitchen style images in a 5-column × 3-row grid.
-- **Exact Selection**: Users must pick exactly 3 styles; unselected cards dim to 40% opacity once the limit is reached.
-- **Feedback**: Blue checkmark badge on selected cards, live "X / 3 selected" counter, and a dynamic button label ("Select 2 more" → "Continue").
-- **Assets**: Copied style PNGs to `webapp/public/` for Vite serving; also committed source images to `visualization-library/`.
-- **Deployed**: Committed and pushed to GitHub; Netlify auto-deployed.
-
 ## Next Steps
 - Phase 4: Expansion to additional rooms (Bathroom, Living Room, etc.).
 - Phase 5: Result persistence and contractor matching integration.
 
 ## Technical Health
+- ✅ CI/CD: GitHub pushes auto-deploy to Netlify via root `netlify.toml`.
 - ✅ Centralized state handles onboarding + navigation + selections.
 - ✅ Stable `value` field in data model decouples UI from business logic.
 - ✅ Image aspect ratios and focal points are standardized (3:2, bottom).
-- ✅ Live build verified for performance and asset resolution.
+- ✅ All commits on `master`, repo is clean.

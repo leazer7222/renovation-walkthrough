@@ -45,7 +45,7 @@ export function App() {
   }
 
   if (state.phase === "final" || state.complete) {
-    return <FinalReveal selection={state.selection} onRestart={restart} />;
+    return <FinalReveal selection={state.selection} styles={state.onboarding.styles} onRestart={restart} />;
   }
 
   if (!currentRound || !state.roundState.currentMatch) {

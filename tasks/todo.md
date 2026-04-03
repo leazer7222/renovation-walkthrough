@@ -27,14 +27,6 @@
 - [x] Persistent "Current Selections" bar (thumb + label)
 - [x] Visual Hero image reveal at the end
 
-## Phase 3.7: Visual Style Picker ✅ COMPLETE
-- [x] Replace generic text options with 15 kitchen style image cards
-- [x] 5-column × 3-row CSS grid layout
-- [x] Enforce exactly 3 selections (dim + block extras, checkmark badge, live counter)
-- [x] Copy style images to webapp/public for asset serving
-- [x] Commit source images to visualization-library
-- [x] Push to GitHub and deploy to Netlify
-
 ## Phase 3.6: Professional Onboarding & Deployment ✅ COMPLETE
 - [x] Productized landing screen copy (Headline, Subheadline, CTA)
 - [x] Enhanced onboarding with subtitles and descriptors
@@ -43,12 +35,27 @@
 - [x] Push to GitHub ([leazer7222/renovation-walkthrough](https://github.com/leazer7222/renovation-walkthrough))
 - [x] Production deployment on Netlify ([reformai-renovationwalkthrough.netlify.app](https://reformai-renovationwalkthrough.netlify.app/))
 
+## Phase 3.7: Visual Style Picker + CI/CD ✅ COMPLETE
+- [x] Replace generic text options with 15 kitchen style image cards
+- [x] 5-column × 3-row CSS grid layout
+- [x] Enforce exactly 3 selections (dim + block extras, checkmark badge, live counter)
+- [x] Copy style images to webapp/public for asset serving
+- [x] Commit source images to visualization-library
+- [x] Add root `netlify.toml` for GitHub → Netlify auto-deploy CI/CD
+- [x] Fix publish path (`dist` relative to `base`, not `webapp/dist`)
+- [x] All changes committed and pushed to master
+
 ## Phase 4: Multi-Room Expansion 📋 PLANNED
 - [ ] Extend prototype to additional rooms
 - [ ] Bathroom decision flow
 - [ ] Living room decision flow
 
+## Phase 5: Results & Matching 📋 PLANNED
+- [ ] Result persistence across sessions
+- [ ] Contractor matching integration
+
 ## Session Result
 - ✅ Kitchen Prototype 100% Functional, Professional, and Live
-- ✅ Multi-step onboarding and productized landing page verified
-- ✅ GitHub Repository and Netlify Deployment finalized
+- ✅ 15-style image picker with exact 3-pick enforcement
+- ✅ CI/CD pipeline established — pushes to master auto-deploy to Netlify
+- ✅ All code committed and clean on master
