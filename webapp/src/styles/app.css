@@ -1,17 +1,58 @@
+/* ============================================================
+   ReformAI Design Tokens
+   ============================================================ */
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
+  /* Base */
+  --background:           #ffffff;
+  --foreground:           #0a0a0a;
+
+  /* Cards & Surfaces */
+  --card:                 #ffffff;
+  --card-foreground:      #0a0a0a;
+
+  /* Primary (near-black) */
+  --primary:              #171717;
+  --primary-foreground:   #fafafa;
+
+  /* Secondary */
+  --secondary:            #f5f5f5;
+  --secondary-foreground: #171717;
+
+  /* Muted */
+  --muted:                #f5f5f5;
+  --muted-foreground:     #737373;
+
+  /* Accent */
+  --accent:               #f5f5f5;
+  --accent-foreground:    #171717;
+
+  /* Semantic */
+  --border:               #e5e5e5;
+  --input:                #e5e5e5;
+  --ring:                 #a1a1a1;
+
+  /* Brand Teal */
+  --brand-teal:           #00ADB5;
+  --brand-teal-dark:      #009AA2;
+  --brand-badge:          #3B8AA2;
+
+  /* Shape */
+  --radius:               0.625rem; /* 10px */
+
+  /* Animation */
+  --duration:             0.5s;
+  --easing:               cubic-bezier(0.7, 0, 0.3, 1);
+
+  /* Legacy aliases for components */
+  --bg:                   #ffffff;
+  --card-bg:              #ffffff;
+  --text:                 #0a0a0a;
+  --text-muted:           #737373;
 }
 
+/* ============================================================
+   Reset & Base
+   ============================================================ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,13 +60,16 @@
 }
 
 body {
-  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: "Red Hat Display", "Red Hat Display Fallback", sans-serif;
+  background: var(--background);
+  color: var(--foreground);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ============================================================
+   Layout
+   ============================================================ */
 .screen {
   min-height: 100vh;
   padding: 2rem;
@@ -41,6 +85,9 @@ body {
   text-align: center;
 }
 
+/* ============================================================
+   Round Header
+   ============================================================ */
 .round-header {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -49,21 +96,21 @@ body {
 
 .round-header h1 {
   font-size: 2.25rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.025em;
-  background: linear-gradient(to right, var(--primary), #4f46e5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--foreground);
   margin-bottom: 0.5rem;
 }
 
 .round-header p {
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   font-size: 1rem;
   font-weight: 500;
 }
 
+/* ============================================================
+   Comparison Cards
+   ============================================================ */
 .compare-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -73,29 +120,24 @@ body {
 
 .comparison-card {
   position: relative;
-  background: var(--card-bg);
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration) var(--easing),
+              box-shadow var(--duration) var(--easing);
 }
 
 .comparison-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
-  border-color: var(--primary);
-}
-
-.comparison-card:active {
-  transform: translateY(-8px) scale(0.98);
+  border-color: var(--brand-teal);
+  box-shadow: 0 4px 16px rgba(0, 173, 181, 0.12);
 }
 
 .image-wrap {
   width: 100%;
   aspect-ratio: 3 / 2;
-  background: #f1f5f9;
+  background: var(--secondary);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -107,17 +149,16 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: bottom;
-  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: transform 0.6s var(--easing);
 }
 
-
 .comparison-card:hover .image-wrap img {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 .card-text {
   padding: 1.5rem;
-  background: white;
+  background: var(--card);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -126,9 +167,9 @@ body {
 }
 
 .card-text h3 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground);
   margin: 0;
 }
 
@@ -136,25 +177,52 @@ body {
   width: 100%;
 }
 
+/* ============================================================
+   Buttons
+   ============================================================ */
 button {
   cursor: pointer;
   border: none;
-  border-radius: 12px;
-  padding: 0.75rem 1.5rem;
-  font-weight: 700;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 500;
   font-size: 0.875rem;
-  background: var(--primary);
-  color: #fff;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+  background: var(--brand-teal);
+  color: #ffffff;
+  transition: background-color var(--duration) var(--easing);
 }
 
 button:hover {
-  background: var(--primary-hover);
-  transform: scale(1.05);
-  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+  background: var(--brand-teal-dark);
 }
 
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-large {
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-secondary {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--secondary);
+  border-color: var(--foreground);
+}
+
+/* ============================================================
+   Progress Bar
+   ============================================================ */
 .progress-bar {
   margin-bottom: 2rem;
 }
@@ -165,23 +233,26 @@ button:hover {
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
 }
 
 .progress-track {
-  height: 10px;
+  height: 8px;
   border-radius: 999px;
-  background: #e2e8f0;
+  background: var(--secondary);
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(to right, #22c55e, #10b981);
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--brand-teal);
+  border-radius: 999px;
+  transition: width var(--duration) var(--easing);
 }
 
-/* Onboarding Styles */
+/* ============================================================
+   Onboarding
+   ============================================================ */
 .onboarding-screen {
   padding: 4rem 2rem;
   max-width: 1100px;
@@ -189,7 +260,7 @@ button:hover {
 }
 
 .onboarding-step {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn var(--duration) var(--easing);
   width: 100%;
 }
 
@@ -199,28 +270,26 @@ button:hover {
 }
 
 .step-indicator {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.5rem;
-  opacity: 0.8;
 }
 
 .question-title {
-  font-size: 2.75rem;
-  font-weight: 800;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 0.25rem;
-  letter-spacing: -0.03em;
-  color: var(--text);
+  letter-spacing: -0.02em;
+  color: var(--foreground);
 }
 
 .question-subtitle {
-  font-size: 1.15rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin-bottom: 0;
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  font-weight: 400;
 }
 
 .options-grid {
@@ -231,14 +300,14 @@ button:hover {
 }
 
 .option-card {
-  background: white;
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  padding: 1.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration) var(--easing),
+              box-shadow var(--duration) var(--easing);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -246,32 +315,30 @@ button:hover {
 }
 
 .option-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-teal);
+  box-shadow: 0 2px 8px rgba(0, 173, 181, 0.1);
 }
 
 .option-label {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
 }
 
 .option-description {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  font-weight: 400;
 }
 
 .option-card.selected {
-  border-color: var(--primary);
-  background: rgba(37, 99, 235, 0.04);
-  transform: scale(1.02);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), var(--shadow-lg);
+  border-color: var(--brand-teal);
+  background: rgba(0, 173, 181, 0.04);
+  box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.15);
 }
 
 .option-card.selected .option-label {
-  color: var(--primary);
+  color: var(--brand-teal);
 }
 
 .onboarding-nav {
@@ -290,23 +357,22 @@ button:hover {
 }
 
 .speed-reinforcement {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
   font-weight: 500;
-  opacity: 0.7;
 }
 
-
-/* Selections Bar */
+/* ============================================================
+   Selections Bar
+   ============================================================ */
 .selections-bar {
   display: flex;
   gap: 1rem;
-  background: white;
+  background: var(--card);
   padding: 1rem;
-  border-radius: 16px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm);
   overflow-x: auto;
 }
 
@@ -317,20 +383,20 @@ button:hover {
   align-items: center;
   gap: 1rem;
   padding: 0.5rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: 8px;
+  transition: background-color var(--duration) var(--easing);
 }
 
 .selection-item.active {
-  background: rgba(37, 99, 235, 0.05);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  background: rgba(0, 173, 181, 0.05);
+  border: 1px solid rgba(0, 173, 181, 0.2);
 }
 
 .selection-thumb {
   width: 48px;
   height: 48px;
   border-radius: 8px;
-  background: #f1f5f9;
+  background: var(--secondary);
   object-fit: cover;
   border: 1px solid var(--border);
 }
@@ -342,23 +408,26 @@ button:hover {
 
 .selection-label {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .selection-value {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
 }
 
-/* Styles Grid (5×3 image picker) */
+/* ============================================================
+   Styles Grid (5×3 image picker)
+   ============================================================ */
 .style-selection-count {
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   margin-top: 0.5rem;
   letter-spacing: 0.04em;
 }
@@ -372,23 +441,22 @@ button:hover {
 
 .style-card {
   cursor: pointer;
-  border-radius: 14px;
+  border-radius: var(--radius);
   overflow: hidden;
-  border: 2px solid var(--border);
-  background: white;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: border-color var(--duration) var(--easing),
+              box-shadow var(--duration) var(--easing);
 }
 
 .style-card:hover:not(.disabled) {
-  border-color: var(--primary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-teal);
+  box-shadow: 0 2px 8px rgba(0, 173, 181, 0.1);
 }
 
 .style-card.selected {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15), var(--shadow-lg);
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.15);
 }
 
 .style-card.disabled {
@@ -401,7 +469,7 @@ button:hover {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #f1f5f9;
+  background: var(--secondary);
 }
 
 .style-card-image-wrap img {
@@ -409,11 +477,11 @@ button:hover {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s var(--easing);
 }
 
 .style-card:hover:not(.disabled) .style-card-image-wrap img {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
 .style-card-check {
@@ -423,10 +491,10 @@ button:hover {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--primary);
-  color: white;
+  background: var(--brand-teal);
+  color: #ffffff;
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -434,9 +502,9 @@ button:hover {
 
 .style-card-label {
   padding: 0.5rem 0.6rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -444,22 +512,24 @@ button:hover {
 }
 
 .style-card.selected .style-card-label {
-  color: var(--primary);
+  color: var(--brand-teal);
 }
 
-/* Transition Screen */
+/* ============================================================
+   Transition Screen
+   ============================================================ */
 .transition-screen {
   text-align: center;
   padding: 4rem 2rem;
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn var(--duration) var(--easing);
 }
 
 .transition-image {
   max-width: 900px;
   width: 100%;
   aspect-ratio: 3 / 2;
-  border-radius: 24px;
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
   margin-bottom: 3rem;
   object-fit: cover;
   object-position: bottom;
@@ -467,18 +537,23 @@ button:hover {
 
 .transition-title {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 1rem;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
 }
 
 .transition-subtext {
-  font-size: 1.25rem;
-  color: var(--text-muted);
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  font-weight: 400;
   max-width: 600px;
   margin: 0 auto 3rem;
 }
 
-/* Final Reveal */
+/* ============================================================
+   Final Reveal
+   ============================================================ */
 .final-reveal {
   padding: 2rem;
   max-width: 1000px;
@@ -488,42 +563,43 @@ button:hover {
 .hero-image {
   width: 100%;
   aspect-ratio: 3 / 2;
-  border-radius: 32px;
-  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
   margin-bottom: 3rem;
   object-fit: cover;
   object-position: bottom;
-  animation: scaleIn 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+  animation: scaleIn 0.6s var(--easing);
 }
 
 .reveal-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: 1.5rem;
   margin-bottom: 4rem;
 }
 
 .reveal-item {
-  background: white;
+  background: var(--secondary);
   padding: 1.5rem;
-  border-radius: 20px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   text-align: center;
 }
 
 .reveal-label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .reveal-value {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
 }
 
 .action-row {
@@ -532,44 +608,29 @@ button:hover {
   justify-content: center;
 }
 
-.btn-large {
-  padding: 1rem 3rem;
-  font-size: 1.1rem;
-}
-
-.btn-secondary {
-  background: white;
-  color: var(--text);
-  border: 2px solid var(--border);
-  box-shadow: none;
-}
-
-.btn-reveal-action:hover {
-  background: #f8fafc;
-  border-color: var(--text);
-  color: var(--text);
-}
-
-/* Base Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.screen {
-  animation: fadeIn 0.4s ease-out;
-}
-
+/* ============================================================
+   Microcopy
+   ============================================================ */
 .microcopy {
   margin-top: 1rem;
   font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  color: var(--muted-foreground);
+  font-weight: 400;
 }
 
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.screen {
+  animation: fadeIn 0.4s var(--easing);
+}
