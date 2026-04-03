@@ -6,6 +6,7 @@ import {
   countTraits,
   getDominantTraits,
   generateDesignSummary,
+  generateDesignHeadline,
   formatDisplayLabel,
   flooringInsight,
   countertopInsight,
@@ -36,6 +37,7 @@ export function FinalReveal({
   const traits = getTraitsForSelections(selection);
   const traitCounts = countTraits(traits);
   const dominantTraits = getDominantTraits(traitCounts);
+  const headline = generateDesignHeadline(dominantTraits);
   const summary = generateDesignSummary(dominantTraits);
   const styledDisplay = styles.map(formatDisplayLabel).join(", ");
 
@@ -62,6 +64,7 @@ export function FinalReveal({
           <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
             How your final design reflects that direction
           </h3>
+          <p style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--foreground)" }}>{headline}</p>
           <p style={{ fontSize: "1.125rem", lineHeight: 1.5 }}>{summary}</p>
         </div>
 

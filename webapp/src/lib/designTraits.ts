@@ -74,34 +74,51 @@ export function generateDesignSummary(dominantTraits: Trait[]): string {
   const t1 = dominantTraits[0];
   const t2 = dominantTraits[1];
 
-  let pair = `${t1}-${t2}`;
   if (!t2) return "This design stays true to your selected direction with a strong, focused materials palette.";
 
-  // Sort them loosely so the order doesn't fail combinations
-  if (t1 > t2) {
-    pair = `${t2}-${t1}`;
-  }
+  const pair = [t1, t2].sort().join("-");
 
-  // Suggest combinations based on the prompt
-  // clean, warm, bold, soft, natural, refined
   const summaries: Record<string, string> = {
-    "clean-warm": "Your final kitchen reflects that inspiration through a sleek modern foundation, balanced by warm wood tones that make the space feel more inviting.",
-    "bold-clean": "This design reflects your inspiration through strong contrast and a sleek, modern edge.",
-    "natural-warm": "This design combines warm natural elements, creating a space that feels both organic and inviting.",
-    "refined-soft": "Your final kitchen reflects your inspiration through an airy foundation, balanced by refined finishes that feel polished and timeless.",
-    "refined-warm": "This design combines elevated elements with natural materials, creating a space that feels both refined and livable.",
-    "bold-refined": "The result is a space that feels dramatic and polished, perfect for a high-end, sophisticated aesthetic.",
-    "clean-refined": "This design stays true to your selected direction with a minimal and elevated foundation.",
-    "soft-warm": "The result is a space that feels light and welcoming, while still warm enough to feel lived-in.",
-    "bold-warm": "This design carefully balances strong, dramatic contrast with welcoming tones to soften the overall look.",
-    "natural-refined": "This design stays true to your direction, blending elevated finishes with natural texture for a balanced aesthetic."
+    "clean-warm": "This design combines a clean, modern foundation with warm natural materials, creating a space that feels both refined and inviting.",
+    "bold-clean": "This design leans into a sleek, modern direction with sharper lines and a more defined visual edge.",
+    "natural-warm": "This design brings together warm tones and natural materials, creating a space that feels relaxed, organic, and inviting.",
+    "refined-soft": "This design feels light and polished, with refined finishes that create a soft, timeless look.",
+    "refined-warm": "This design balances elevated finishes with natural warmth, creating a space that feels both polished and comfortable.",
+    "bold-refined": "This design combines darker, more dramatic elements with refined finishes, resulting in a space that feels both bold and elevated.",
+    "clean-refined": "This design stays minimal and structured, with refined materials that give it a clean, elevated feel.",
+    "soft-warm": "This design feels light, warm, and welcoming, with softer tones that create a relaxed and livable space.",
+    "bold-warm": "This design balances stronger visual contrast with warm materials, creating a space that feels both dynamic and inviting.",
+    "natural-refined": "This design blends natural textures with refined finishes, creating a balanced space that feels both grounded and elevated."
   };
 
   const exactMatch = summaries[pair];
   if (exactMatch) return exactMatch;
 
-  // Fallback for missing pairs
-  return `This design stays true to your selected direction with a polished foundation and materials that add depth and character.`;
+  return "This design brings together a thoughtful mix of materials, creating a space that feels balanced, polished, and inviting.";
+}
+
+export function generateDesignHeadline(dominantTraits: Trait[]): string {
+  const t1 = dominantTraits[0];
+  const t2 = dominantTraits[1];
+
+  if (!t2) return "A thoughtfully designed space";
+
+  const pair = [t1, t2].sort().join("-");
+
+  const headlines: Record<string, string> = {
+    "clean-warm": "A modern design with natural warmth",
+    "bold-clean": "A sleek, high-contrast modern design",
+    "natural-warm": "A warm, natural living space",
+    "refined-soft": "A soft and refined design",
+    "refined-warm": "An elevated space with warmth",
+    "bold-refined": "A bold, high-end aesthetic",
+    "clean-refined": "A minimal and elevated design",
+    "soft-warm": "A light and welcoming space",
+    "bold-warm": "A bold design with warmth",
+    "natural-refined": "A balanced, natural and refined space"
+  };
+
+  return headlines[pair] || "A balanced and thoughtfully designed space";
 }
 
 export function formatDisplayLabel(slug: string | null): string {
