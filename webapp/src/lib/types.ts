@@ -1,6 +1,16 @@
 export type Phase =
   | "start"
   | "onboarding"
+  | "layout"
+  | "transition-to-storage"
+  | "storage"
+  | "transition-to-appliance"
+  | "appliance"
+  | "transition-to-lighting"
+  | "lighting"
+  | "transition-to-addons"
+  | "addons"
+  | "transition-to-flooring"
   | "flooring"
   | "transition-to-countertop"
   | "countertop"
@@ -14,7 +24,7 @@ export interface Option {
 }
 
 export interface RoundConfig {
-  phase: "flooring" | "countertop" | "cabinet";
+  phase: "layout" | "storage" | "appliance" | "lighting" | "flooring" | "countertop" | "cabinet";
   label: string;
   options: Option[];
 }
@@ -37,6 +47,11 @@ export interface GameState {
   phase: Phase;
   onboarding: OnboardingState;
   selection: {
+    layout: string | null;
+    storage: string | null;
+    appliance: string | null;
+    lighting: string | null;
+    addons: Record<string, boolean>;
     flooring: string | null;
     countertop: string | null;
     cabinet: string | null;

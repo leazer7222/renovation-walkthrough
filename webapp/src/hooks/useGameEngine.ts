@@ -12,7 +12,16 @@ const initialRoundState: RoundState = {
 const initialState: GameState = {
   phase: "start",
   onboarding: { room: "kitchen", budget: "", styles: [], priority: "" },
-  selection: { flooring: null, countertop: null, cabinet: null },
+  selection: {
+    layout: null,
+    storage: null,
+    appliance: null,
+    lighting: null,
+    addons: {},
+    flooring: null,
+    countertop: null,
+    cabinet: null,
+  },
   roundState: initialRoundState,
   complete: false,
 };
@@ -20,6 +29,16 @@ const initialState: GameState = {
 const toQueue = (options: Option[]): Option[] => options.map((o) => ({ ...o }));
 
 const nextPhase = (phase: Phase): Phase => {
+  if (phase === "layout") return "transition-to-storage";
+  if (phase === "transition-to-storage") return "storage";
+  if (phase === "storage") return "transition-to-appliance";
+  if (phase === "transition-to-appliance") return "appliance";
+  if (phase === "appliance") return "transition-to-lighting";
+  if (phase === "transition-to-lighting") return "lighting";
+  if (phase === "lighting") return "transition-to-addons";
+  if (phase === "transition-to-addons") return "addons";
+  if (phase === "addons") return "transition-to-flooring";
+  if (phase === "transition-to-flooring") return "flooring";
   if (phase === "flooring") return "transition-to-countertop";
   if (phase === "transition-to-countertop") return "countertop";
   if (phase === "countertop") return "transition-to-cabinet";
@@ -68,12 +87,28 @@ export const useGameEngine = () => {
       ...prev,
       onboarding,
     }));
-    initRound("flooring");
+    initRound("layout");
+  };
+
+  const completeAddons = (addons: Record<string, boolean>) => {
+    setState((prev) => ({
+      ...prev,
+      selection: {
+        ...prev.selection,
+        addons,
+      },
+    }));
+    continueToNextRound();
   };
 
   const continueToNextRound = () => {
     const next = nextPhase(state.phase);
-    initRound(next as any);
+    const config = getRoundConfig(next as any);
+    if (!config) {
+      setState((prev) => ({ ...prev, phase: next as Phase }));
+    } else {
+      initRound(next as any);
+    }
   };
 
   const advanceMatch = (winner: Option, loser: Option) => {
@@ -84,6 +119,10 @@ export const useGameEngine = () => {
 
       const updatedSelection = {
         ...prev.selection,
+        ...(prev.phase === "layout" && { layout: winner.id }),
+        ...(prev.phase === "storage" && { storage: winner.id }),
+        ...(prev.phase === "appliance" && { appliance: winner.id }),
+        ...(prev.phase === "lighting" && { lighting: winner.id }),
         ...(prev.phase === "flooring" && { flooring: winner.id }),
         ...(prev.phase === "countertop" && { countertop: winner.id }),
         ...(prev.phase === "cabinet" && { cabinet: winner.id }),
@@ -155,6 +194,7 @@ export const useGameEngine = () => {
     state,
     startGame,
     completeOnboarding,
+    completeAddons,
     continueToNextRound,
     selectOption: makeSelection,
     restart,

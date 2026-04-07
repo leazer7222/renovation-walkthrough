@@ -6,23 +6,34 @@ export function TransitionScreen({
   selection,
   onContinue,
 }: {
-  type: "flooring" | "countertop";
-  selection: { flooring: string | null; countertop: string | null; cabinet: string | null };
+  type: string;
+  selection: any;
   onContinue: () => void;
 }) {
+  let resolveType = type;
+  let resolveOption = selection[type] || "";
+
+  if (type === "addons") {
+    resolveType = "layout";
+    resolveOption = selection.layout || "";
+  }
+
   const imageUrl = resolveImage(
-    type as any, // We pass the phase we just finished
+    resolveType as any,
     selection,
-    selection[type] || ""
+    resolveOption
   );
 
-  const title = type === "flooring" 
-    ? "Great choice!" 
-    : "Your kitchen is coming together!";
+  const title = "Great choice!";
   
-  const subtext = type === "flooring"
-    ? "Now let's choose a countertop that works with your floor."
-    : "Now let's find the cabinet style to complete your kitchen.";
+  let subtext = "Now let's continue building your design.";
+  if (type === "layout") subtext = "Now let's choose a storage style.";
+  if (type === "storage") subtext = "Next up: appliances.";
+  if (type === "appliance") subtext = "Let's illuminate your space with some lighting choices.";
+  if (type === "lighting") subtext = "Time to consider any premium add-ons.";
+  if (type === "addons") subtext = "Now for the fun part: let's pick your materials! Starting with flooring.";
+  if (type === "flooring") subtext = "Now let's choose a countertop that works with your floor.";
+  if (type === "countertop") subtext = "Now let's find the cabinet style to complete your kitchen.";
 
   return (
     <main className="screen center transition-screen">

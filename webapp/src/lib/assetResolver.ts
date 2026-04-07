@@ -16,11 +16,19 @@ export function resolveCabinetImage(
   return `${ROOT}/cabinets/${flooring}/${countertop}/${optionId}/${flooring}_${countertop}_${optionId}_01.png`;
 }
 
+export function resolveDesignElementImage(phase: string, optionId: string) {
+  const folderPhase = phase === "layout" ? "layout" : `${phase}-style`;
+  return `${ROOT}/design-elements/${folderPhase}/${optionId}/${optionId}.png`;
+}
+
 export function resolveImage(
-  phase: "flooring" | "countertop" | "cabinet",
-  selection: { flooring: string | null; countertop: string | null; cabinet: string | null },
+  phase: string,
+  selection: any,
   optionId: string
 ) {
+  if (phase === "layout" || phase === "storage" || phase === "appliance" || phase === "lighting") {
+    return resolveDesignElementImage(phase, optionId);
+  }
   if (phase === "flooring") return resolveFlooringImage(optionId);
   if (phase === "countertop" && selection.flooring) {
     return resolveCountertopImage(selection.flooring, optionId);

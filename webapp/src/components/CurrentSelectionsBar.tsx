@@ -6,8 +6,8 @@ export function CurrentSelectionsBar({
   phase,
   selection,
 }: {
-  phase: "flooring" | "countertop" | "cabinet";
-  selection: { flooring: string | null; countertop: string | null; cabinet: string | null };
+  phase: string;
+  selection: any;
 }) {
   const categories = roundOrder.map((r) => {
     const selectedId = selection[r.phase as keyof typeof selection];

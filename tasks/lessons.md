@@ -111,3 +111,21 @@
 - **Evidence**: Used `exist_ok=True` and relative paths throughout Python scripts.
 - **Impact**: Easy to rebuild entire structure from Excel source without fear of breaking progress.
 - **Prevention**: Design all file system operations to be idempotent.
+
+## Design Foundation & AI Prompting (April 7, 2026)
+
+### AI Prompting: Structural Anchoring is Critical
+- **Lesson**: Generic descriptors like "integrated appliances" or "modern design" lead to AI hallucinations (e.g., turning double ovens into refrigerators).
+- **Evidence**: Initial prompts resulted in refrigerators replacing wall ovens on the left cabinetry.
+- **Impact**: Explicit spatial anchoring (e.g., "explicitly preserving the built-in double wall ovens on the left tall cabinet") and removing conflicting terms like "massive gas range" fixed the output.
+- **Prevention**: Use directional cues (left/right/center) and "explicitly preserving" language in AI prompts to maintain architectural integrity.
+
+### Asset Library Consistency vs. Game Engine Routing
+- **Lesson**: Non-match phases (like Add-ons) require different routing logic to avoid crashing the tournament controller.
+- **Impact**: Updated `useGameEngine` to check for round availability before initializing a match; if no round is found, the phase is handled as a direct state transition.
+- **Prevention**: Always decouple the "Match Engine" from "State Routing" to allow for hybrid flows (Comparisons + Checklists).
+
+### Syncing Folder-Structured Assets for Vite
+- **Lesson**: New asset categories (like `design-elements`) added to the root library MUST be recursively copied to `webapp/public` for the dev server and production builds.
+- **Impact**: Missing images during the "Layout" phase were due to files existing at the root but not in the public folder.
+- **Prevention**: Establish a `copy-design-elements` script or manual verification step whenever adding new top-level categories.

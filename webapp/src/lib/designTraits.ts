@@ -128,3 +128,83 @@ export function formatDisplayLabel(slug: string | null): string {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+
+const promptModifiers: Record<string, string> = {
+  // Layouts
+  "large-island-with-seating": "Large Island With Seating configuration (featuring a large central kitchen island incorporating bar seating with midcentury modern stools in front)",
+  "small-prep-island": "Small Prep Island configuration (featuring a compact central prep island focusing on workspace without seating)",
+  "no-island": "spacious open layout configuration without a central island",
+  "peninsula-layout": "connected peninsula layout configuration with bar seating",
+  
+  // Storage
+  "closed-cabinetry": "seamless, floor-to-ceiling Closed Cabinetry keeping all items hidden",
+  "open-shelving": "airy Open Shelving displaying curated decorative dishware",
+  "glass-display-cabinets": "elegant Glass Display Cabinets",
+  "minimal-storage": "Minimalist Storage with bare upper walls and sleek lower cabinets",
+  
+  // Appliances
+  "standard-stainless": "Standard Stainless Steel appliances prominently featured, explicitly preserving the built-in double wall ovens on the left tall cabinet",
+  "integrated-appliances": "fully flush, panel-ready Integrated Appliances, while explicitly preserving the visible built-in double wall ovens on the left tall cabinet (not paneled like a fridge)",
+  "professional-statement-appliances": "heavy-duty, Professional Statement Appliances including a professional cooktop, explicitly preserving the built-in double wall ovens on the left tall cabinet",
+  
+  // Lighting
+  "minimal-recessed-only": "Minimal Recessed Lighting embedded cleanly in the ceiling",
+  "pendant-lighting": "stylish Pendant Lighting fixtures hanging prominently over the workspace",
+  "statement-lighting": "a bold, sculptural Statement Lighting fixture acting as a dramatic centerpiece",
+  
+  // Materials (Flooring)
+  "dark-walnut": "rich Dark Walnut wood flooring",
+  "large-format-tile": "clean, continuous Large Format Tile flooring",
+  "light-oak": "warm and airy Light Oak wood flooring",
+  "microcement": "seamless, sleek industrial Microcement floors",
+
+  // Materials (Countertops)
+  "butcher-block": "warm natural Butcher Block wood countertops",
+  "dark-quartz": "bold Dark Quartz countertops",
+  "granite": "naturally textured Granite stone countertops",
+  "marble": "elegant, softly veined Marble countertops",
+
+  // Materials (Cabinets)
+  "flat-panel-white": "crisp, modern Flat Panel White cabinetry",
+  "matte-black": "striking Matte Black cabinetry",
+  "shaker": "classic and approachable Shaker-style cabinetry",
+  "warm-wood": "natural Warm Wood cabinetry",
+
+  // Addons
+  "wine-fridge": "a built-in glass-door Wine Fridge specifically integrated seamlessly under the counter into the kitchen island",
+  "under-cabinet-ambient-glow": "soft, warm glowing Under Cabinet Ambient light"
+};
+
+export function generatePromptDescription(
+  styles: string[],
+  selection: {
+    layout?: string | null;
+    storage?: string | null;
+    appliance?: string | null;
+    lighting?: string | null;
+    addons?: Record<string, boolean>;
+    flooring?: string | null;
+    countertop?: string | null;
+    cabinet?: string | null;
+  }
+): string {
+  const getMod = (key: string | null | undefined, fallback: string) => {
+    if (!key) return fallback;
+    return promptModifiers[key] || formatDisplayLabel(key);
+  };
+
+  const styleStr = styles.map(formatDisplayLabel).join(", ");
+  
+  const layout = getMod(selection.layout, "Standard configuration");
+  const flooring = getMod(selection.flooring, "Hardwood floors");
+  const countertop = getMod(selection.countertop, "Stone countertops");
+  const cabinet = getMod(selection.cabinet, "Custom cabinetry");
+  const storage = getMod(selection.storage, "Standard storage");
+  const appliance = getMod(selection.appliance, "Modern appliances");
+  const lighting = getMod(selection.lighting, "Ambient lighting");
+  
+  const addonsArr = Object.keys(selection.addons || {}).filter(k => selection.addons![k]).map(k => getMod(k, formatDisplayLabel(k)));
+  const addonsStr = addonsArr.length > 0 ? `, featuring integrated ${addonsArr.join(" and ")}` : "";
+
+  return `High quality architectural photography of a stunning kitchen design, combining ${styleStr} aesthetics. The space features a ${layout} with beautiful ${flooring} and ${cabinet}. The countertops are ${countertop}, complemented by ${storage}. The kitchen is equipped with ${appliance}, illuminated by ${lighting}${addonsStr}. Shot in 8k, highly detailed, photorealistic, beautiful daylight, architectural digest style.`;
+}

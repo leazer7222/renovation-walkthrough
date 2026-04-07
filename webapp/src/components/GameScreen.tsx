@@ -12,10 +12,10 @@ export function GameScreen({
   onSelect,
   progress,
 }: {
-  phase: "flooring" | "countertop" | "cabinet";
+  phase: string;
   currentRound: RoundConfig;
   match: { a: Option; b: Option };
-  selection: { flooring: string | null; countertop: string | null; cabinet: string | null };
+  selection: any;
   onSelect: (option: Option) => void;
   progress: { phaseIndex: number; totalPhases: number; remainingMatches: number };
 }) {
