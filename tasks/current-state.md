@@ -1,27 +1,16 @@
 # Current State - RenovationWalkthrough Project
 
-## Project Status: PHASE 4 COMPLETE — DESIGN FOUNDATION & NLP PROMPTING 🚀
+## Project Status: PHASE 5 COMPLETE — ADVANCED MODULAR PROMPTING SYSTEM 🚀
 
-**Date**: April 7, 2026
-**Phase**: Phase 4 (Design Foundation + AI Prompt Engineering) - 100% Complete & Verified
+**Date**: April 8, 2026
+**Phase**: Phase 5 (Advanced Modular Prompting + Adaptation Logic) - 100% Complete & Verified
 
-## Major Updates (April 7, 2026)
-
-### Design Foundation Phase
-- **New Stages**: Added 5 new steps before Materials: Layout, Storage Style, Appliance Style, Lighting Style, and Add-ons.
-- **Visual Comparisons**: Implemented A/B match logic for structural design elements using `design-elements` asset library.
-- **Add-on Screen**: Created a dedicated `AddonScreen` with visual toggle cards for high-end features (Wine Fridge, Ambient Lighting).
-
-### NLP Prompt Engineering & Visualization
-- **NLP Engine**: Built a sophisticated `generatePromptDescription` system that converts user selections into high-fidelity AI image generation prompts.
-- **Visual Modifiers**: Implemented a dictionary of structural descriptions (e.g., "midcentury modern stools", "built-in double wall ovens on the left") to ensure AI consistency.
-- **Anchor Logic**: Added specific spatial anchoring to prevent AI hallucinations (e.g., preventing ovens from turning into fridges).
-- **Clipboard Integration**: Added click-to-copy functionality for the final prompt on the reveal screen.
-
-### UX & Architecture
-- **Complete Moodboard**: Rebuilt the Final Reveal summary into a visual grid showing thumbnails of every single selection made.
-- **Asset Syncing**: Established a protocol for syncing the `visualization-library` root with `webapp/public` for Vite serving.
-- **Engine Robustness**: Fixed routing logic in `useGameEngine` to handle non-match phases (Checklists) without crashing.
+### Advanced Modular Prompting (April 8, 2026)
+- **Modular Refactoring**: Rebuilt the kitchen generation prompt into a 9-layer architectural structure (Scene Framing, Style Direction, Layout, Materials, Features, Appliances, Lighting, Mood, Rendering).
+- **Renovation Mode**: Introduced a new adaptive `renovation_prompt` specifically designed for Image-to-Image transformations.
+- **Structural Integrity**: Renovation prompt strictly preserves wall/window/camera perspective while adaptively mapping design features to existing geometry.
+- **Functional Anchors**: Explicitly locks core kitchen components (Sink, Cooktop, Ovens) to prevent AI relocation hallucinations.
+- **Dual-Prompt UI**: Updated the Final Reveal screen to display both "New Build" and "Transformation" prompts side-by-side with click-to-copy functionality.
 
 ## Major Updates (April 2, 2026 - Iteration 4)
 

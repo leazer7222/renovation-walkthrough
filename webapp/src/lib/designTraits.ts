@@ -130,52 +130,57 @@ export function formatDisplayLabel(slug: string | null): string {
 }
 
 const promptModifiers: Record<string, string> = {
-  // Layouts
-  "large-island-with-seating": "Large Island With Seating configuration (featuring a large central kitchen island incorporating bar seating with midcentury modern stools in front)",
-  "small-prep-island": "Small Prep Island configuration (featuring a compact central prep island focusing on workspace without seating)",
-  "no-island": "spacious open layout configuration without a central island",
-  "peninsula-layout": "connected peninsula layout configuration with bar seating",
+  // Layouts - Hard Defined for Generation
+  "large-island-with-seating": "a Large Island With Seating configuration as the central anchor of the room, featuring a massive stone-topped island with integrated breakfast bar seating and three midcentury modern stools",
+  "small-prep-island": "a Small Prep Island configuration, featuring a compact standalone butcher-block or stone island dedicated entirely to workspace and food preparation",
+  "no-island": "a spacious Open-Concept layout without a central island, focusing on a continuous perimeter workflow and expansive floor space",
+  "peninsula-layout": "a connected Peninsula Layout configuration, where the countertop extends into the room to create an integrated breakfast bar with seating on one side",
   
-  // Storage
-  "closed-cabinetry": "seamless, floor-to-ceiling Closed Cabinetry keeping all items hidden",
-  "open-shelving": "airy Open Shelving displaying curated decorative dishware",
-  "glass-display-cabinets": "elegant Glass Display Cabinets",
-  "minimal-storage": "Minimalist Storage with bare upper walls and sleek lower cabinets",
+  // Storage - Explicit and Descriptive
+  "closed-cabinetry": "Seamless floor-to-ceiling Closed Cabinetry, creating a monolithic and uncluttered wall of storage that hides all kitchen essentials",
+  "open-shelving": "Airy Open Shelving made of natural wood or metal, displaying a curated collection of artisanal ceramics and glassware against a clean backsplash",
+  "glass-display-cabinets": "Elegant Glass-Front Display Cabinets with integrated internal lighting, showcasing fine dishware and adding depth to the cabinetry run",
+  "minimal-storage": "Ultra-Minimalist Storage with bare upper walls and sleek, handle-less lower drawers for a light and unencumbered aesthetic",
   
-  // Appliances
-  "standard-stainless": "Standard Stainless Steel appliances prominently featured, explicitly preserving the built-in double wall ovens on the left tall cabinet",
-  "integrated-appliances": "fully flush, panel-ready Integrated Appliances, while explicitly preserving the visible built-in double wall ovens on the left tall cabinet (not paneled like a fridge)",
-  "professional-statement-appliances": "heavy-duty, Professional Statement Appliances including a professional cooktop, explicitly preserving the built-in double wall ovens on the left tall cabinet",
+  // Appliances - Strict and Anchored
+  "standard-stainless": "a suite of high-end Professional Stainless Steel appliances, including a built-in double wall oven unit anchored on the left tall cabinet and a flush-mount cooktop",
+  "integrated-appliances": "Fully Integrated, panel-ready appliances that disappear into the cabinetry for a seamless look, while preserving the visible built-in double wall ovens on the left (not paneled)",
+  "professional-statement-appliances": "Heavy-duty Professional Statement appliances, featuring a massive commercial-grade cooktop and industrial-scale double wall ovens built into the cabinetry on the left",
   
   // Lighting
-  "minimal-recessed-only": "Minimal Recessed Lighting embedded cleanly in the ceiling",
-  "pendant-lighting": "stylish Pendant Lighting fixtures hanging prominently over the workspace",
-  "statement-lighting": "a bold, sculptural Statement Lighting fixture acting as a dramatic centerpiece",
+  "minimal-recessed-only": "Clean and understated architectural Recessed Lighting, flush-mounted in the ceiling to provide even, ambient illumination without visual clutter",
+  "pendant-lighting": "A series of three designer Pendant Lighting fixtures with glass or metal shades, hanging at perfect height over the island or peninsula as a secondary focal point",
+  "statement-lighting": "A bold, sculptural Statement Lighting installation, acting as the primary artistic centerpiece of the kitchen with a unique geometric or organic form",
   
   // Materials (Flooring)
-  "dark-walnut": "rich Dark Walnut wood flooring",
-  "large-format-tile": "clean, continuous Large Format Tile flooring",
-  "light-oak": "warm and airy Light Oak wood flooring",
-  "microcement": "seamless, sleek industrial Microcement floors",
+  "dark-walnut": "rich and deeply grained Dark Walnut wide-plank wood flooring",
+  "large-format-tile": "expansive and continuous Large Format Stone Tile flooring with minimal grout lines",
+  "light-oak": "warm, airy, and natural Light Oak hardwood flooring",
+  "microcement": "seamless, industrial-chic Microcement flooring with a smooth, hand-troweled finish",
 
   // Materials (Countertops)
-  "butcher-block": "warm natural Butcher Block wood countertops",
-  "dark-quartz": "bold Dark Quartz countertops",
-  "granite": "naturally textured Granite stone countertops",
-  "marble": "elegant, softly veined Marble countertops",
+  "butcher-block": "thick, warm, and organic natural Butcher Block wood countertops",
+  "dark-quartz": "bold, honed Dark Quartz countertops with a matte finish",
+  "granite": "naturally textured and durable Granite stone countertops",
+  "marble": "luxurious, elegantly veined white Marble countertops with polished finish",
 
   // Materials (Cabinets)
-  "flat-panel-white": "crisp, modern Flat Panel White cabinetry",
-  "matte-black": "striking Matte Black cabinetry",
-  "shaker": "classic and approachable Shaker-style cabinetry",
-  "warm-wood": "natural Warm Wood cabinetry",
+  "flat-panel-white": "crisp, modern Flat Panel White cabinetry with a smooth matte finish",
+  "matte-black": "striking, deep Matte Black cabinetry for a sophisticated and bold look",
+  "shaker": "classic and timeless Shaker-style cabinetry with refined recessed panel detailing",
+  "warm-wood": "natural and textured Warm Wood cabinetry with visible grain and organic feel",
 
   // Addons
-  "wine-fridge": "a built-in glass-door Wine Fridge specifically integrated seamlessly under the counter into the kitchen island",
-  "under-cabinet-ambient-glow": "soft, warm glowing Under Cabinet Ambient light"
+  "wine-fridge": "a built-in tinted-glass door Wine Fridge integrated seamlessly under the counter in the kitchen island",
+  "under-cabinet-ambient-glow": "soft and warm glowing Under-Cabinet LED lighting to provide depth and architectural task illumination"
 };
 
-export function generatePromptDescription(
+export type PromptOutput = {
+  generation: string;
+  renovation: string;
+};
+
+export function generatePrompts(
   styles: string[],
   selection: {
     layout?: string | null;
@@ -187,24 +192,59 @@ export function generatePromptDescription(
     countertop?: string | null;
     cabinet?: string | null;
   }
-): string {
-  const getMod = (key: string | null | undefined, fallback: string) => {
+): PromptOutput {
+  const format = (key: string | null | undefined, fallback: string) => {
     if (!key) return fallback;
     return promptModifiers[key] || formatDisplayLabel(key);
   };
 
-  const styleStr = styles.map(formatDisplayLabel).join(", ");
-  
-  const layout = getMod(selection.layout, "Standard configuration");
-  const flooring = getMod(selection.flooring, "Hardwood floors");
-  const countertop = getMod(selection.countertop, "Stone countertops");
-  const cabinet = getMod(selection.cabinet, "Custom cabinetry");
-  const storage = getMod(selection.storage, "Standard storage");
-  const appliance = getMod(selection.appliance, "Modern appliances");
-  const lighting = getMod(selection.lighting, "Ambient lighting");
-  
-  const addonsArr = Object.keys(selection.addons || {}).filter(k => selection.addons![k]).map(k => getMod(k, formatDisplayLabel(k)));
-  const addonsStr = addonsArr.length > 0 ? `, featuring integrated ${addonsArr.join(" and ")}` : "";
+  const selectedStyles = styles.map(formatDisplayLabel).join(", ");
+  const layout = format(selection.layout, "Standard configuration");
+  const storage = format(selection.storage, "Standard storage");
+  const appliances = format(selection.appliance, "Modern appliances");
+  const lighting = format(selection.lighting, "Ambient lighting");
+  const flooring = format(selection.flooring, "Hardwood floors");
+  const countertop = format(selection.countertop, "Stone countertops");
+  const cabinet = format(selection.cabinet, "Custom cabinetry");
 
-  return `High quality architectural photography of a stunning kitchen design, combining ${styleStr} aesthetics. The space features a ${layout} with beautiful ${flooring} and ${cabinet}. The countertops are ${countertop}, complemented by ${storage}. The kitchen is equipped with ${appliance}, illuminated by ${lighting}${addonsStr}. Shot in 8k, highly detailed, photorealistic, beautiful daylight, architectural digest style.`;
+  const addonsList = Object.keys(selection.addons || {})
+    .filter((k) => selection.addons![k])
+    .map((k) => format(k, formatDisplayLabel(k)));
+  const addonsStr = addonsList.length > 0 ? `, further enhanced by ${addonsList.join(" and ")}` : "";
+
+  // 1. GENERATION PROMPT
+  const generation = [
+    `[SCENE FRAMING] High quality architectural photography of a stunning and expansive kitchen design.`,
+    `[STYLE DIRECTION] The interior combines ${selectedStyles} aesthetics into a cohesive, high-end environment.`,
+    `[LAYOUT] The space features ${layout}.`,
+    `[MATERIALS] The foundation is built on ${flooring}, complemented by ${cabinet}. The workspace is defined by ${countertop}.`,
+    `[DESIGN FEATURES] For storage, the kitchen utilizes ${storage}${addonsStr}.`,
+    `[APPLIANCES] The kitchen is equipped with ${appliances}.`,
+    `[LIGHTING] The atmosphere is defined by ${lighting}.`,
+    `[STYLING & MOOD] Beautiful natural daylight streaming through windows, architectural digest style, clean and professional staging.`,
+    `[RENDERING] 8k resolution, highly detailed, photorealistic, cinematic lighting, sharp focus.`
+  ].join("\n\n");
+
+  // 2. RENOVATION PROMPT
+  const renovation = [
+    `[CONTEXT] A photorealistic renovation and style transformation of the existing kitchen image.`,
+    `[STRUCTURAL PRESERVATION] Strictly preserve the existing kitchen layout, structural walls, window placements, and overall room architecture. Maintain the exact camera angle and perspective of the original photo.`,
+    `[FUNCTIONAL ANCHORS] Strictly preserve and keep visible the existing functional locations of the cooktop, sink, and built-in ovens. Do not remove or relocate these core functional elements.`,
+    `[USER-SELECTED FEATURES] Strictly enforce the inclusion of the following selected features: ${storage}${addonsStr}. These must be clearly visible and prioritized in the new design.`,
+    `[MATERIALS] Apply ${flooring} to the floor, update the cabinets with ${cabinet}, and install ${countertop} on all work surfaces. No material substitutions allowed.`,
+    `[LAYOUT ADAPTATION] Do not force a change in the room structure; instead, adapt the ${layout} design intent to the existing kitchen geometry and surfaces.`,
+    `[FEATURE INTEGRATION] Seamlessly integrate the selected lighting and storage features into the existing architecture. ${lighting} should be used to enhance the space.`,
+    `[FEATURE EMPHASIS] Ensure that the ${addonsList.includes("wine-fridge") ? "wine fridge and " : ""}${selection.layout?.includes("seating") ? "island seating" : "new surfaces"} are clearly visible and act as focal points.`,
+    `[LIGHTING] Use a combination of task lighting and ${lighting} to create depth, realism, and a high-end atmosphere.`,
+    `[STYLE DIRECTION] Transform the aesthetic to match a combination of ${selectedStyles} design styles.`,
+    `[DESIGN INTENT] Balance buildable realism with a high-end, aspirational architectural output.`,
+    `[RENDERING] Photorealistic, natural daylight, architectural digest style, 8k quality, highly detailed, professional finish.`
+  ].join("\n\n");
+
+  return { generation, renovation };
+}
+
+// Keep the old one for compatibility while we transition or just update it to use the new logic
+export function generatePromptDescription(styles: string[], selection: any): string {
+  return generatePrompts(styles, selection).generation;
 }

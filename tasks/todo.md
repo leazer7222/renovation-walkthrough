@@ -54,17 +54,25 @@
 - [x] Add click-to-copy functionality for AI prompts
 - [x] Sync `design-elements` assets to public web folder
 
-## Phase 5: Multi-Room Expansion 📋 PLANNED
+## Phase 5: Advanced Modular Prompting System ✅ COMPLETE
+- [x] Refactor Generation prompt into 9-layer architectural structure
+- [x] Create new adaptive `renovation_prompt` for style transfers
+- [x] Implement structural preservation and functional anchoring logic
+- [x] Update Final Reveal UI to show both prompt types side-by-side
+- [x] Maintain shared input system for all prompt generation
+
+## Phase 6: Multi-Room Expansion 📋 PLANNED
 - [ ] Extend prototype to additional rooms
 - [ ] Bathroom decision flow
 - [ ] Living room decision flow
 
-## Phase 6: Results & Matching 📋 PLANNED
+## Phase 7: Results & Matching 📋 PLANNED
 - [ ] Result persistence across sessions
 - [ ] Contractor matching integration
 
 ## Session Result
 - ✅ Kitchen Prototype expanded with Design Foundation phase
-- ✅ High-fidelity AI Prompt generation with structural anchoring
+- ✅ New Dual-Prompt system (New Build + Renovation) integrated
+- ✅ High-fidelity AI Prompt generation with strict structural anchoring
 - ✅ Complete visual summary of all user selections
 - ✅ All code committed and ready for master/production

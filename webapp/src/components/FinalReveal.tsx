@@ -11,7 +11,7 @@ import {
   flooringInsight,
   countertopInsight,
   cabinetInsight,
-  generatePromptDescription
+  generatePrompts
 } from "@/lib/designTraits";
 
 export function FinalReveal({
@@ -42,7 +42,7 @@ export function FinalReveal({
   const summary = generateDesignSummary(dominantTraits);
   const styledDisplay = styles.map(formatDisplayLabel).join(", ");
   
-  const yourStylePrompt = generatePromptDescription(styles, selection);
+  const { generation, renovation } = generatePrompts(styles, selection);
 
   return (
     <main className="screen final-reveal">
@@ -88,19 +88,70 @@ export function FinalReveal({
           </ul>
         </div>
 
-        <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--primary-light)", borderRadius: "8px", marginTop: "2rem" }}>
-          <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--primary)", opacity: 0.9, marginBottom: "0.5rem" }}>
-            Ready to Visualize?
-          </h3>
-          <p style={{ fontSize: "0.9rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
-            Copy and paste this generated prompt into Midjourney or DALL-E to visualize your dream kitchen.
-          </p>
-          <p style={{ fontSize: "1.125rem", lineHeight: 1.6, fontStyle: "italic", fontWeight: 400, userSelect: "all", cursor: "pointer", background: "rgba(0,0,0,0.05)", padding: "1rem", borderRadius: "4px" }} onClick={(e) => {
-               navigator.clipboard.writeText(e.currentTarget.innerText);
-               alert("Prompt Copied!");
-          }}>
-            {yourStylePrompt}
-          </p>
+        <div className="prompts-container" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", marginTop: "2rem" }}>
+          {/* Generation Prompt */}
+          <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--primary-light)", borderRadius: "8px" }}>
+            <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--primary)", opacity: 0.9, marginBottom: "0.5rem" }}>
+              1. New Build Prompt
+            </h3>
+            <p style={{ fontSize: "0.85rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
+              Best for generating a brand new kitchen from scratch in Midjourney or DALL-E.
+            </p>
+            <div 
+              style={{ 
+                fontSize: "0.95rem", 
+                lineHeight: 1.6, 
+                fontStyle: "italic", 
+                fontWeight: 400, 
+                userSelect: "all", 
+                cursor: "pointer", 
+                background: "rgba(0,0,0,0.05)", 
+                padding: "1rem", 
+                borderRadius: "4px",
+                whiteSpace: "pre-wrap",
+                maxHeight: "300px",
+                overflowY: "auto"
+              }} 
+              onClick={(e) => {
+                navigator.clipboard.writeText((e.currentTarget as HTMLElement).innerText);
+                alert("New Build Prompt Copied!");
+              }}
+            >
+              {generation}
+            </div>
+          </div>
+
+          {/* Renovation Prompt */}
+          <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--secondary-light, #f0f4f8)", borderRadius: "8px" }}>
+            <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "#2c5282", opacity: 0.9, marginBottom: "0.5rem" }}>
+              2. Transformation Prompt
+            </h3>
+            <p style={{ fontSize: "0.85rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
+              Best for "style transfer" on an existing photo using AI Image-to-Image tools.
+            </p>
+            <div 
+              style={{ 
+                fontSize: "0.95rem", 
+                lineHeight: 1.6, 
+                fontStyle: "italic", 
+                fontWeight: 400, 
+                userSelect: "all", 
+                cursor: "pointer", 
+                background: "rgba(0,0,0,0.05)", 
+                padding: "1rem", 
+                borderRadius: "4px",
+                whiteSpace: "pre-wrap",
+                maxHeight: "300px",
+                overflowY: "auto"
+              }} 
+              onClick={(e) => {
+                navigator.clipboard.writeText((e.currentTarget as HTMLElement).innerText);
+                alert("Transformation Prompt Copied!");
+              }}
+            >
+              {renovation}
+            </div>
+          </div>
         </div>
       </div>
 
