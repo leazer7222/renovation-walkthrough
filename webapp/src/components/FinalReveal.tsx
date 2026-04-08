@@ -89,10 +89,10 @@ export function FinalReveal({
         </div>
 
         <div className="prompts-container" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", marginTop: "2rem" }}>
-          {/* Generation Prompt */}
+          {/* Default Kitchen Prompt */}
           <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--primary-light)", borderRadius: "8px" }}>
             <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--primary)", opacity: 0.9, marginBottom: "0.5rem" }}>
-              1. New Build Prompt
+              1. Default Kitchen Prompt
             </h3>
             <p style={{ fontSize: "0.85rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
               Best for generating a brand new kitchen from scratch in Midjourney or DALL-E.
@@ -114,7 +114,7 @@ export function FinalReveal({
               }} 
               onClick={(e) => {
                 navigator.clipboard.writeText((e.currentTarget as HTMLElement).innerText);
-                alert("New Build Prompt Copied!");
+                alert("Default Kitchen Prompt Copied!");
               }}
             >
               {generation}
