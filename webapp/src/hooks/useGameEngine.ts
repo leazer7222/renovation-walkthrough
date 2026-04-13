@@ -23,6 +23,7 @@ const initialState: GameState = {
     countertop: null,
     cabinet: null,
     showerType: null,
+    showerTileStyle: null,
     vanityStyle: null,
     wallTreatment: null,
     vanityFinish: null,

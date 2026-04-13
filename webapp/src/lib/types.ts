@@ -19,6 +19,8 @@ export type Phase =
   | "transition-to-cabinet"
   | "cabinet"
   | "shower-type"
+  | "transition-to-shower-tile-style"
+  | "shower-tile-style"
   | "transition-to-vanity-style"
   | "vanity-style"
   | "transition-to-wall-treatment"
