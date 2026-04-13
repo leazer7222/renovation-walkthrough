@@ -1,9 +1,9 @@
 # Current State - RenovationWalkthrough Project
 
-## Project Status: PHASE 5 COMPLETE — HIGH-FIDELITY PROMPTING SYSTEM 🚀
+## Project Status: PHASE 8 COMPLETE — CODEBASE CLEANUP & HANDOVER READY
 
-**Date**: April 8, 2026
-**Phase**: Phase 5 (Deterministic AI Prompting + Fidelity Refinement) - 100% Complete & Verified
+**Date**: April 13, 2026
+**Phase**: Codebase cleanup complete. Phase 8 (Style Discovery) was already complete at last session. Project is ready for full-stack engineer handover.
 
 ### High-Fidelity Prompting System (April 8, 2026)
 - **Fidelity Refinement**: Stripped all exaggerated marketing language (e.g., "massive", "commercial-grade") from prompt generation to ensure deterministic results.
@@ -69,6 +69,17 @@
 ### ✅ Interactive UI Prototype (Phase 3)
 - Polished React webapp with sequential challenger game logic.
 - Config-driven architecture for landing and onboarding copy.
+
+## Cleanup Session (April 13, 2026)
+
+### Changes Made
+- **Deleted** `tasks/lessons.md` — verbatim duplicate of `docs/LESSONS_LEARNED.md`
+- **Added** `KITCHEN_PHASE_ORDER` and `BATHROOM_PHASE_ORDER` typed constants to `webapp/src/lib/types.ts`
+- **Refactored** `webapp/src/components/App.tsx`: removed hardcoded inline phase arrays (now use the constants above); removed unnecessary `as any` cast on `phase` prop
+- **Fixed** `webapp/src/lib/assetResolver.ts`: replaced `selection: any` with typed `SelectionForImage` interface
+- **Fixed** `scripts/scan_prototype_images.py`: replaced hardcoded absolute path with `Path(__file__)` relative reference; added purpose docblock
+- **Updated** `scripts/generate_flooring_light_oak.py`: expanded docblock to clarify it is a one-off utility
+- Build verified: `npm run build` passes with zero TypeScript errors
 
 ## Next Steps
 - Phase 4: Design Foundation & NLP Prompting ✅ COMPLETE

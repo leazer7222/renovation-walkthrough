@@ -31,6 +31,21 @@ export type Phase =
   | "mirror-style"
   | "final";
 
+/** Ordered list of user-visible phases for kitchen flow (used for progress bar tracking) */
+export const KITCHEN_PHASE_ORDER: Phase[] = [
+  "style-discovery", "style-results", "onboarding",
+  "layout", "storage", "appliance", "lighting",
+  "flooring", "countertop", "cabinet", "addons", "final",
+];
+
+/** Ordered list of user-visible phases for bathroom flow (used for progress bar tracking) */
+export const BATHROOM_PHASE_ORDER: Phase[] = [
+  "style-discovery", "style-results", "onboarding",
+  "shower-type", "shower-tile-style", "vanity-style",
+  "flooring", "wall-treatment", "vanity-finish", "mirror-style",
+  "addons", "final",
+];
+
 export interface Option {
   id: string;
   label: string;

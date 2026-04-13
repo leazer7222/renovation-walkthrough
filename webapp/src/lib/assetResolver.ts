@@ -22,9 +22,14 @@ export function resolveDesignElementImage(phase: string, optionId: string) {
   return `${KITCHEN_ROOT}/design-elements/${folderPhase}/${optionId}/${optionId}.png`;
 }
 
+interface SelectionForImage {
+  flooring?: string | null;
+  countertop?: string | null;
+}
+
 export function resolveImage(
   phase: string,
-  selection: any,
+  selection: SelectionForImage,
   optionId: string,
   room?: string
 ) {

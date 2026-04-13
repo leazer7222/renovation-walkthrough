@@ -2,8 +2,10 @@
 """
 generate_flooring_light_oak.py
 
-Generate a light oak hardwood flooring variation of the base kitchen image
-using OpenAI's image generation API.
+One-off utility: Generates a light oak hardwood flooring variation of the base kitchen
+image using OpenAI's image generation API. Not part of the regular setup flow — safe to
+skip unless regenerating base flooring assets from scratch.
+Run from: RenovationWalkthrough/ root
 """
 
 import os

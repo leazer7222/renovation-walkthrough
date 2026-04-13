@@ -1,6 +1,11 @@
+"""
+Maintenance utility: Scans visualization-library/comparison/kitchen/prototype/ and prints
+an inventory of which prototype slots have real images vs .gitkeep placeholders.
+Run from: RenovationWalkthrough/ root
+"""
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\cjlea\AI-Projects\RenovationWalkthrough\visualization-library\comparison\kitchen\prototype")
+ROOT = Path(__file__).parent.parent / "visualization-library" / "comparison" / "kitchen" / "prototype"
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 
 

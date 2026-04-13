@@ -7,6 +7,7 @@ import { AddonScreen } from "@/components/AddonScreen";
 import { StyleDiscoveryScreen } from "@/components/StyleDiscoveryScreen";
 import { StyleDiscoveryResults } from "@/components/StyleDiscoveryResults";
 import { useGameEngine } from "@/hooks/useGameEngine";
+import { KITCHEN_PHASE_ORDER, BATHROOM_PHASE_ORDER } from "@/lib/types";
 
 export function App() {
   const { 
@@ -106,9 +107,9 @@ export function App() {
     return <div className="screen center">Preparing game...</div>;
   }
 
-  const currentPhasesArray = state.onboarding.room === "bathroom" 
-    ? ["style-discovery", "style-results", "onboarding", "shower-type", "shower-tile-style", "vanity-style", "flooring", "wall-treatment", "vanity-finish", "mirror-style", "addons", "final"]
-    : ["style-discovery", "style-results", "onboarding", "layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet", "addons", "final"];
+  const currentPhasesArray = state.onboarding.room === "bathroom"
+    ? BATHROOM_PHASE_ORDER
+    : KITCHEN_PHASE_ORDER;
 
   const progress = {
     phaseIndex: currentPhasesArray.indexOf(state.phase) + 1,
@@ -118,7 +119,7 @@ export function App() {
 
   return (
     <GameScreen
-      phase={state.phase as any}
+      phase={state.phase}
       currentRound={currentRound}
       match={state.roundState.currentMatch}
       selection={state.selection}

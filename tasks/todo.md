@@ -74,6 +74,15 @@
 - [x] Room-aware AI prompt generation (Kitchen vs Bathroom templates)
 - [x] Fixed widespread filename white-space and casing bugs
 
+## Codebase Cleanup (April 13, 2026) ✅ COMPLETE
+- [x] Delete duplicate `tasks/lessons.md` (canonical copy in `docs/LESSONS_LEARNED.md`)
+- [x] Extract hardcoded phase arrays from App.tsx into typed constants in types.ts
+- [x] Remove `as any` cast on `phase` prop in App.tsx
+- [x] Replace `selection: any` with `SelectionForImage` interface in assetResolver.ts
+- [x] Fix hardcoded absolute path in scan_prototype_images.py
+- [x] Add purpose docblocks to one-off Python scripts
+- [x] Build verified: zero TypeScript errors
+
 ## Phase 9: Results & Matching 📋 PLANNED
 - [ ] Result persistence across sessions
 - [ ] Contractor matching integration
