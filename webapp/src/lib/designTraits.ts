@@ -170,9 +170,43 @@ const promptModifiers: Record<string, string> = {
   "shaker": "shaker-style cabinetry",
   "warm-wood": "warm wood cabinetry with visible natural grain",
 
-  // Addons
-  "wine-fridge": "Built-in glass-door wine fridge seamlessly integrated into the kitchen island",
-  "under-cabinet-ambient-glow": "Under-cabinet ambient lighting creating a soft, warm glow"
+  // Bathroom Specific
+  "tub-shower-combo": "standard tub-shower combination layout",
+  "standalone-tub": "luxurious standalone soaking tub acting as a central focal point",
+  "walk-in-glass-shower": "spacious walk-in glass-enclosed shower",
+  "walk-in-half-wall-shower": "walk-in shower with a modern half-wall partition",
+  
+  "accent-band": "decorative accent tile band running through the shower space",
+  "feature-back-wall": "bold feature back wall in the shower with specialized tile textures",
+  "full-pattern-textured-tile": "full-patterned and highly textured tile work covering all shower walls",
+  "uniform-tile": "clean and uniform tile work for a seamless, minimalist look",
+  
+  "built-in-vanity": "custom built-in vanity unit",
+  "double-vanity": "spacious double vanity with dual sinks",
+  "vanity-tower": "vanity unit with integrated vertical storage tower",
+  
+  "light-neutral-tile": "light neutral tile flooring",
+  "patterned-tile": "intricate patterned tile flooring",
+  "dark-stone-tile": "dark stone tile flooring",
+  
+  "painted-wall": "clean painted walls in a complementing neutral tone",
+  "half-wall-paneling": "classic half-wall wainscoting or paneling",
+  "full-tile-feature-wall": "dramatic full-tile feature wall spanning the room",
+  
+  "white-vanity": "crisp white vanity finish",
+  "light-wood-vanity": "warm light wood vanity finish",
+  "dark-or-black-vanity": "dramatic dark or matte black vanity finish",
+  
+  "framed-mirror": "elegantly framed mirror",
+  "frameless-mirror": "sleek frameless mirror",
+  "led-backlit-mirror": "modern LED-backlit mirror providing a soft halo glow",
+
+  // Bathroom Addons
+  "toilet-upgrade": "modern skirted toilet unit",
+  "mirror-upgrade": "integrated smart backlit mirror",
+  "shower-experience": "premium multi-function rainfall shower system",
+  "comfort-upgrade": "heated flooring system and integrated towel warmer",
+  "storage-functionality": "integrated shower niche with dedicated storage",
 };
 
 export type PromptOutput = {
@@ -191,7 +225,15 @@ export function generatePrompts(
     flooring?: string | null;
     countertop?: string | null;
     cabinet?: string | null;
-  }
+    // Bathroom
+    showerType?: string | null;
+    showerTileStyle?: string | null;
+    vanityStyle?: string | null;
+    wallTreatment?: string | null;
+    vanityFinish?: string | null;
+    mirrorStyle?: string | null;
+  },
+  room: string = "kitchen"
 ): PromptOutput {
   const getLabel = (key: string | null | undefined, fallback: string) => {
     if (!key) return fallback;
@@ -199,6 +241,82 @@ export function generatePrompts(
   };
 
   const styleStr = styles.map(formatDisplayLabel).join(", ");
+  const addonsList = Object.keys(selection.addons || {})
+    .filter((k) => selection.addons![k])
+    .map((k) => getLabel(k, formatDisplayLabel(k)));
+
+  if (room === "bathroom") {
+    const showerRaw = getLabel(selection.showerType, "standard shower");
+    const showerTileRaw = getLabel(selection.showerTileStyle, "standard tile");
+    const vanityRaw = getLabel(selection.vanityStyle, "standard vanity");
+    const flooringRaw = getLabel(selection.flooring, "tile flooring");
+    const wallRaw = getLabel(selection.wallTreatment, "painted walls");
+    const vanityFinishRaw = getLabel(selection.vanityFinish, "matching finish");
+    const mirrorRaw = getLabel(selection.mirrorStyle, "unframed mirror");
+
+    const generation = [
+      `High quality architectural photography of a bathroom designed in a cohesive ${styleStr} aesthetic.`,
+      `---`,
+      `Layout & Shower:`,
+      `${showerRaw} featuring ${showerTileRaw}.`,
+      `---`,
+      `Materials:`,
+      `* Flooring: ${flooringRaw}`,
+      `* Vanity Finish: ${vanityFinishRaw}`,
+      `* Wall Treatment: ${wallRaw}`,
+      `Ensure strict adherence to the specified material palette. Do not introduce additional materials or substitute finishes.`,
+      `---`,
+      `Furniture & Fixtures:`,
+      `* Vanity: ${vanityRaw}`,
+      `* Mirror: ${mirrorRaw}`,
+      addonsList.length > 0 ? addonsList.map(a => `* ${a}`).join("\n") : "",
+      `---`,
+      `Hardware & Detail:`,
+      `* Upgrade all faucets, shower heads, and cabinet hardware to a premium finish consistent with the ${styleStr} style.`,
+      `* Ensure a clean, modern appearance with a high-end architectural finish.`,
+      `---`,
+      `Lighting:`,
+      `Soft layered lighting with a focus on the ${mirrorRaw} area, creating a serene and spa-like atmosphere.`,
+      `---`,
+      `Styling & Mood:`,
+      `Clean, tranquil, and grounded. The space should feel like a high-end spa, with balanced textures and minimal clutter.`,
+      `---`,
+      `Rendering:`,
+      `Photorealistic, natural daylight, architectural digest style, highly detailed, 8k resolution.`,
+      `---`,
+      `Control Rules:`,
+      `* Do not introduce new materials, finishes, or design elements that are not specified`,
+      `* Do not exaggerate scale or use terms such as "massive", "expansive", or "commercial-grade"`,
+      `* Keep all elements consistent with the provided selections`
+    ].filter(Boolean).join("\n\n");
+
+    const renovation = [
+      `[CONTEXT] A photorealistic renovation and style transformation of the existing bathroom image.`,
+      `[STRUCTURAL PRESERVATION] Strictly preserve the existing bathroom footprint, window placements, and overall room architecture. Maintain the exact camera angle and perspective.`,
+      `[FUNCTIONAL ANCHORS] Strictly preserve and keep visible the primary shower/tub placement, the toilet position, and the vanity location. Do not relocate these core fixtures.`,
+      `[USER-SELECTED FEATURES]`,
+      `Strictly include:`,
+      `* ${showerRaw}`,
+      `* ${vanityRaw}`,
+      `* ${showerTileRaw}`,
+      addonsList.map(a => `* ${a}`).join("\n"),
+      `[MATERIALS]`,
+      `* Flooring: ${flooringRaw}`,
+      `* Vanity Finish: ${vanityFinishRaw}`,
+      `* Wall Treatment: ${wallRaw}`,
+      `No substitutions allowed.`,
+      `[STYLE DIRECTION]`,
+      `Apply ${styleStr} aesthetics.`,
+      `[DESIGN INTENT]`,
+      `Balance realism with a high-end aspirational result. Transform the existing bathroom into a modern, spa-like sanctuary.`,
+      `[RENDERING]`,
+      `Photorealistic, natural daylight, architectural digest style, highly detailed, 8k.`
+    ].filter(Boolean).join("\n\n");
+
+    return { generation, renovation };
+  }
+
+  // DEFAULT KITCHEN LOGIC
   const layoutRaw = getLabel(selection.layout, "Standard layout");
   const storageRaw = getLabel(selection.storage, "standard storage");
   const applianceRaw = getLabel(selection.appliance, "professional-grade appliances");
@@ -207,11 +325,6 @@ export function generatePrompts(
   const countertopRaw = getLabel(selection.countertop, "stone surfaces");
   const cabinetRaw = getLabel(selection.cabinet, "custom cabinetry");
 
-  const addonsList = Object.keys(selection.addons || {})
-    .filter((k) => selection.addons![k])
-    .map((k) => getLabel(k, formatDisplayLabel(k)));
-
-  // 1. DEFAULT KITCHEN PROMPT
   const generation = [
     `High quality architectural photography of a kitchen designed in a cohesive ${styleStr} aesthetic.`,
     `---`,
@@ -226,7 +339,6 @@ export function generatePrompts(
     `---`,
     `Design Features:`,
     addonsList.length > 0 ? addonsList.map(a => `* ${a}`).join("\n") : `* ${storageRaw}`,
-    // If we have storage specifically, add it if not in addons (though storage is a selection, not an addon)
     selection.storage ? `* ${storageRaw}` : "",
     `---`,
     `Appliances (Strictly Enforced):`,
@@ -251,7 +363,6 @@ export function generatePrompts(
     `* Keep all elements consistent with the provided selections`
   ].filter(Boolean).join("\n\n");
 
-  // 2. RENOVATION PROMPT
   const renovation = [
     `[CONTEXT] A photorealistic renovation and style transformation of the existing kitchen image.`,
     `[STRUCTURAL PRESERVATION] Strictly preserve the existing kitchen layout, structural walls, window placements, and overall room architecture. Maintain the exact camera angle and perspective.`,

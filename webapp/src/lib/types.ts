@@ -1,5 +1,7 @@
 export type Phase =
   | "start"
+  | "style-discovery"
+  | "style-results"
   | "onboarding"
   | "layout"
   | "transition-to-storage"
@@ -71,6 +73,7 @@ export interface GameState {
     wallTreatment: string | null;
     vanityFinish: string | null;
     mirrorStyle: string | null;
+    discoveryResults?: any[];
   };
   roundState: RoundState;
   complete: boolean;

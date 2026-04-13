@@ -35,6 +35,9 @@ const initialState: GameState = {
 const toQueue = (options: Option[]): Option[] => options.map((o) => ({ ...o }));
 
 const nextPhase = (phase: Phase, room: string): Phase => {
+  if (phase === "style-discovery") return "style-results";
+  if (phase === "style-results") return "onboarding";
+
   if (room === "bathroom") {
     if (phase === "shower-type") return "transition-to-shower-tile-style";
     if (phase === "transition-to-shower-tile-style") return "shower-tile-style";
@@ -108,8 +111,37 @@ export const useGameEngine = () => {
   const startGame = () => {
     setState({
       ...initialState,
+      phase: "style-discovery",
+    });
+  };
+
+  const skipDiscovery = () => {
+    setState({
+      ...initialState,
       phase: "onboarding",
     });
+  };
+
+  const setDiscoveryResults = (results: any[]) => {
+    setState(prev => ({
+      ...prev,
+      selection: {
+        ...prev.selection,
+        discoveryResults: results
+      }
+    }));
+    continueToNextRound();
+  };
+
+  const completeStyleDiscovery = (topStyles: string[]) => {
+    setState((prev) => ({
+      ...prev,
+      phase: "onboarding",
+      onboarding: {
+        ...prev.onboarding,
+        styles: topStyles
+      }
+    }));
   };
 
   const completeOnboarding = (onboarding: OnboardingState) => {
@@ -237,6 +269,9 @@ export const useGameEngine = () => {
   return {
     state,
     startGame,
+    skipDiscovery,
+    setDiscoveryResults,
+    completeStyleDiscovery,
     completeOnboarding,
     completeAddons,
     continueToNextRound,

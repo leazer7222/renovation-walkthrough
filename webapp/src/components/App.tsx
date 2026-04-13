@@ -4,12 +4,17 @@ import { StartScreen } from "@/components/StartScreen";
 import { OnboardingScreen } from "@/components/OnboardingScreen";
 import { TransitionScreen } from "@/components/TransitionScreen";
 import { AddonScreen } from "@/components/AddonScreen";
+import { StyleDiscoveryScreen } from "@/components/StyleDiscoveryScreen";
+import { StyleDiscoveryResults } from "@/components/StyleDiscoveryResults";
 import { useGameEngine } from "@/hooks/useGameEngine";
 
 export function App() {
   const { 
     state, 
     startGame, 
+    skipDiscovery,
+    setDiscoveryResults,
+    completeStyleDiscovery,
     completeOnboarding, 
     completeAddons,
     continueToNextRound, 
@@ -19,11 +24,20 @@ export function App() {
   } = useGameEngine();
 
   if (state.phase === "start") {
-    return <StartScreen onStart={startGame} />;
+    return <StartScreen onStartDiscovery={startGame} onSkipToOnboarding={skipDiscovery} />;
   }
 
   if (state.phase === "onboarding") {
-    return <OnboardingScreen onComplete={completeOnboarding} />;
+    return <OnboardingScreen onComplete={completeOnboarding} initialStyles={state.onboarding.styles} />;
+  }
+
+  if (state.phase === "style-discovery") {
+    return <StyleDiscoveryScreen onComplete={setDiscoveryResults} />;
+  }
+
+  if (state.phase === "style-results") {
+    const results = state.selection.discoveryResults || [];
+    return <StyleDiscoveryResults results={results} onContinue={completeStyleDiscovery} />;
   }
 
   if (state.phase === "addons") {
@@ -93,8 +107,8 @@ export function App() {
   }
 
   const currentPhasesArray = state.onboarding.room === "bathroom" 
-    ? ["onboarding", "shower-type", "shower-tile-style", "vanity-style", "flooring", "wall-treatment", "vanity-finish", "mirror-style", "addons", "final"]
-    : ["onboarding", "layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet", "addons", "final"];
+    ? ["style-discovery", "style-results", "onboarding", "shower-type", "shower-tile-style", "vanity-style", "flooring", "wall-treatment", "vanity-finish", "mirror-style", "addons", "final"]
+    : ["style-discovery", "style-results", "onboarding", "layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet", "addons", "final"];
 
   const progress = {
     phaseIndex: currentPhasesArray.indexOf(state.phase) + 1,

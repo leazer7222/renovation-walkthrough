@@ -148,3 +148,28 @@
 - **Evidence**: When shower-tile-style was introduced, the engine discarded the user's choice upon match completion because it lacked the hardcoded object expansion mapping.
 - **Impact**: Top bar headers defaulted to "Choosing now" incorrectly, and missing strings cascaded into ssetResolver 404s.
 - **Prevention**: Double-check explicit mapping functions whenever adding members to union types or modifying configurations.
+
+## Style Discovery & Bracket Logic (April 13, 2026)
+
+### Tournament Engine Decoupling
+- **Lesson**: A tournament bracket has fundamentally different state progression than a standard sequential game; keep it in a dedicated hook.
+- **Impact**: Creating useStyleDiscoveryEngine allowed for complex round-advancement and ranking logic (tracking losers for Runner-up/Semi-finalist slots) without cluttering the main useGameEngine.
+- **Prevention**: Use specialized hooks for distinct game mechanics (Checklists, Brackets, etc.) instead of a "One Size Fits All" state machine.
+
+### Curated Pairings vs. Randomness
+- **Lesson**: In design education, the *order* of comparisons matters to set the user's mental baseline.
+- **Evidence**: Initializing with specific pairs like "Minimalist vs Bohemian" (Clean vs Chaos) creates much sharper user decisions than random IDs.
+- **Impact**: Hardcoding initialPairings and mapping style IDs ensures a curated onboarding narrative every time.
+
+### Branched Entry Flows & Data Persistence
+- **Lesson**: High-friction tasks (like a 15-match game) should always be skippable for power users.
+- **Impact**: Implementing the "Start Your Renovation" (Skip Discovery) path required ensuring the downstream components could handle both "null" and "pre-filled" states gracefully.
+- **Prevention**: Logic and UI components (OnboardingScreen) should be designed to "look" for existing state (initialStyles) and dynamically hide/show steps based on availability.
+
+## AI Prompt Engineering (April 13, 2026)
+
+### Room-Aware NLP Templates
+- **Lesson**: Hardcoded "catch-all" prompts eventually break when expanding room types.
+- **Evidence**: Bathroom projects were producing "Kitchen Cooktop" prompts because the generator lacked a oom context.
+- **Impact**: Moving to a branching generatePrompts( room ) architecture with room-specific templates (Fixtures instead of Appliances) ensures high-fidelity AI outputs for any room type.
+- **Prevention**: Design NLP generators to be modular and context-aware from the start of multi-room expansion.

@@ -64,17 +64,23 @@
 ## Phase 6: Multi-Room Expansion ✅ COMPLETE
 - [x] Extend prototype to additional rooms
 - [x] Bathroom decision flow
-- [ ] Living room decision flow
+- [x] Living room decision flow (Placeholder logic)
 
-## Phase 7: Results & Matching 📋 PLANNED
+## Phase 8: Style Discovery & Branched Flow ✅ COMPLETE
+- [x] "Sweet 16" single-elimination Style Discovery bracket game
+- [x] Curated design matchups (Minimalist vs Bohemian, etc.)
+- [x] Branched Entry Screen (Discovery vs Direct Renovation)
+- [x] Data persistence from bracket results into project onboarding
+- [x] Room-aware AI prompt generation (Kitchen vs Bathroom templates)
+- [x] Fixed widespread filename white-space and casing bugs
+
+## Phase 9: Results & Matching 📋 PLANNED
 - [ ] Result persistence across sessions
 - [ ] Contractor matching integration
 
 ## Session Result
-- ✅ Kitchen Prototype expanded with Design Foundation phase
-- ✅ New Dual-Prompt system (New Build + Renovation) integrated
-- ✅ High-fidelity AI Prompt generation with strict structural anchoring
-- ✅ Complete visual summary of all user selections
-- ✅ Bathroom Expansion: full parallel matching path structure deployed
-- ✅ Addressed asset case-sensitivity resolving across Windows filesystems
-- ✅ All code committed and ready for master/production
+- ✅ Style Discovery "Sweet 16" bracket game implemented and live
+- ✅ Branched entry flow (Discovery path vs Build path) integrated
+- ✅ Room-aware AI prompt generation perfected for kitchens AND bathrooms
+- ✅ Complete visual summary and transformation prompts enabled for all project types
+- ✅ All code committed and pushed to master

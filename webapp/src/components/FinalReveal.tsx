@@ -46,7 +46,7 @@ export function FinalReveal({
   const summary = generateDesignSummary(dominantTraits);
   const styledDisplay = styles.map(formatDisplayLabel).join(", ");
   
-  const { generation, renovation } = generatePrompts(styles, selection);
+  const { generation, renovation } = generatePrompts(styles, selection, room);
 
   return (
     <main className="screen final-reveal">
@@ -118,7 +118,7 @@ export function FinalReveal({
               }} 
               onClick={(e) => {
                 navigator.clipboard.writeText((e.currentTarget as HTMLElement).innerText);
-                alert("Default Kitchen Prompt Copied!");
+                alert(`Default ${isBathroom ? "Bathroom" : "Kitchen"} Prompt Copied!`);
               }}
             >
               {generation}

@@ -1,21 +1,43 @@
+import React from "react";
 import { landingConfig } from "@/config/landingConfig";
 
-export function StartScreen({ onStart }: { onStart: () => void }) {
+interface StartScreenProps {
+  onStartDiscovery: () => void;
+  onSkipToOnboarding: () => void;
+}
+
+export function StartScreen({ onStartDiscovery, onSkipToOnboarding }: StartScreenProps) {
   return (
-    <main className="screen center">
-      <div style={{ marginBottom: "2rem", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-        <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-          Reform-A.i
-        </span>
-        <span style={{ fontSize: "0.875rem", color: "var(--muted-foreground)", fontWeight: 400 }}>
-          Renovation Made Easy
-        </span>
+    <main className="screen center start-screen">
+      <div className="branding-wrap">
+        <span className="brand-name">Reform-A.i</span>
+        <span className="brand-tagline">Renovation Made Easy</span>
       </div>
-      <h1 className="transition-title">{landingConfig.headline}</h1>
-      <p className="transition-subtext">{landingConfig.subheadline}</p>
-      <button className="btn-large" onClick={onStart}>{landingConfig.ctaButton}</button>
+      
+      <h1 className="landing-title">{landingConfig.headline}</h1>
+      <p className="landing-subtitle">{landingConfig.subheadline}</p>
+
+      <div className="choice-container">
+        <div className="choice-card discovery" onClick={onStartDiscovery}>
+          <div className="choice-icon">🏆</div>
+          <div className="choice-content">
+            <h3>Discover Your Style</h3>
+            <p>Play the Style Bracket game to find your perfect design match.</p>
+          </div>
+          <button className="btn-large">Start Bracket</button>
+        </div>
+
+        <div className="choice-card direct" onClick={onSkipToOnboarding}>
+          <div className="choice-icon">🏗️</div>
+          <div className="choice-content">
+            <h3>Start Your Renovation</h3>
+            <p>Skip the game and go straight to building your space.</p>
+          </div>
+          <button className="btn-large btn-secondary">Build My Space</button>
+        </div>
+      </div>
+
       <p className="microcopy">{landingConfig.microcopy}</p>
     </main>
   );
 }
-
