@@ -1,16 +1,21 @@
 import React from "react";
 import { resolveImage } from "@/lib/assetResolver";
 import { roundOrder } from "@/config/kitchenConfig";
+import { bathroomRoundOrder } from "@/config/bathroomConfig";
 
 export function CurrentSelectionsBar({
   phase,
   selection,
+  room,
 }: {
   phase: string;
   selection: any;
+  room: string;
 }) {
-  const categories = roundOrder.map((r) => {
-    const selectedId = selection[r.phase as keyof typeof selection];
+  const sourceOrder = room === "bathroom" ? bathroomRoundOrder : roundOrder;
+  const categories = sourceOrder.map((r) => {
+    const selectionKey = r.phase.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+    const selectedId = selection[selectionKey] || selection[r.phase];
     const selectedOption = r.options.find((o) => o.id === selectedId);
     
     let thumb = "/placeholder.png";
@@ -18,7 +23,8 @@ export function CurrentSelectionsBar({
       thumb = resolveImage(
         r.phase as any,
         selection,
-        selectedId
+        selectedId,
+        room
       );
     }
 

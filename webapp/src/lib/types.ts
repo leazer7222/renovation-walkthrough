@@ -16,6 +16,15 @@ export type Phase =
   | "countertop"
   | "transition-to-cabinet"
   | "cabinet"
+  | "shower-type"
+  | "transition-to-vanity-style"
+  | "vanity-style"
+  | "transition-to-wall-treatment"
+  | "wall-treatment"
+  | "transition-to-vanity-finish"
+  | "vanity-finish"
+  | "transition-to-mirror-style"
+  | "mirror-style"
   | "final";
 
 export interface Option {
@@ -24,7 +33,7 @@ export interface Option {
 }
 
 export interface RoundConfig {
-  phase: "layout" | "storage" | "appliance" | "lighting" | "flooring" | "countertop" | "cabinet";
+  phase: "layout" | "storage" | "appliance" | "lighting" | "flooring" | "countertop" | "cabinet" | "shower-type" | "shower-tile-style" | "vanity-style" | "wall-treatment" | "vanity-finish" | "mirror-style" | "addons";
   label: string;
   options: Option[];
 }
@@ -55,8 +64,14 @@ export interface GameState {
     flooring: string | null;
     countertop: string | null;
     cabinet: string | null;
+    // Bathroom Specific
+    showerType: string | null;
+    showerTileStyle: string | null;
+    vanityStyle: string | null;
+    wallTreatment: string | null;
+    vanityFinish: string | null;
+    mirrorStyle: string | null;
   };
   roundState: RoundState;
   complete: boolean;
 }
-

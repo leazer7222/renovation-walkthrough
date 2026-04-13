@@ -1,6 +1,7 @@
 import React from "react";
 import { resolveImage } from "@/lib/assetResolver";
 import { roundOrder } from "@/config/kitchenConfig";
+import { bathroomRoundOrder } from "@/config/bathroomConfig";
 import {
   getTraitsForSelections,
   countTraits,
@@ -15,23 +16,26 @@ import {
 } from "@/lib/designTraits";
 
 export function FinalReveal({
+  room,
   selection,
   styles,
   onRestart,
 }: {
+  room: string;
   selection: any;
   styles: string[];
   onRestart: () => void;
 }) {
-  const finalImageUrl = resolveImage(
-    "cabinet",
-    selection,
-    selection.cabinet || ""
-  );
+  const isBathroom = room === "bathroom";
+  
+  const finalImageUrl = isBathroom 
+    ? resolveImage("vanity-style", selection, selection.vanityStyle || "", room)
+    : resolveImage("cabinet", selection, selection.cabinet || "", room);
 
   const getLabel = (phase: string, id: string | null) => {
     if (!id) return "Not selected";
-    const round = roundOrder.find(r => r.phase === phase);
+    const sourceOrder = isBathroom ? bathroomRoundOrder : roundOrder;
+    const round = sourceOrder.find(r => r.phase === phase);
     return round?.options.find(o => o.id === id)?.label || id;
   };
 
@@ -48,7 +52,7 @@ export function FinalReveal({
     <main className="screen final-reveal">
       <header style={{ textAlign: "center", marginBottom: "3rem" }}>
         <p className="selection-label">Project Complete</p>
-        <h1 className="transition-title">Your Kitchen Reveal</h1>
+        <h1 className="transition-title">Your {room === "bathroom" ? "Bathroom" : "Kitchen"} Reveal</h1>
       </header>
 
       <img src={finalImageUrl} alt="Final Kitchen Design" className="hero-image" style={{ marginBottom: "2rem" }} />
@@ -92,10 +96,10 @@ export function FinalReveal({
           {/* Default Kitchen Prompt */}
           <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--primary-light)", borderRadius: "8px" }}>
             <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--primary)", opacity: 0.9, marginBottom: "0.5rem" }}>
-              1. Default Kitchen Prompt
+              1. Default {isBathroom ? "Bathroom" : "Kitchen"} Prompt
             </h3>
             <p style={{ fontSize: "0.85rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
-              Best for generating a brand new kitchen from scratch in Midjourney or DALL-E.
+              Best for generating a brand new {isBathroom ? "bathroom" : "kitchen"} from scratch in Midjourney or DALL-E.
             </p>
             <div 
               style={{ 
@@ -160,10 +164,12 @@ export function FinalReveal({
           Your Complete Selections
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "1rem" }}>
-          {["layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet"].map(phase => {
-            const id = (selection as any)[phase];
+          {(isBathroom 
+            ? ["shower-type", "shower-tile-style", "vanity-style", "flooring", "wall-treatment", "vanity-finish", "mirror-style"]
+            : ["layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet"]).map(phase => {
+            const id = (selection as any)[phase.replace(/-([a-z])/g, (g) => g[1].toUpperCase())] || (selection as any)[phase]; // fallback for camel case vs kebab case
             if (!id) return null;
-            const thumbUrl = resolveImage(phase as any, selection, id);
+            const thumbUrl = resolveImage(phase as any, selection, id, room);
             return (
               <div key={phase} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 <img src={thumbUrl} alt={phase} style={{ width: "100%", height: "100px", objectFit: "cover", borderRadius: "6px", border: "1px solid rgba(0,0,0,0.1)" }} />

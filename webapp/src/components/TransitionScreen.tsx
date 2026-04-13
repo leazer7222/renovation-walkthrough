@@ -4,14 +4,17 @@ import { resolveImage } from "@/lib/assetResolver";
 export function TransitionScreen({
   type,
   selection,
+  room,
   onContinue,
 }: {
   type: string;
   selection: any;
+  room: string;
   onContinue: () => void;
 }) {
   let resolveType = type;
-  let resolveOption = selection[type] || "";
+  const selectionKey = type.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+  let resolveOption = selection[selectionKey] || selection[type] || "";
 
   if (type === "addons") {
     resolveType = "layout";
@@ -21,19 +24,29 @@ export function TransitionScreen({
   const imageUrl = resolveImage(
     resolveType as any,
     selection,
-    resolveOption
+    resolveOption,
+    room
   );
 
   const title = "Great choice!";
   
   let subtext = "Now let's continue building your design.";
+  // Kitchen transitions
   if (type === "layout") subtext = "Now let's choose a storage style.";
   if (type === "storage") subtext = "Next up: appliances.";
   if (type === "appliance") subtext = "Let's illuminate your space with some lighting choices.";
   if (type === "lighting") subtext = "Time to consider any premium add-ons.";
   if (type === "addons") subtext = "Now for the fun part: let's pick your materials! Starting with flooring.";
-  if (type === "flooring") subtext = "Now let's choose a countertop that works with your floor.";
+  if (type === "flooring") subtext = room === "bathroom" ? "Now let's choose your wall treatment." : "Now let's choose a countertop that works with your floor.";
   if (type === "countertop") subtext = "Now let's find the cabinet style to complete your kitchen.";
+  
+  // Bathroom transitions
+  if (type === "shower-type") subtext = "Next, let's design the shower tile.";
+  if (type === "shower-tile-style") subtext = "Now let's select a vanity style.";
+  if (type === "vanity-style") subtext = "Now let's ground the space with some flooring.";
+  if (type === "wall-treatment") subtext = "Let's define the finish for your vanity.";
+  if (type === "vanity-finish") subtext = "Almost there! Let's pick a mirror style.";
+  if (type === "mirror-style") subtext = "Time to consider any premium bathroom add-ons.";
 
   return (
     <main className="screen center transition-screen">

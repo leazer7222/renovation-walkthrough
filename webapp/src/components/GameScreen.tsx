@@ -9,6 +9,7 @@ export function GameScreen({
   currentRound,
   match,
   selection,
+  room,
   onSelect,
   progress,
 }: {
@@ -16,15 +17,16 @@ export function GameScreen({
   currentRound: RoundConfig;
   match: { a: Option; b: Option };
   selection: any;
+  room: string;
   onSelect: (option: Option) => void;
   progress: { phaseIndex: number; totalPhases: number; remainingMatches: number };
 }) {
-  const left = resolveImage(phase, selection, match.a.id);
-  const right = resolveImage(phase, selection, match.b.id);
+  const left = resolveImage(phase, selection, match.a.id, room);
+  const right = resolveImage(phase, selection, match.b.id, room);
 
   return (
     <main className="screen">
-      <CurrentSelectionsBar phase={phase} selection={selection} />
+      <CurrentSelectionsBar phase={phase} selection={selection} room={room} />
       <ProgressBar 
         current={progress.phaseIndex} 
         total={progress.totalPhases} 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { bathroomAddons } from "@/config/bathroomConfig";
 
 const availableAddons = [
   { 
@@ -16,11 +17,15 @@ const availableAddons = [
 ];
 
 export function AddonScreen({
+  room,
   onComplete,
 }: {
+  room: string;
   onComplete: (addons: Record<string, boolean>) => void;
 }) {
   const [selected, setSelected] = useState<Record<string, boolean>>({});
+
+  const addonsList = room === "bathroom" ? bathroomAddons : availableAddons;
 
   const toggleAddon = (id: string) => {
     setSelected((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -42,7 +47,7 @@ export function AddonScreen({
         </header>
 
         <div className="styles-grid">
-          {availableAddons.map((addon) => {
+          {addonsList.map((addon) => {
             const isSelected = !!selected[addon.id];
             return (
               <div
@@ -61,8 +66,8 @@ export function AddonScreen({
         </div>
 
         <div className="onboarding-nav" style={{ justifyContent: "flex-end", marginTop: "2rem" }}>
-          <button className="btn-large" onClick={handleNext}>
-            Continue to Materials
+          <button className="btn-large" onClick={() => onComplete(selected)}>
+            View Final Reveal
           </button>
         </div>
       </div>

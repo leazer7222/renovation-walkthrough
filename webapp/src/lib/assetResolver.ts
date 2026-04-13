@@ -1,11 +1,12 @@
-const ROOT = "/visualization-library/comparison/kitchen/prototype";
+const KITCHEN_ROOT = "/visualization-library/comparison/kitchen/prototype";
+const BATHROOM_ROOT = "/visualization-library/comparison/bathroom/prototype";
 
 export function resolveFlooringImage(optionId: string) {
-  return `${ROOT}/flooring/${optionId}/${optionId}_01.png`;
+  return `${KITCHEN_ROOT}/flooring/${optionId}/${optionId}_01.png`;
 }
 
 export function resolveCountertopImage(flooring: string, optionId: string) {
-  return `${ROOT}/countertops/${flooring}/${optionId}/${flooring}_${optionId}_01.png`;
+  return `${KITCHEN_ROOT}/countertops/${flooring}/${optionId}/${flooring}_${optionId}_01.png`;
 }
 
 export function resolveCabinetImage(
@@ -13,19 +14,25 @@ export function resolveCabinetImage(
   countertop: string,
   optionId: string
 ) {
-  return `${ROOT}/cabinets/${flooring}/${countertop}/${optionId}/${flooring}_${countertop}_${optionId}_01.png`;
+  return `${KITCHEN_ROOT}/cabinets/${flooring}/${countertop}/${optionId}/${flooring}_${countertop}_${optionId}_01.png`;
 }
 
 export function resolveDesignElementImage(phase: string, optionId: string) {
   const folderPhase = phase === "layout" ? "layout" : `${phase}-style`;
-  return `${ROOT}/design-elements/${folderPhase}/${optionId}/${optionId}.png`;
+  return `${KITCHEN_ROOT}/design-elements/${folderPhase}/${optionId}/${optionId}.png`;
 }
 
 export function resolveImage(
   phase: string,
   selection: any,
-  optionId: string
+  optionId: string,
+  room?: string
 ) {
+  if (room === "bathroom") {
+    // Basic root for bathroom images. Flat structure.
+    return `${BATHROOM_ROOT}/core/${phase}/${optionId}/${optionId}.png`;
+  }
+
   if (phase === "layout" || phase === "storage" || phase === "appliance" || phase === "lighting") {
     return resolveDesignElementImage(phase, optionId);
   }

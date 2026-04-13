@@ -129,3 +129,22 @@
 - **Lesson**: New asset categories (like `design-elements`) added to the root library MUST be recursively copied to `webapp/public` for the dev server and production builds.
 - **Impact**: Missing images during the "Layout" phase were due to files existing at the root but not in the public folder.
 - **Prevention**: Establish a `copy-design-elements` script or manual verification step whenever adding new top-level categories.
+## Bathroom Expansion & Asset Normalization (April 13, 2026)
+
+### Strict Folder Casing on Windows & Vite
+- **Lesson**: Windows file system considers Accent-band and ccent-band to be identical paths, blocking standard Rename-Item commands, but Vite's asset server acts strictly case-sensitive and will 404.
+- **Evidence**: ccent-band.png failed to load because the parent folder had a capital A, while eature-back-wall.png (pure lowercase) worked perfectly.
+- **Impact**: Mismatches between React string keys and raw folder case lead to silent broken image links in the Comparison and Transition screens.
+- **Prevention**: Use a two-step script (rename to temp, then rename to lowercase) to definitively strip capital letters from directories on Windows filesystems.
+
+### React State Closures & Config Updates
+- **Lesson**: Structural configuration changes (like expanding the Total Rounds array) may not safely patch via Vite Hot Module Replacement if a user holds a complex mid-game memory session.
+- **Evidence**: A user in "Round 6" experienced mismatched data ("Furniture Style" instead of "Double Vanity") after the config expanded to 7 rounds under the hood. 
+- **Impact**: UI desync and missing options.
+- **Prevention**: Force full browser reloads after introducing new routing milestones or modifying initialization arrays.
+
+### Explicit State Key Logging
+- **Lesson**: If an object literal uses explicit matching ...(phase === "x" && {x: y}) to log state, every single new progression phase must be manually added to that array.
+- **Evidence**: When shower-tile-style was introduced, the engine discarded the user's choice upon match completion because it lacked the hardcoded object expansion mapping.
+- **Impact**: Top bar headers defaulted to "Choosing now" incorrectly, and missing strings cascaded into ssetResolver 404s.
+- **Prevention**: Double-check explicit mapping functions whenever adding members to union types or modifying configurations.

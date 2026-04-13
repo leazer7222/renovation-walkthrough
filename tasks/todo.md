@@ -61,9 +61,9 @@
 - [x] Rename "New Build" to "Default Kitchen Prompt" in UI/Logic
 - [x] Enforce structural anchors and preservation in Renovation mode
 
-## Phase 6: Multi-Room Expansion 📋 PLANNED
-- [ ] Extend prototype to additional rooms
-- [ ] Bathroom decision flow
+## Phase 6: Multi-Room Expansion ✅ COMPLETE
+- [x] Extend prototype to additional rooms
+- [x] Bathroom decision flow
 - [ ] Living room decision flow
 
 ## Phase 7: Results & Matching 📋 PLANNED
@@ -75,4 +75,6 @@
 - ✅ New Dual-Prompt system (New Build + Renovation) integrated
 - ✅ High-fidelity AI Prompt generation with strict structural anchoring
 - ✅ Complete visual summary of all user selections
+- ✅ Bathroom Expansion: full parallel matching path structure deployed
+- ✅ Addressed asset case-sensitivity resolving across Windows filesystems
 - ✅ All code committed and ready for master/production

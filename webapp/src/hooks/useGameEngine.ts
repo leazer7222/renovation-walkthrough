@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { GameState, OnboardingState, Option, Phase, RoundState } from "@/lib/types";
 import { roundOrder } from "@/config/kitchenConfig";
+import { bathroomRoundOrder } from "@/config/bathroomConfig";
 
 const initialRoundState: RoundState = {
   currentWinner: null,
@@ -21,6 +22,11 @@ const initialState: GameState = {
     flooring: null,
     countertop: null,
     cabinet: null,
+    showerType: null,
+    vanityStyle: null,
+    wallTreatment: null,
+    vanityFinish: null,
+    mirrorStyle: null,
   },
   roundState: initialRoundState,
   complete: false,
@@ -28,7 +34,27 @@ const initialState: GameState = {
 
 const toQueue = (options: Option[]): Option[] => options.map((o) => ({ ...o }));
 
-const nextPhase = (phase: Phase): Phase => {
+const nextPhase = (phase: Phase, room: string): Phase => {
+  if (room === "bathroom") {
+    if (phase === "shower-type") return "transition-to-shower-tile-style";
+    if (phase === "transition-to-shower-tile-style") return "shower-tile-style";
+    if (phase === "shower-tile-style") return "transition-to-vanity-style";
+    if (phase === "transition-to-vanity-style") return "vanity-style";
+    if (phase === "vanity-style") return "transition-to-flooring";
+    if (phase === "transition-to-flooring") return "flooring";
+    if (phase === "flooring") return "transition-to-wall-treatment";
+    if (phase === "transition-to-wall-treatment") return "wall-treatment";
+    if (phase === "wall-treatment") return "transition-to-vanity-finish";
+    if (phase === "transition-to-vanity-finish") return "vanity-finish";
+    if (phase === "vanity-finish") return "transition-to-mirror-style";
+    if (phase === "transition-to-mirror-style") return "mirror-style";
+    if (phase === "mirror-style") return "transition-to-addons";
+    if (phase === "transition-to-addons") return "addons";
+    if (phase === "addons") return "final";
+    return "final";
+  }
+
+  // Kitchen (default)
   if (phase === "layout") return "transition-to-storage";
   if (phase === "transition-to-storage") return "storage";
   if (phase === "storage") return "transition-to-appliance";
@@ -47,16 +73,20 @@ const nextPhase = (phase: Phase): Phase => {
   return "final";
 };
 
-const getRoundConfig = (phase: Phase) => 
-  roundOrder.find((r) => r.phase === phase) ?? null;
+const getRoundConfig = (phase: Phase, room: string) => {
+  if (room === "bathroom") {
+    return bathroomRoundOrder.find((r) => r.phase === phase) ?? null;
+  }
+  return roundOrder.find((r) => r.phase === phase) ?? null;
+};
 
 export const useGameEngine = () => {
   const [state, setState] = useState<GameState>(initialState);
 
-  const currentRound = useMemo(() => getRoundConfig(state.phase), [state.phase]);
+  const currentRound = useMemo(() => getRoundConfig(state.phase, state.onboarding.room), [state.phase, state.onboarding.room]);
 
-  const initRound = (phase: Phase) => {
-    const config = getRoundConfig(phase);
+  const initRound = (phase: Phase, room: string) => {
+    const config = getRoundConfig(phase, room);
     if (!config) return;
 
     const queue = toQueue(config.options);
@@ -87,7 +117,7 @@ export const useGameEngine = () => {
       ...prev,
       onboarding,
     }));
-    initRound("layout");
+    initRound(onboarding.room === "bathroom" ? "shower-type" : "layout", onboarding.room);
   };
 
   const completeAddons = (addons: Record<string, boolean>) => {
@@ -102,17 +132,25 @@ export const useGameEngine = () => {
   };
 
   const continueToNextRound = () => {
-    const next = nextPhase(state.phase);
-    const config = getRoundConfig(next as any);
+    const next = nextPhase(state.phase, state.onboarding.room);
+    const config = getRoundConfig(next as any, state.onboarding.room);
     if (!config) {
       setState((prev) => ({ ...prev, phase: next as Phase }));
     } else {
-      initRound(next as any);
+      initRound(next as any, state.onboarding.room);
     }
   };
 
   const advanceMatch = (winner: Option, loser: Option) => {
     setState((prev) => {
+      // Guard against double-clicks/stale closures
+      if (
+        !prev.roundState.currentMatch ||
+        (prev.roundState.currentMatch.a.id !== loser.id && prev.roundState.currentMatch.b.id !== loser.id)
+      ) {
+        return prev;
+      }
+
       const queue = [...prev.roundState.challengerQueue];
       const nextMatchOp = queue.shift();
       const updatedHistory = [...prev.roundState.history, { phase: prev.phase, winner, loser }];
@@ -126,6 +164,12 @@ export const useGameEngine = () => {
         ...(prev.phase === "flooring" && { flooring: winner.id }),
         ...(prev.phase === "countertop" && { countertop: winner.id }),
         ...(prev.phase === "cabinet" && { cabinet: winner.id }),
+        ...(prev.phase === "shower-type" && { showerType: winner.id }),
+        ...(prev.phase === "shower-tile-style" && { showerTileStyle: winner.id }),
+        ...(prev.phase === "vanity-style" && { vanityStyle: winner.id }),
+        ...(prev.phase === "wall-treatment" && { wallTreatment: winner.id }),
+        ...(prev.phase === "vanity-finish" && { vanityFinish: winner.id }),
+        ...(prev.phase === "mirror-style" && { mirrorStyle: winner.id }),
       };
 
       if (nextMatchOp) {
@@ -143,7 +187,7 @@ export const useGameEngine = () => {
       }
 
       // Phase complete -> Transition
-      const nextPhaseId = nextPhase(prev.phase);
+      const nextPhaseId = nextPhase(prev.phase, prev.onboarding.room);
 
       if (nextPhaseId === "final") {
         return {
