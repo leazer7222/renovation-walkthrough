@@ -1,16 +1,19 @@
 # Current State - RenovationWalkthrough Project
 
-## Project Status: PHASE 8 COMPLETE — CODEBASE CLEANUP & HANDOVER READY
+## Project Status: PHASE 6 COMPLETE — MULTI-ROOM EXPANSION & BUILD STABILIZED
 
-**Date**: April 13, 2026
-**Phase**: Codebase cleanup complete. Phase 8 (Style Discovery) was already complete at last session. Project is ready for full-stack engineer handover.
+**Date**: April 14, 2026
+**Phase**: Multi-room expansion finalized. Bathroom and Living Room modules are now fully functional with robust asset resolution. Netlify build stabilized after TypeScript error resolution.
 
-### High-Fidelity Prompting System (April 8, 2026)
-- **Fidelity Refinement**: Stripped all exaggerated marketing language (e.g., "massive", "commercial-grade") from prompt generation to ensure deterministic results.
-- **Naming Update**: Renamed "New Build Prompt" to **"Default Kitchen Prompt"** across the UI and logic.
-- **Sectional Structure**: Implemented a strict 8-section structure for Default prompts and a 14-section structure for Renovation prompts.
-- **Control Rules**: Added explicit "Control Rules" to Default Kitchen prompts to prevent AI drift and material substitutions.
-- **Functional Anchors**: Hard-coded structural preservation and appliance anchoring logic for Renovation mode.
+### Multi-Room Expansion (April 14, 2026)
+- **Living Room Module**: Implemented full decision flow including Layout, Flooring Material, Seating Configuration, Wall Treatment, Rug Style, and Lighting.
+- **Bathroom Module**: Finalized Bathroom flow logic and corrected state machine transitions for the "Add-ons" phase.
+- **Asset Resolution**: Refactored `assetResolver.ts` with room-specific overrides and normalized path handling to support Kitchen, Bathroom, and Living Room modules concurrently.
+- **Bug Fixes**: 
+  - Restored missing Living Room seating options (Sectional, Sofa & Chairs, Minimal Sofa, Lounge Layered).
+  - Fixed "shadowing" bug in `App.tsx` where kitchen transition logic interfered with other rooms.
+  - Corrected asset typos (e.g., `lounge-layerd.png` -> `lounge-layered.png`) on the filesystem.
+- **Build Stability**: Resolved `TS2304` error in `useGameEngine.ts` preventing Netlify deployments; verified fix with successful production `npm run build`.
 
 ## Major Updates (April 2, 2026 - Iteration 4)
 
@@ -99,10 +102,10 @@
 - [x] Enforce functional anchors (sink, cooktop, ovens) in Transformation logic
 - [x] Add explicit "Control Rules" to generation output
 
-## Phase 6: Multi-Room Expansion 📋 PLANNED
-- [ ] Extend prototype to additional rooms
-- [ ] Bathroom decision flow
-- [ ] Living room decision flow
+## Phase 6: Multi-Room Expansion ✅ COMPLETE
+- [x] Extend prototype to additional rooms
+- [x] Bathroom decision flow
+- [x] Living room decision flow
 
 ## Phase 7: Results & Matching 📋 PLANNED
 - [ ] Result persistence across sessions
