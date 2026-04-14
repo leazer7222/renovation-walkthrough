@@ -34,6 +34,8 @@ export const livingRoomFlooringTraits: Record<string, Trait[]> = {
 export const seatingTraits: Record<string, Trait[]> = {
   "sectional": ["soft", "warm"],
   "sofa-chairs": ["refined", "clean"],
+  "minimal-sofa": ["clean", "soft"],
+  "lounge-layered": ["warm", "bold"],
 };
 
 export const wallTraits: Record<string, Trait[]> = {
@@ -70,6 +72,8 @@ export const livingRoomFlooringInsight: Record<string, string> = {
 export const seatingInsight: Record<string, string> = {
   "sectional": "The sectional seating configuration encourages relaxation and maximizes comfort.",
   "sofa-chairs": "The sofa and chair arrangement creates a formal yet inviting conversation area.",
+  "minimal-sofa": "A single streamlined sofa keeps the space open and uncluttered, letting the room breathe.",
+  "lounge-layered": "Layered lounge seating creates a rich, textured environment perfect for relaxed entertaining.",
 };
 
 export const livingRoomWallInsight: Record<string, string> = {
@@ -255,6 +259,8 @@ const promptModifiers: Record<string, string> = {
   "wood": "natural hardwood flooring with refined grain",
   "sectional": "large L-shaped or U-shaped sectional sofa providing ample lounge seating",
   "sofa-chairs": "classic seating arrangement with a primary sofa complemented by individual accent chairs",
+  "minimal-sofa": "a single streamlined sofa with a minimal footprint, keeping the floor plan open",
+  "lounge-layered": "layered lounge seating with multiple soft pieces creating a richly furnished, inviting space",
 };
 
 export type PromptOutput = {
