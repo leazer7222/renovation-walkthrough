@@ -45,12 +45,25 @@ The visualization library organizes assets by room and style combinations:
 - **Styles**: 18 design styles (modern, farmhouse, coastal, etc.)
 - **Structure**: Each room/style combination contains `base/`, `refs/`, and `thumbnails/` subdirectories
 
-## Development Phases
+## Web Application
+The project includes a React-based web application located in the `webapp/` directory.
 
-1. **Scaffold** (Current): Clean structure and mock data
-2. **Mock Flow**: Interactive decision flow prototype
-3. **UI Prototype**: Visual interface implementation
-4. **Full Product**: Complete guided experience
+### Key Features
+- **Style Discovery**: A guided onboarding flow to identify user design preferences.
+- **Renovation Game**: An interactive A/B comparison game for room-specific design decisions (Kitchen, Bathroom, Living Room).
+- **Dynamic Assets**: Real-time image resolution based on user selections across multiple categories (Layout, Flooring, Lighting, etc.).
+- **Responsive Design**: Modern, premium UI built with React, Vite, and Lucide icons.
+
+### Local Development
+1. Navigate to the `webapp` directory: `cd webapp`
+2. Install dependencies: `npm install`
+3. Start the dev server: `npm run dev`
+
+## Development Phases
+1. **Scaffold**: Clean structure and asset organization.
+2. **UI Prototype**: Implementation of the Style Discovery and Renovation Game.
+3. **Multi-Room Support**: Added Kitchen, Bathroom, and Living Room modules.
+4. **Build Optimization**: (Current) Finalizing robust asset resolution and production builds.
 
 ## Getting Started
 
