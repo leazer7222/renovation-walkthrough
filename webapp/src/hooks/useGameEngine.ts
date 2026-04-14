@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { GameState, OnboardingState, Option, Phase, RoundState } from "@/lib/types";
 import { roundOrder } from "@/config/kitchenConfig";
 import { bathroomRoundOrder } from "@/config/bathroomConfig";
+import { livingRoomRoundOrder } from "@/config/livingRoomConfig";
 
 const initialRoundState: RoundState = {
   currentWinner: null,
@@ -28,6 +29,9 @@ const initialState: GameState = {
     wallTreatment: null,
     vanityFinish: null,
     mirrorStyle: null,
+    flooringMaterial: null,
+    seatingConfig: null,
+    rug: null,
   },
   roundState: initialRoundState,
   complete: false,
@@ -52,9 +56,22 @@ const nextPhase = (phase: Phase, room: string): Phase => {
     if (phase === "transition-to-vanity-finish") return "vanity-finish";
     if (phase === "vanity-finish") return "transition-to-mirror-style";
     if (phase === "transition-to-mirror-style") return "mirror-style";
-    if (phase === "mirror-style") return "transition-to-addons";
-    if (phase === "transition-to-addons") return "addons";
-    if (phase === "addons") return "final";
+    if (addons) return "final";
+    return "final";
+  }
+
+  if (room === "living-room") {
+    if (phase === "layout") return "transition-to-flooring-material";
+    if (phase === "transition-to-flooring-material") return "flooring-material";
+    if (phase === "flooring-material") return "transition-to-seating-config";
+    if (phase === "transition-to-seating-config") return "seating-config";
+    if (phase === "seating-config") return "transition-to-wall-treatment";
+    if (phase === "transition-to-wall-treatment") return "wall-treatment";
+    if (phase === "wall-treatment") return "transition-to-rug";
+    if (phase === "transition-to-rug") return "rug";
+    if (phase === "rug") return "transition-to-lighting";
+    if (phase === "transition-to-lighting") return "lighting";
+    if (phase === "lighting") return "final";
     return "final";
   }
 
@@ -80,6 +97,9 @@ const nextPhase = (phase: Phase, room: string): Phase => {
 const getRoundConfig = (phase: Phase, room: string) => {
   if (room === "bathroom") {
     return bathroomRoundOrder.find((r) => r.phase === phase) ?? null;
+  }
+  if (room === "living-room") {
+    return livingRoomRoundOrder.find((r) => r.phase === phase) ?? null;
   }
   return roundOrder.find((r) => r.phase === phase) ?? null;
 };
@@ -203,6 +223,9 @@ export const useGameEngine = () => {
         ...(prev.phase === "wall-treatment" && { wallTreatment: winner.id }),
         ...(prev.phase === "vanity-finish" && { vanityFinish: winner.id }),
         ...(prev.phase === "mirror-style" && { mirrorStyle: winner.id }),
+        ...(prev.phase === "flooring-material" && { flooringMaterial: winner.id }),
+        ...(prev.phase === "seating-config" && { seatingConfig: winner.id }),
+        ...(prev.phase === "rug" && { rug: winner.id }),
       };
 
       if (nextMatchOp) {

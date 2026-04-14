@@ -29,6 +29,12 @@ export type Phase =
   | "vanity-finish"
   | "transition-to-mirror-style"
   | "mirror-style"
+  | "transition-to-flooring-material"
+  | "flooring-material"
+  | "transition-to-seating-config"
+  | "seating-config"
+  | "transition-to-rug"
+  | "rug"
   | "final";
 
 /** Ordered list of user-visible phases for kitchen flow (used for progress bar tracking) */
@@ -46,13 +52,20 @@ export const BATHROOM_PHASE_ORDER: Phase[] = [
   "addons", "final",
 ];
 
+/** Ordered list of user-visible phases for living room flow (used for progress bar tracking) */
+export const LIVING_ROOM_PHASE_ORDER: Phase[] = [
+  "style-discovery", "style-results", "onboarding",
+  "layout", "flooring-material", "seating-config",
+  "wall-treatment", "rug", "lighting", "final",
+];
+
 export interface Option {
   id: string;
   label: string;
 }
 
 export interface RoundConfig {
-  phase: "layout" | "storage" | "appliance" | "lighting" | "flooring" | "countertop" | "cabinet" | "shower-type" | "shower-tile-style" | "vanity-style" | "wall-treatment" | "vanity-finish" | "mirror-style" | "addons";
+  phase: "layout" | "storage" | "appliance" | "lighting" | "flooring" | "countertop" | "cabinet" | "shower-type" | "shower-tile-style" | "vanity-style" | "wall-treatment" | "vanity-finish" | "mirror-style" | "addons" | "flooring-material" | "seating-config" | "rug";
   label: string;
   options: Option[];
 }
@@ -90,6 +103,10 @@ export interface GameState {
     wallTreatment: string | null;
     vanityFinish: string | null;
     mirrorStyle: string | null;
+    // Living Room Specific
+    flooringMaterial: string | null;
+    seatingConfig: string | null;
+    rug: string | null;
     discoveryResults?: any[];
   };
   roundState: RoundState;

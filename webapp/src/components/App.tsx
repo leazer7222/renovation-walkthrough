@@ -7,7 +7,7 @@ import { AddonScreen } from "@/components/AddonScreen";
 import { StyleDiscoveryScreen } from "@/components/StyleDiscoveryScreen";
 import { StyleDiscoveryResults } from "@/components/StyleDiscoveryResults";
 import { useGameEngine } from "@/hooks/useGameEngine";
-import { KITCHEN_PHASE_ORDER, BATHROOM_PHASE_ORDER } from "@/lib/types";
+import { KITCHEN_PHASE_ORDER, BATHROOM_PHASE_ORDER, LIVING_ROOM_PHASE_ORDER } from "@/lib/types";
 
 export function App() {
   const { 
@@ -46,15 +46,15 @@ export function App() {
   }
 
   // --- KITCHEN TRANSITIONS ---
-  if (state.phase === "transition-to-storage") {
+  if (state.phase === "transition-to-storage" && state.onboarding.room === "kitchen") {
     return <TransitionScreen type="layout" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-appliance") {
+  if (state.phase === "transition-to-appliance" && state.onboarding.room === "kitchen") {
     return <TransitionScreen type="storage" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-lighting") {
+  if (state.phase === "transition-to-lighting" && state.onboarding.room === "kitchen") {
     return <TransitionScreen type="appliance" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
@@ -64,18 +64,18 @@ export function App() {
     return <TransitionScreen type={lastPhase} selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-flooring") {
+  if (state.phase === "transition-to-flooring" && state.onboarding.room !== "living-room") {
     // Both Kitchen (after addons) and Bathroom (after vanity-style) go to flooring
     // Wait, type="addons" for kitchen means it shows layout image. For bathroom, type="vanity-style" shows vanity picture.
     const lastPhase = state.onboarding.room === "bathroom" ? "vanity-style" : "addons";
     return <TransitionScreen type={lastPhase} selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-countertop") {
+  if (state.phase === "transition-to-countertop" && state.onboarding.room === "kitchen") {
     return <TransitionScreen type="flooring" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-cabinet") {
+  if (state.phase === "transition-to-cabinet" && state.onboarding.room === "kitchen") {
     return <TransitionScreen type="countertop" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
@@ -87,7 +87,7 @@ export function App() {
     return <TransitionScreen type="shower-tile-style" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-wall-treatment") {
+  if (state.phase === "transition-to-wall-treatment" && state.onboarding.room === "bathroom") {
     return <TransitionScreen type="flooring" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
@@ -95,8 +95,31 @@ export function App() {
     return <TransitionScreen type="wall-treatment" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
-  if (state.phase === "transition-to-mirror-style") {
+  if (state.phase === "transition-to-mirror-style" && state.onboarding.room === "bathroom") {
     return <TransitionScreen type="vanity-finish" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
+  }
+
+  // --- LIVING ROOM TRANSITIONS ---
+  if (state.phase === "transition-to-flooring-material") {
+    return <TransitionScreen type="layout" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
+  }
+
+  if (state.phase === "transition-to-seating-config") {
+    return <TransitionScreen type="flooring-material" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
+  }
+
+  if (state.phase === "transition-to-wall-treatment" && state.onboarding.room === "living-room") {
+    // Shared phase with bathroom, but previous is seating-config for living-room
+    return <TransitionScreen type="seating-config" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
+  }
+
+  if (state.phase === "transition-to-rug") {
+    return <TransitionScreen type="wall-treatment" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
+  }
+
+  if (state.phase === "transition-to-lighting" && state.onboarding.room === "living-room") {
+    // Shared phase with kitchen/appliance, but previous is rug for living-room
+    return <TransitionScreen type="rug" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
   if (state.phase === "final" || state.complete) {
@@ -109,7 +132,9 @@ export function App() {
 
   const currentPhasesArray = state.onboarding.room === "bathroom"
     ? BATHROOM_PHASE_ORDER
-    : KITCHEN_PHASE_ORDER;
+    : state.onboarding.room === "living-room"
+      ? LIVING_ROOM_PHASE_ORDER
+      : KITCHEN_PHASE_ORDER;
 
   const progress = {
     phaseIndex: currentPhasesArray.indexOf(state.phase) + 1,

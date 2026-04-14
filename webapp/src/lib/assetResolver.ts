@@ -1,5 +1,6 @@
 const KITCHEN_ROOT = "/visualization-library/comparison/kitchen/prototype";
 const BATHROOM_ROOT = "/visualization-library/comparison/bathroom/prototype";
+const LIVING_ROOM_ROOT = "/visualization-library/comparison/living-room/prototype";
 
 export function resolveFlooringImage(optionId: string) {
   return `${KITCHEN_ROOT}/flooring/${optionId}/${optionId}_01.png`;
@@ -33,11 +34,20 @@ export function resolveImage(
   optionId: string,
   room?: string
 ) {
-  if (room === "bathroom") {
+  // Room-specific overrides
+  const normalizedRoom = room?.toLowerCase();
+
+  if (normalizedRoom === "bathroom") {
     // Basic root for bathroom images. Flat structure.
     return `${BATHROOM_ROOT}/core/${phase}/${optionId}/${optionId}.png`;
   }
 
+  if (normalizedRoom === "living-room") {
+    // Living room follows phase/option/option.png
+    return `${LIVING_ROOM_ROOT}/${phase}/${optionId}/${optionId}.png`;
+  }
+
+  // Kitchen / Default fallbacks
   if (phase === "layout" || phase === "storage" || phase === "appliance" || phase === "lighting") {
     return resolveDesignElementImage(phase, optionId);
   }

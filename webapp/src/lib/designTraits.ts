@@ -21,10 +21,25 @@ export const countertopTraits: Record<string, Trait[]> = {
 };
 
 export const cabinetTraits: Record<string, Trait[]> = {
-  "flat-panel-white": ["clean", "soft"],
-  "matte-black": ["bold", "clean"],
-  "shaker": ["refined", "warm"],
   "warm-wood": ["warm", "natural"],
+};
+
+export const livingRoomFlooringTraits: Record<string, Trait[]> = {
+  "wood": ["warm", "natural"],
+  "tile": ["clean", "refined"],
+  "stone": ["natural", "refined"],
+  "concrete": ["bold", "clean"],
+};
+
+export const seatingTraits: Record<string, Trait[]> = {
+  "sectional": ["soft", "warm"],
+  "sofa-chairs": ["refined", "clean"],
+};
+
+export const wallTraits: Record<string, Trait[]> = {
+  "clean": ["clean", "soft"],
+  "feature": ["bold", "refined"],
+  "accent": ["soft", "refined"],
 };
 
 export const flooringInsight: Record<string, string> = {
@@ -42,17 +57,40 @@ export const countertopInsight: Record<string, string> = {
 };
 
 export const cabinetInsight: Record<string, string> = {
-  "flat-panel-white": "Flat Panel White cabinets keep the design crisp and light.",
-  "matte-black": "Matte Black cabinetry adds bold contrast and a modern finish.",
-  "shaker": "Shaker cabinets bring a classic look with approachable warmth.",
   "warm-wood": "Warm Wood cabinetry adds natural warmth and texture.",
 };
 
-export function getTraitsForSelections(selections: { flooring: string | null; countertop: string | null; cabinet: string | null }): Trait[] {
+export const livingRoomFlooringInsight: Record<string, string> = {
+  "wood": "Natural wood flooring brings an organic warmth and timeless feel to the space.",
+  "tile": "Designer tile adds a clean, refined aesthetic that is both durable and elegant.",
+  "stone": "Natural stone surfaces provide a sophisticated, grounded foundation with unique texture.",
+  "concrete": "Polished concrete flooring lends a bold, modern edge with a sleek industrial finish.",
+};
+
+export const seatingInsight: Record<string, string> = {
+  "sectional": "The sectional seating configuration encourages relaxation and maximizes comfort.",
+  "sofa-chairs": "The sofa and chair arrangement creates a formal yet inviting conversation area.",
+};
+
+export const livingRoomWallInsight: Record<string, string> = {
+  "clean": "Clean, unadorned walls allow the furniture and natural light to take center stage.",
+  "feature": "A bold feature wall adds architectural depth and serves as a curated focal point.",
+  "accent": "A soft accent wall introduces a subtle layer of color and visual interest without overwhelming the space.",
+};
+
+export function getTraitsForSelections(selections: any, room: string = "kitchen"): Trait[] {
   const traits: Trait[] = [];
-  if (selections.flooring && flooringTraits[selections.flooring]) traits.push(...flooringTraits[selections.flooring]);
-  if (selections.countertop && countertopTraits[selections.countertop]) traits.push(...countertopTraits[selections.countertop]);
-  if (selections.cabinet && cabinetTraits[selections.cabinet]) traits.push(...cabinetTraits[selections.cabinet]);
+  
+  if (room === "living-room") {
+    if (selections.flooringMaterial && livingRoomFlooringTraits[selections.flooringMaterial]) traits.push(...livingRoomFlooringTraits[selections.flooringMaterial]);
+    if (selections.seatingConfig && seatingTraits[selections.seatingConfig]) traits.push(...seatingTraits[selections.seatingConfig]);
+    if (selections.wallTreatment && wallTraits[selections.wallTreatment]) traits.push(...wallTraits[selections.wallTreatment]);
+  } else {
+    if (selections.flooring && flooringTraits[selections.flooring]) traits.push(...flooringTraits[selections.flooring]);
+    if (selections.countertop && countertopTraits[selections.countertop]) traits.push(...countertopTraits[selections.countertop]);
+    if (selections.cabinet && cabinetTraits[selections.cabinet]) traits.push(...cabinetTraits[selections.cabinet]);
+  }
+  
   return traits;
 }
 
@@ -207,6 +245,16 @@ const promptModifiers: Record<string, string> = {
   "shower-experience": "premium multi-function rainfall shower system",
   "comfort-upgrade": "heated flooring system and integrated towel warmer",
   "storage-functionality": "integrated shower niche with dedicated storage",
+
+  // Living Room Specific
+  "tv-centered": "layout centered around a large media wall or television focal point",
+  "conversation": "interactive layout focused on a central conversation area with seating facing each other",
+  "open-minimal": "open-concept layout with minimal boundaries and a focus on spaciousness",
+  "cozy-dense": "intimate layout with layered seating and a cozy, filled atmosphere",
+  "tile-stone": "large-format tile or stone slab flooring",
+  "wood": "natural hardwood flooring with refined grain",
+  "sectional": "large L-shaped or U-shaped sectional sofa providing ample lounge seating",
+  "sofa-chairs": "classic seating arrangement with a primary sofa complemented by individual accent chairs",
 };
 
 export type PromptOutput = {
@@ -232,6 +280,10 @@ export function generatePrompts(
     wallTreatment?: string | null;
     vanityFinish?: string | null;
     mirrorStyle?: string | null;
+    // Living Room
+    flooringMaterial?: string | null;
+    seatingConfig?: string | null;
+    rug?: string | null;
   },
   room: string = "kitchen"
 ): PromptOutput {
@@ -309,6 +361,67 @@ export function generatePrompts(
       `Apply ${styleStr} aesthetics.`,
       `[DESIGN INTENT]`,
       `Balance realism with a high-end aspirational result. Transform the existing bathroom into a modern, spa-like sanctuary.`,
+      `[RENDERING]`,
+      `Photorealistic, natural daylight, architectural digest style, highly detailed, 8k.`
+    ].filter(Boolean).join("\n\n");
+
+    return { generation, renovation };
+  }
+
+  if (room === "living-room") {
+    const layoutRaw = getLabel(selection.layout, "open living layout");
+    const flooringRaw = getLabel(selection.flooringMaterial, "hardwood flooring");
+    const seatingRaw = getLabel(selection.seatingConfig, "comfortable seating arrangement");
+    const wallRaw = getLabel(selection.wallTreatment, "clean finished walls");
+    const rugRaw = getLabel(selection.rug, "textured area rug");
+    const lightingRaw = getLabel(selection.lighting, "ambient layered lighting");
+
+    const generation = [
+      `High quality architectural photography of a living room designed in a cohesive ${styleStr} aesthetic.`,
+      `---`,
+      `Layout & Seating:`,
+      `${layoutRaw} featuring a ${seatingRaw}.`,
+      `---`,
+      `Materials & Surfaces:`,
+      `* Flooring: ${flooringRaw}`,
+      `* Wall Treatment: ${wallRaw}`,
+      `* Area Rug: ${rugRaw}`,
+      `Ensure strict adherence to the specified material palette. Do not introduce additional materials or substitute finishes.`,
+      `---`,
+      `Atmosphere & Detail:`,
+      `* Lighting: ${lightingRaw}`,
+      `---`,
+      `Styling & Mood:`,
+      `The space should feel inviting, balanced, and sophisticated. Use textures consistent with ${styleStr} to create a professional, lived-in appearance.`,
+      `---`,
+      `Rendering:`,
+      `Photorealistic, natural daylight, architectural digest style, highly detailed, 8k resolution.`,
+      `---`,
+      `Control Rules:`,
+      `* Do not introduce new materials, finishes, or design elements that are not specified`,
+      `* Do not exaggerate scale or use terms such as "massive", "expansive", or "commercial-grade"`,
+      `* Keep all elements consistent with the provided selections`
+    ].filter(Boolean).join("\n\n");
+
+    const renovation = [
+      `[CONTEXT] A photorealistic renovation and style transformation of the existing living room image.`,
+      `[STRUCTURAL PRESERVATION] Strictly preserve the existing living room footprint, structural walls, window placements, and overall room architecture. Maintain the exact camera angle and perspective.`,
+      `[FUNCTIONAL ANCHORS] Strictly preserve and keep visible the primary window locations and any existing architectural fireplace or structural features.`,
+      `[USER-SELECTED FEATURES]`,
+      `Strictly include:`,
+      `* ${layoutRaw}`,
+      `* ${seatingRaw}`,
+      `* ${rugRaw}`,
+      `[MATERIALS]`,
+      `* Flooring: ${flooringRaw}`,
+      `* Wall Treatment: ${wallRaw}`,
+      `No substitutions allowed.`,
+      `[LIGHTING]`,
+      `${lightingRaw} acting as the primary light source.`,
+      `[STYLE DIRECTION]`,
+      `Apply ${styleStr} aesthetics.`,
+      `[DESIGN INTENT]`,
+      `Balance realism with a high-end aspirational result. Transform the existing space into a refined, designer living room.`,
       `[RENDERING]`,
       `Photorealistic, natural daylight, architectural digest style, highly detailed, 8k.`
     ].filter(Boolean).join("\n\n");

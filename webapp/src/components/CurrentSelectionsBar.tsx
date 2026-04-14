@@ -2,6 +2,7 @@ import React from "react";
 import { resolveImage } from "@/lib/assetResolver";
 import { roundOrder } from "@/config/kitchenConfig";
 import { bathroomRoundOrder } from "@/config/bathroomConfig";
+import { livingRoomRoundOrder } from "@/config/livingRoomConfig";
 
 export function CurrentSelectionsBar({
   phase,
@@ -12,7 +13,9 @@ export function CurrentSelectionsBar({
   selection: any;
   room: string;
 }) {
-  const sourceOrder = room === "bathroom" ? bathroomRoundOrder : roundOrder;
+  const isBathroom = room === "bathroom";
+  const isLivingRoom = room === "living-room";
+  const sourceOrder = isLivingRoom ? livingRoomRoundOrder : (isBathroom ? bathroomRoundOrder : roundOrder);
   const categories = sourceOrder.map((r) => {
     const selectionKey = r.phase.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
     const selectedId = selection[selectionKey] || selection[r.phase];

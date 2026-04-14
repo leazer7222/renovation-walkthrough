@@ -2,6 +2,7 @@ import React from "react";
 import { resolveImage } from "@/lib/assetResolver";
 import { roundOrder } from "@/config/kitchenConfig";
 import { bathroomRoundOrder } from "@/config/bathroomConfig";
+import { livingRoomRoundOrder } from "@/config/livingRoomConfig";
 import {
   getTraitsForSelections,
   countTraits,
@@ -12,6 +13,9 @@ import {
   flooringInsight,
   countertopInsight,
   cabinetInsight,
+  livingRoomFlooringInsight,
+  seatingInsight,
+  livingRoomWallInsight,
   generatePrompts
 } from "@/lib/designTraits";
 
@@ -27,19 +31,22 @@ export function FinalReveal({
   onRestart: () => void;
 }) {
   const isBathroom = room === "bathroom";
+  const isLivingRoom = room === "living-room";
   
-  const finalImageUrl = isBathroom 
-    ? resolveImage("vanity-style", selection, selection.vanityStyle || "", room)
-    : resolveImage("cabinet", selection, selection.cabinet || "", room);
+  const finalImageUrl = isLivingRoom
+    ? resolveImage("layout", selection, selection.layout || "", room)
+    : isBathroom 
+      ? resolveImage("vanity-style", selection, selection.vanityStyle || "", room)
+      : resolveImage("cabinet", selection, selection.cabinet || "", room);
 
   const getLabel = (phase: string, id: string | null) => {
     if (!id) return "Not selected";
-    const sourceOrder = isBathroom ? bathroomRoundOrder : roundOrder;
+    const sourceOrder = isLivingRoom ? livingRoomRoundOrder : (isBathroom ? bathroomRoundOrder : roundOrder);
     const round = sourceOrder.find(r => r.phase === phase);
     return round?.options.find(o => o.id === id)?.label || id;
   };
 
-  const traits = getTraitsForSelections(selection);
+  const traits = getTraitsForSelections(selection, room);
   const traitCounts = countTraits(traits);
   const dominantTraits = getDominantTraits(traitCounts);
   const headline = generateDesignHeadline(dominantTraits);
@@ -52,10 +59,10 @@ export function FinalReveal({
     <main className="screen final-reveal">
       <header style={{ textAlign: "center", marginBottom: "3rem" }}>
         <p className="selection-label">Project Complete</p>
-        <h1 className="transition-title">Your {room === "bathroom" ? "Bathroom" : "Kitchen"} Reveal</h1>
+        <h1 className="transition-title">Your {isLivingRoom ? "Living Room" : (isBathroom ? "Bathroom" : "Kitchen")} Reveal</h1>
       </header>
 
-      <img src={finalImageUrl} alt="Final Kitchen Design" className="hero-image" style={{ marginBottom: "2rem" }} />
+      <img src={finalImageUrl} alt={`Final ${room} Design`} className="hero-image" style={{ marginBottom: "2rem" }} />
 
       <div className="design-insight" style={{ marginBottom: "3rem" }}>
         {styles.length > 0 && (
@@ -89,6 +96,15 @@ export function FinalReveal({
             {selection.cabinet && cabinetInsight[selection.cabinet] && (
                <li style={{ marginBottom: "0.25rem" }}>{cabinetInsight[selection.cabinet]}</li>
             )}
+            {selection.flooringMaterial && livingRoomFlooringInsight[selection.flooringMaterial] && (
+               <li style={{ marginBottom: "0.25rem" }}>{livingRoomFlooringInsight[selection.flooringMaterial]}</li>
+            )}
+            {selection.seatingConfig && seatingInsight[selection.seatingConfig] && (
+               <li style={{ marginBottom: "0.25rem" }}>{seatingInsight[selection.seatingConfig]}</li>
+            )}
+            {selection.wallTreatment && isLivingRoom && livingRoomWallInsight[selection.wallTreatment] && (
+               <li style={{ marginBottom: "0.25rem" }}>{livingRoomWallInsight[selection.wallTreatment]}</li>
+            )}
           </ul>
         </div>
 
@@ -96,11 +112,8 @@ export function FinalReveal({
           {/* Default Kitchen Prompt */}
           <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--primary-light)", borderRadius: "8px" }}>
             <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--primary)", opacity: 0.9, marginBottom: "0.5rem" }}>
-              1. Default {isBathroom ? "Bathroom" : "Kitchen"} Prompt
+              1. Default {isLivingRoom ? "Living Room" : (isBathroom ? "Bathroom" : "Kitchen")} Prompt
             </h3>
-            <p style={{ fontSize: "0.85rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
-              Best for generating a brand new {isBathroom ? "bathroom" : "kitchen"} from scratch in Midjourney or DALL-E.
-            </p>
             <div 
               style={{ 
                 fontSize: "0.95rem", 
@@ -118,7 +131,7 @@ export function FinalReveal({
               }} 
               onClick={(e) => {
                 navigator.clipboard.writeText((e.currentTarget as HTMLElement).innerText);
-                alert(`Default ${isBathroom ? "Bathroom" : "Kitchen"} Prompt Copied!`);
+                alert(`Default ${isLivingRoom ? "Living Room" : (isBathroom ? "Bathroom" : "Kitchen")} Prompt Copied!`);
               }}
             >
               {generation}
@@ -126,13 +139,10 @@ export function FinalReveal({
           </div>
 
           {/* Renovation Prompt */}
-          <div className="insight-section prompt-section" style={{ padding: "1.5rem", backgroundColor: "var(--secondary-light, #f0f4f8)", borderRadius: "8px" }}>
-            <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "#2c5282", opacity: 0.9, marginBottom: "0.5rem" }}>
+          <div className="insight-section prompt-section" style={{ padding: "1.5rem", border: "1px solid var(--primary)", borderRadius: "8px" }}>
+            <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--primary)", opacity: 0.9, marginBottom: "0.5rem" }}>
               2. Transformation Prompt
             </h3>
-            <p style={{ fontSize: "0.85rem", color: "var(--foreground)", opacity: 0.8, marginBottom: "1rem" }}>
-              Best for "style transfer" on an existing photo using AI Image-to-Image tools.
-            </p>
             <div 
               style={{ 
                 fontSize: "0.95rem", 
@@ -164,9 +174,11 @@ export function FinalReveal({
           Your Complete Selections
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "1rem" }}>
-          {(isBathroom 
-            ? ["shower-type", "shower-tile-style", "vanity-style", "flooring", "wall-treatment", "vanity-finish", "mirror-style"]
-            : ["layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet"]).map(phase => {
+          {(isLivingRoom
+            ? ["layout", "flooring-material", "seating-config", "wall-treatment", "rug", "lighting"]
+            : isBathroom 
+              ? ["shower-type", "shower-tile-style", "vanity-style", "flooring", "wall-treatment", "vanity-finish", "mirror-style"]
+              : ["layout", "storage", "appliance", "lighting", "flooring", "countertop", "cabinet"]).map(phase => {
             const id = (selection as any)[phase.replace(/-([a-z])/g, (g) => g[1].toUpperCase())] || (selection as any)[phase]; // fallback for camel case vs kebab case
             if (!id) return null;
             const thumbUrl = resolveImage(phase as any, selection, id, room);
