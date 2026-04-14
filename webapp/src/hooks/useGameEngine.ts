@@ -56,7 +56,9 @@ const nextPhase = (phase: Phase, room: string): Phase => {
     if (phase === "transition-to-vanity-finish") return "vanity-finish";
     if (phase === "vanity-finish") return "transition-to-mirror-style";
     if (phase === "transition-to-mirror-style") return "mirror-style";
-    if (addons) return "final";
+    if (phase === "mirror-style") return "transition-to-addons";
+    if (phase === "transition-to-addons") return "addons";
+    if (phase === "addons") return "final";
     return "final";
   }
 
