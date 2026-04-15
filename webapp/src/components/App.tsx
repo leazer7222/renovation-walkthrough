@@ -6,22 +6,25 @@ import { TransitionScreen } from "@/components/TransitionScreen";
 import { AddonScreen } from "@/components/AddonScreen";
 import { StyleDiscoveryScreen } from "@/components/StyleDiscoveryScreen";
 import { StyleDiscoveryResults } from "@/components/StyleDiscoveryResults";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import { useGameEngine } from "@/hooks/useGameEngine";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { KITCHEN_PHASE_ORDER, BATHROOM_PHASE_ORDER, LIVING_ROOM_PHASE_ORDER } from "@/lib/types";
 
-export function App() {
-  const { 
-    state, 
-    startGame, 
+function AppScreen() {
+  const { t } = useLanguage();
+  const {
+    state,
+    startGame,
     skipDiscovery,
     setDiscoveryResults,
     completeStyleDiscovery,
-    completeOnboarding, 
+    completeOnboarding,
     completeAddons,
-    continueToNextRound, 
-    selectOption, 
-    restart, 
-    currentRound 
+    continueToNextRound,
+    selectOption,
+    restart,
+    currentRound
   } = useGameEngine();
 
   if (state.phase === "start") {
@@ -59,14 +62,11 @@ export function App() {
   }
 
   if (state.phase === "transition-to-addons") {
-    // Both Kitchen (after lighting) and Bathroom (after mirror-style) go to addons
     const lastPhase = state.onboarding.room === "bathroom" ? "mirror-style" : "lighting";
     return <TransitionScreen type={lastPhase} selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
   if (state.phase === "transition-to-flooring" && state.onboarding.room !== "living-room") {
-    // Both Kitchen (after addons) and Bathroom (after vanity-style) go to flooring
-    // Wait, type="addons" for kitchen means it shows layout image. For bathroom, type="vanity-style" shows vanity picture.
     const lastPhase = state.onboarding.room === "bathroom" ? "vanity-style" : "addons";
     return <TransitionScreen type={lastPhase} selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
@@ -109,7 +109,6 @@ export function App() {
   }
 
   if (state.phase === "transition-to-wall-treatment" && state.onboarding.room === "living-room") {
-    // Shared phase with bathroom, but previous is seating-config for living-room
     return <TransitionScreen type="seating-config" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
@@ -118,7 +117,6 @@ export function App() {
   }
 
   if (state.phase === "transition-to-lighting" && state.onboarding.room === "living-room") {
-    // Shared phase with kitchen/appliance, but previous is rug for living-room
     return <TransitionScreen type="rug" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
@@ -127,7 +125,7 @@ export function App() {
   }
 
   if (!currentRound || !state.roundState.currentMatch) {
-    return <div className="screen center">Preparing game...</div>;
+    return <div className="screen center">{t.preparingGame}</div>;
   }
 
   const currentPhasesArray = state.onboarding.room === "bathroom"
@@ -155,3 +153,11 @@ export function App() {
   );
 }
 
+export function App() {
+  return (
+    <>
+      <LanguageToggle />
+      <AppScreen />
+    </>
+  );
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { landingConfig } from "@/config/landingConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface StartScreenProps {
   onStartDiscovery: () => void;
@@ -7,37 +7,39 @@ interface StartScreenProps {
 }
 
 export function StartScreen({ onStartDiscovery, onSkipToOnboarding }: StartScreenProps) {
+  const { t } = useLanguage();
+
   return (
     <main className="screen center start-screen">
       <div className="branding-wrap">
         <span className="brand-name">Reform-A.i</span>
-        <span className="brand-tagline">Renovation Made Easy</span>
+        <span className="brand-tagline">{t.brandTagline}</span>
       </div>
-      
-      <h1 className="landing-title">{landingConfig.headline}</h1>
-      <p className="landing-subtitle">{landingConfig.subheadline}</p>
+
+      <h1 className="landing-title">{t.landingHeadline}</h1>
+      <p className="landing-subtitle">{t.landingSubheadline}</p>
 
       <div className="choice-container">
         <div className="choice-card discovery" onClick={onStartDiscovery}>
           <div className="choice-icon">🏆</div>
           <div className="choice-content">
-            <h3>Discover Your Style</h3>
-            <p>Play the Style Bracket game to find your perfect design match.</p>
+            <h3>{t.discoverYourStyle}</h3>
+            <p>{t.discoverYourStyleDesc}</p>
           </div>
-          <button className="btn-large">Start Bracket</button>
+          <button className="btn-large">{t.startBracket}</button>
         </div>
 
         <div className="choice-card direct" onClick={onSkipToOnboarding}>
           <div className="choice-icon">🏗️</div>
           <div className="choice-content">
-            <h3>Start Your Renovation</h3>
-            <p>Skip the game and go straight to building your space.</p>
+            <h3>{t.startYourRenovation}</h3>
+            <p>{t.startYourRenovationDesc}</p>
           </div>
-          <button className="btn-large btn-secondary">Build My Space</button>
+          <button className="btn-large btn-secondary">{t.buildMySpace}</button>
         </div>
       </div>
 
-      <p className="microcopy">{landingConfig.microcopy}</p>
+      <p className="microcopy">{t.landingMicrocopy}</p>
     </main>
   );
 }

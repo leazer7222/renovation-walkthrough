@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleOption } from "@/config/styleDiscoveryConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface StyleComparisonCardProps {
   style: StyleOption;
@@ -7,6 +8,8 @@ interface StyleComparisonCardProps {
 }
 
 export function StyleComparisonCard({ style, onSelect }: StyleComparisonCardProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="discovery-card" onClick={onSelect}>
       <div className="discovery-image-wrap">
@@ -22,7 +25,7 @@ export function StyleComparisonCard({ style, onSelect }: StyleComparisonCardProp
             <li key={i}>{line}</li>
           ))}
         </ul>
-        <button className="btn-large discovery-btn">Select This Style</button>
+        <button className="btn-large discovery-btn">{t.selectThisStyle}</button>
       </div>
     </div>
   );

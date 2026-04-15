@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleOption } from "@/config/styleDiscoveryConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface StyleDiscoveryResultsProps {
   results: StyleOption[];
@@ -7,21 +8,20 @@ interface StyleDiscoveryResultsProps {
 }
 
 export function StyleDiscoveryResults({ results, onContinue }: StyleDiscoveryResultsProps) {
-  // results is [Winner, RunnerUp, Semi1, Semi2]
+  const { t } = useLanguage();
   const top4 = results;
 
   return (
     <main className="screen results-screen">
       <header className="center" style={{ marginBottom: "3rem" }}>
-        <h1 className="question-title">Your Design Identity</h1>
-        <p className="question-subtitle">These are the styles that best match your preferences.</p>
+        <h1 className="question-title">{t.yourDesignIdentity}</h1>
+        <p className="question-subtitle">{t.bestMatchSubtitle}</p>
       </header>
 
       <div className="results-grid">
         {top4.map((style, index) => {
-          const rankLabel = index === 0 ? "Winner" : index === 1 ? "Runner Up" : "Semi-Finalist";
-          const isTop3 = index < 3;
-          
+          const rankLabel = index === 0 ? t.winner : index === 1 ? t.runnerUp : t.semiFinalist;
+
           return (
             <div key={style.id} className={`result-card ${index === 0 ? "winner" : ""}`}>
               <div className="result-rank-badge">{rankLabel}</div>
@@ -43,11 +43,11 @@ export function StyleDiscoveryResults({ results, onContinue }: StyleDiscoveryRes
       </div>
 
       <div className="center" style={{ marginTop: "4rem" }}>
-        <button 
-          className="btn-large" 
+        <button
+          className="btn-large"
           onClick={() => onContinue(results.slice(0, 3).map(s => s.id))}
         >
-          Use These Styles for My Project
+          {t.useTheseStylesForMyProject}
         </button>
       </div>
     </main>

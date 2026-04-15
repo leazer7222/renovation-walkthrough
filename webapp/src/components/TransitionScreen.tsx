@@ -1,5 +1,36 @@
 import React from "react";
 import { resolveImage } from "@/lib/assetResolver";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { Translations } from "@/i18n/translations";
+
+function getSubtext(t: Translations, type: string, room: string): string {
+  if (room === "kitchen") {
+    if (type === "layout") return t.kitchen_layout_next;
+    if (type === "storage") return t.kitchen_storage_next;
+    if (type === "appliance") return t.kitchen_appliance_next;
+    if (type === "lighting") return t.kitchen_lighting_next;
+    if (type === "addons") return t.kitchen_addons_next;
+    if (type === "flooring") return t.kitchen_flooring_next;
+    if (type === "countertop") return t.kitchen_countertop_next;
+  }
+  if (room === "bathroom") {
+    if (type === "shower-type") return t.bathroom_showerType_next;
+    if (type === "shower-tile-style") return t.bathroom_showerTileStyle_next;
+    if (type === "vanity-style") return t.bathroom_vanityStyle_next;
+    if (type === "flooring") return t.bathroom_flooring_next;
+    if (type === "wall-treatment") return t.bathroom_wallTreatment_next;
+    if (type === "vanity-finish") return t.bathroom_vanityFinish_next;
+    if (type === "mirror-style") return t.bathroom_mirrorStyle_next;
+  }
+  if (room === "living-room") {
+    if (type === "layout") return t.livingRoom_layout_next;
+    if (type === "flooring-material") return t.livingRoom_flooringMaterial_next;
+    if (type === "seating-config") return t.livingRoom_seatingConfig_next;
+    if (type === "wall-treatment") return t.livingRoom_wallTreatment_next;
+    if (type === "rug") return t.livingRoom_rug_next;
+  }
+  return t.nowLetsContinue;
+}
 
 export function TransitionScreen({
   type,
@@ -12,6 +43,8 @@ export function TransitionScreen({
   room: string;
   onContinue: () => void;
 }) {
+  const { t } = useLanguage();
+
   let resolveType = type;
   const selectionKey = type.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
   let resolveOption = selection[selectionKey] || selection[type] || "";
@@ -28,51 +61,19 @@ export function TransitionScreen({
     room
   );
 
-  const title = "Great choice!";
-  
-  let subtext = "Now let's continue building your design.";
-  // Kitchen transitions
-  if (room === "kitchen") {
-    if (type === "layout") subtext = "Now let's choose a storage style.";
-    if (type === "storage") subtext = "Next up: appliances.";
-    if (type === "appliance") subtext = "Let's illuminate your space with some lighting choices.";
-    if (type === "lighting") subtext = "Time to consider any premium add-ons.";
-    if (type === "addons") subtext = "Now for the fun part: let's pick your materials! Starting with flooring.";
-    if (type === "flooring") subtext = "Now let's choose a countertop that works with your floor.";
-    if (type === "countertop") subtext = "Now let's find the cabinet style to complete your kitchen.";
-  }
-  
-  // Bathroom transitions
-  if (room === "bathroom") {
-    if (type === "shower-type") subtext = "Next, let's design the shower tile.";
-    if (type === "shower-tile-style") subtext = "Now let's select a vanity style.";
-    if (type === "vanity-style") subtext = "Now let's ground the space with some flooring.";
-    if (type === "flooring") subtext = "Now let's choose your wall treatment.";
-    if (type === "wall-treatment") subtext = "Let's define the finish for your vanity.";
-    if (type === "vanity-finish") subtext = "Almost there! Let's pick a mirror style.";
-    if (type === "mirror-style") subtext = "Time to consider any premium bathroom add-ons.";
-  }
-
-  // Living Room transitions
-  if (room === "living-room") {
-    if (type === "layout") subtext = "Great layout! Now let's decide on the flooring material.";
-    if (type === "flooring-material") subtext = "Excellent floor. Next: let's configure your seating.";
-    if (type === "seating-config") subtext = "Comfort is key. Now let's pick a wall treatment for your living space.";
-    if (type === "wall-treatment") subtext = "Looking sharp! Let's find a rug to ground the room.";
-    if (type === "rug") subtext = "Last step! Let's illuminate your living room with a lighting choice.";
-  }
+  const subtext = getSubtext(t, type, room);
 
   return (
     <main className="screen center transition-screen">
-      <h2 className="selection-label">Selection Saved</h2>
-      <h1 className="transition-title">{title}</h1>
+      <h2 className="selection-label">{t.selectionSaved}</h2>
+      <h1 className="transition-title">{t.greatChoice}</h1>
       <p className="transition-subtext">{subtext}</p>
-      
+
       <img src={imageUrl} alt="Selected" className="transition-image" />
-      
+
       <div>
         <button className="btn-large" onClick={onContinue}>
-          Continue
+          {t.continueBtn}
         </button>
       </div>
     </main>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { OnboardingState } from "@/lib/types";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { Translations } from "@/i18n/translations";
 
 interface Option {
   label: string;
@@ -17,66 +19,68 @@ interface Step {
   multi?: boolean;
 }
 
-const steps: Step[] = [
-  {
-    id: "room",
-    stepLabel: "Getting Started",
-    title: "What space are you working on?",
-    subtitle: "We'll tailor your options based on the room you're designing.",
-    options: [
-      { label: "Kitchen", description: "Cabinets, countertops, flooring", value: "kitchen" },
-      { label: "Bathroom", description: "Tile, vanities, fixtures", value: "bathroom" },
-      { label: "Living Room", description: "Flooring, finishes, layout", value: "living-room" },
-    ],
-  },
-  {
-    id: "budget",
-    stepLabel: "Budget",
-    title: "What's your budget range?",
-    subtitle: "This helps us show options that match your price point.",
-    options: [
-      { label: "Budget-Friendly", description: "Cost-conscious options", value: "low" },
-      { label: "Mid-Range", description: "Balanced quality and cost", value: "medium" },
-      { label: "Premium", description: "High-end materials and finishes", value: "high" },
-    ],
-  },
-  {
-    id: "styles",
-    stepLabel: "Style",
-    title: "Pick 3 styles that inspire you.",
-    subtitle: "Your selections will shape the look and feel of your renovation.",
-    multi: true,
-    options: [
-      { label: "Biophilic", description: "Nature-inspired elements", value: "biophilic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Biophilic.png" },
-      { label: "Bohemian", description: "Eclectic and free-spirited", value: "bohemian", image: "/visualization-library/comparison/kitchen/prototype/Styles/Bohemian.png" },
-      { label: "Coastal", description: "Breezy, light, and airy", value: "coastal", image: "/visualization-library/comparison/kitchen/prototype/Styles/Coastal.png" },
-      { label: "Contemporary", description: "Current, curated, and refined", value: "contemporary", image: "/visualization-library/comparison/kitchen/prototype/Styles/Contemporary.png" },
-      { label: "Farmhouse", description: "Warm, rustic, and welcoming", value: "farmhouse", image: "/visualization-library/comparison/kitchen/prototype/Styles/Farmhouse.png" },
-      { label: "French Country", description: "Elegant and pastoral charm", value: "french-country", image: "/visualization-library/comparison/kitchen/prototype/Styles/French Country.png" },
-      { label: "Industrial", description: "Raw materials and edge", value: "industrial", image: "/visualization-library/comparison/kitchen/prototype/Styles/Industrial.png" },
-      { label: "Japandi", description: "Japanese-Scandi minimalism", value: "japandi", image: "/visualization-library/comparison/kitchen/prototype/Styles/Japandi.png" },
-      { label: "Japanese", description: "Serene, ordered, and natural", value: "japanese", image: "/visualization-library/comparison/kitchen/prototype/Styles/Japanese.png" },
-      { label: "Midcentury Modern", description: "Retro lines and warmth", value: "midcentury-modern", image: "/visualization-library/comparison/kitchen/prototype/Styles/Midcentury-Modern.png" },
-      { label: "Minimalist", description: "Less is more", value: "minimalist", image: "/visualization-library/comparison/kitchen/prototype/Styles/Minimalist.png" },
-      { label: "Modern", description: "Clean lines and bold contrast", value: "modern", image: "/visualization-library/comparison/kitchen/prototype/Styles/Modern.png" },
-      { label: "Neoclassic", description: "Timeless elegance reimagined", value: "neoclassic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Neoclassic.png" },
-      { label: "Rustic", description: "Earthy, natural, and textured", value: "rustic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Rustic.png" },
-      { label: "Vintage", description: "Nostalgic and characterful", value: "vintage", image: "/visualization-library/comparison/kitchen/prototype/Styles/Vintage.png" },
-    ],
-  },
-  {
-    id: "priority",
-    stepLabel: "Priorities",
-    title: "What's your top priority?",
-    subtitle: "We'll prioritize options based on what matters most to you.",
-    options: [
-      { label: "Cost", description: "Stay within budget", value: "cost" },
-      { label: "Aesthetics", description: "Look and design", value: "aesthetics" },
-      { label: "Durability", description: "Long-lasting materials", value: "durability" },
-      { label: "Resale Value", description: "Maximize home value", value: "resale" },
-    ],
-  },
-];
+function buildSteps(t: Translations): Step[] {
+  return [
+    {
+      id: "room",
+      stepLabel: t.roomStepLabel,
+      title: t.roomTitle,
+      subtitle: t.roomSubtitle,
+      options: [
+        { label: t.kitchen, description: t.kitchenDesc, value: "kitchen" },
+        { label: t.bathroom, description: t.bathroomDesc, value: "bathroom" },
+        { label: t.livingRoom, description: t.livingRoomDesc, value: "living-room" },
+      ],
+    },
+    {
+      id: "budget",
+      stepLabel: t.budgetStepLabel,
+      title: t.budgetTitle,
+      subtitle: t.budgetSubtitle,
+      options: [
+        { label: t.budgetLow, description: t.budgetLowDesc, value: "low" },
+        { label: t.budgetMedium, description: t.budgetMediumDesc, value: "medium" },
+        { label: t.budgetHigh, description: t.budgetHighDesc, value: "high" },
+      ],
+    },
+    {
+      id: "styles",
+      stepLabel: t.stylesStepLabel,
+      title: t.stylesTitle,
+      subtitle: t.stylesSubtitle,
+      multi: true,
+      options: [
+        { label: "Biophilic", description: t.styleDescriptions["biophilic"], value: "biophilic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Biophilic.png" },
+        { label: "Bohemian", description: t.styleDescriptions["bohemian"], value: "bohemian", image: "/visualization-library/comparison/kitchen/prototype/Styles/Bohemian.png" },
+        { label: "Coastal", description: t.styleDescriptions["coastal"], value: "coastal", image: "/visualization-library/comparison/kitchen/prototype/Styles/Coastal.png" },
+        { label: "Contemporary", description: t.styleDescriptions["contemporary"], value: "contemporary", image: "/visualization-library/comparison/kitchen/prototype/Styles/Contemporary.png" },
+        { label: "Farmhouse", description: t.styleDescriptions["farmhouse"], value: "farmhouse", image: "/visualization-library/comparison/kitchen/prototype/Styles/Farmhouse.png" },
+        { label: "French Country", description: t.styleDescriptions["french-country"], value: "french-country", image: "/visualization-library/comparison/kitchen/prototype/Styles/French Country.png" },
+        { label: "Industrial", description: t.styleDescriptions["industrial"], value: "industrial", image: "/visualization-library/comparison/kitchen/prototype/Styles/Industrial.png" },
+        { label: "Japandi", description: t.styleDescriptions["japandi"], value: "japandi", image: "/visualization-library/comparison/kitchen/prototype/Styles/Japandi.png" },
+        { label: "Japanese", description: t.styleDescriptions["japanese"], value: "japanese", image: "/visualization-library/comparison/kitchen/prototype/Styles/Japanese.png" },
+        { label: "Midcentury Modern", description: t.styleDescriptions["midcentury-modern"], value: "midcentury-modern", image: "/visualization-library/comparison/kitchen/prototype/Styles/Midcentury-Modern.png" },
+        { label: "Minimalist", description: t.styleDescriptions["minimalist"], value: "minimalist", image: "/visualization-library/comparison/kitchen/prototype/Styles/Minimalist.png" },
+        { label: "Modern", description: t.styleDescriptions["modern"], value: "modern", image: "/visualization-library/comparison/kitchen/prototype/Styles/Modern.png" },
+        { label: "Neoclassic", description: t.styleDescriptions["neoclassic"], value: "neoclassic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Neoclassic.png" },
+        { label: "Rustic", description: t.styleDescriptions["rustic"], value: "rustic", image: "/visualization-library/comparison/kitchen/prototype/Styles/Rustic.png" },
+        { label: "Vintage", description: t.styleDescriptions["vintage"], value: "vintage", image: "/visualization-library/comparison/kitchen/prototype/Styles/Vintage.png" },
+      ],
+    },
+    {
+      id: "priority",
+      stepLabel: t.priorityStepLabel,
+      title: t.priorityTitle,
+      subtitle: t.prioritySubtitle,
+      options: [
+        { label: t.priorityCost, description: t.priorityCostDesc, value: "cost" },
+        { label: t.priorityAesthetics, description: t.priorityAestheticsDesc, value: "aesthetics" },
+        { label: t.priorityDurability, description: t.priorityDurabilityDesc, value: "durability" },
+        { label: t.priorityResale, description: t.priorityResaleDesc, value: "resale" },
+      ],
+    },
+  ];
+}
 
 export function OnboardingScreen({
   onComplete,
@@ -85,8 +89,10 @@ export function OnboardingScreen({
   onComplete: (data: OnboardingState) => void;
   initialStyles?: string[];
 }) {
-  const filteredSteps = initialStyles.length > 0 
-    ? steps.filter(s => s.id !== "styles") 
+  const { t } = useLanguage();
+  const steps = buildSteps(t);
+  const filteredSteps = initialStyles.length > 0
+    ? steps.filter(s => s.id !== "styles")
     : steps;
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -115,8 +121,7 @@ export function OnboardingScreen({
     } else {
       const newAnswers = { ...answers, [step.id]: optionValue };
       setAnswers(newAnswers);
-      
-      // Auto-advance for single select
+
       if (currentStep < filteredSteps.length - 1) {
         setCurrentStep(currentStep + 1);
       } else {
@@ -146,15 +151,15 @@ export function OnboardingScreen({
       <div className="onboarding-step">
         <header className="onboarding-header">
           <p className="step-indicator">
-            Step {currentStep + 1} of {filteredSteps.length} — {step.stepLabel}
+            {t.stepOf(currentStep + 1, filteredSteps.length, step.stepLabel)}
           </p>
           <h2 className="question-title">{step.title}</h2>
           <p className="question-subtitle">{step.subtitle}</p>
         </header>
-        
+
         {step.multi && (
           <p className="style-selection-count">
-            {answers.styles.length} / {MAX_STYLES} selected
+            {t.xOfYSelected(answers.styles.length, MAX_STYLES)}
           </p>
         )}
         <div className={step.multi ? "styles-grid" : "options-grid"}>
@@ -191,7 +196,7 @@ export function OnboardingScreen({
         <div className="onboarding-nav">
           {currentStep > 0 && (
             <button className="btn-secondary" onClick={handleBack}>
-              Back
+              {t.back}
             </button>
           )}
           {step.multi && (
@@ -200,16 +205,15 @@ export function OnboardingScreen({
               onClick={handleNext}
               disabled={!canContinue}
             >
-              {canContinue ? "Continue" : `Select ${MAX_STYLES - answers.styles.length} more`}
+              {canContinue ? t.continue : t.selectNMore(MAX_STYLES - answers.styles.length)}
             </button>
           )}
         </div>
       </div>
 
       <footer className="onboarding-footer">
-        <p className="speed-reinforcement">Takes less than 2 minutes</p>
+        <p className="speed-reinforcement">{t.takesLessThan2Min}</p>
       </footer>
     </main>
   );
 }
-

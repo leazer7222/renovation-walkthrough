@@ -1,14 +1,17 @@
 import { Option } from "@/lib/types";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-export function ComparisonCard({ 
-  option, 
-  imageUrl, 
-  onSelect 
-}: { 
-  option: Option; 
-  imageUrl: string; 
-  onSelect: () => void 
+export function ComparisonCard({
+  option,
+  imageUrl,
+  onSelect
+}: {
+  option: Option;
+  imageUrl: string;
+  onSelect: () => void
 }) {
+  const { t } = useLanguage();
+
   return (
     <article className="comparison-card" onClick={onSelect}>
       <div className="image-wrap">
@@ -22,14 +25,13 @@ export function ComparisonCard({
       </div>
       <div className="card-text">
         <h3>{option.label}</h3>
-        <button onClick={(e) => { 
-          e.stopPropagation(); 
-          onSelect(); 
+        <button onClick={(e) => {
+          e.stopPropagation();
+          onSelect();
         }}>
-          Select
+          {t.select}
         </button>
       </div>
     </article>
   );
 }
-
