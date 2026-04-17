@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GameState, OnboardingState, Option, Phase, RoundState } from "@/lib/types";
 import { roundOrder } from "@/config/kitchenConfig";
 import { bathroomRoundOrder } from "@/config/bathroomConfig";
@@ -36,6 +36,18 @@ const initialState: GameState = {
   roundState: initialRoundState,
   complete: false,
 };
+
+const STORAGE_KEY = "renovation_game_state";
+
+function loadState(): GameState {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw) as GameState;
+  } catch {
+    // ignore parse errors
+  }
+  return initialState;
+}
 
 const toQueue = (options: Option[]): Option[] => options.map((o) => ({ ...o }));
 
@@ -107,7 +119,15 @@ const getRoundConfig = (phase: Phase, room: string) => {
 };
 
 export const useGameEngine = () => {
-  const [state, setState] = useState<GameState>(initialState);
+  const [state, setState] = useState<GameState>(loadState);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // ignore storage errors
+    }
+  }, [state]);
 
   const currentRound = useMemo(() => getRoundConfig(state.phase, state.onboarding.room), [state.phase, state.onboarding.room]);
 
@@ -289,6 +309,7 @@ export const useGameEngine = () => {
   };
 
   const restart = () => {
+    localStorage.removeItem(STORAGE_KEY);
     setState(initialState);
   };
 

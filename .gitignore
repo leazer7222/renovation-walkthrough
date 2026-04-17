@@ -39,6 +39,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Vite temp files
+vite.config.ts.timestamp-*
+
 # Project specific
 data/raw/
 data/processed/

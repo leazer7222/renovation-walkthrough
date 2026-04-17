@@ -6,6 +6,7 @@ import { TransitionScreen } from "@/components/TransitionScreen";
 import { AddonScreen } from "@/components/AddonScreen";
 import { StyleDiscoveryScreen } from "@/components/StyleDiscoveryScreen";
 import { StyleDiscoveryResults } from "@/components/StyleDiscoveryResults";
+import { Header } from "@/components/Header";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useGameEngine } from "@/hooks/useGameEngine";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -156,8 +157,11 @@ function AppScreen() {
 export function App() {
   return (
     <>
+      <Header />
       <LanguageToggle />
-      <AppScreen />
+      <div style={{ paddingTop: "100px" }}>
+        <AppScreen />
+      </div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-const REFORM_API_BASE = "/reform-api/api/v1";
+const REFORM_API_BASE = "/api/v1";
 
 /** Returns a stable device ID stored in localStorage (mirrors reform-ai's device tracking). */
 function getOrCreateDeviceId(): string {
