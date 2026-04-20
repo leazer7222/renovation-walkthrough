@@ -119,6 +119,11 @@ export type Translations = {
   addonsSubtitle: string;
   viewFinalReveal: string;
 
+  // Pre-Reveal Transition
+  preRevealBuilding: string;
+  preRevealSubtext: string;
+  preRevealCta: string;
+
   // Final Reveal
   projectComplete: string;
   kitchenReveal: string;
@@ -290,6 +295,10 @@ export const en: Translations = {
   addonsSubtitle:
     "Toggle the features you'd love to include in your design.",
   viewFinalReveal: "View Final Reveal",
+
+  preRevealBuilding: "is building your",
+  preRevealSubtext: "Your AI-powered renovation design is about to come to life.",
+  preRevealCta: "Reveal My Design",
 
   projectComplete: "Project Complete",
   kitchenReveal: "Your Kitchen Reveal",
@@ -608,6 +617,10 @@ export const es: Translations = {
   addonsSubtitle:
     "Activa las funciones que te gustaría incluir en tu diseño.",
   viewFinalReveal: "Ver Resultado Final",
+
+  preRevealBuilding: "está construyendo tu",
+  preRevealSubtext: "Tu diseño de renovación con inteligencia artificial está a punto de cobrar vida.",
+  preRevealCta: "Revelar Mi Diseño",
 
   projectComplete: "Proyecto Completado",
   kitchenReveal: "El Resultado de Tu Cocina",

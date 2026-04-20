@@ -35,6 +35,7 @@ export type Phase =
   | "seating-config"
   | "transition-to-rug"
   | "rug"
+  | "transition-to-final"
   | "final";
 
 /** Ordered list of user-visible phases for kitchen flow (used for progress bar tracking) */
