@@ -36,6 +36,9 @@
   --brand-teal-dark:      #009AA2;
   --brand-badge:          #3B8AA2;
 
+  /* Layout */
+  --header-height:        80px;
+
   /* Shape */
   --radius:               0.625rem; /* 10px */
 
@@ -73,8 +76,8 @@ body {
    Layout
    ============================================================ */
 .screen {
-  min-height: calc(100vh - 100px);
-  padding: 0.5rem 2rem 2rem; /* Reduced top and bottom padding */
+  min-height: calc(100vh - var(--header-height));
+  padding: 1rem 2rem 2rem; /* Consistent padding */
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
@@ -290,7 +293,7 @@ button:disabled {
 }
 
 .question-title {
-  font-size: 2.5rem;
+  font-size: 1.75rem; /* Reduced from 2.5rem */
   font-weight: 700;
   margin-bottom: 0.25rem;
   letter-spacing: -0.02em;
@@ -482,7 +485,7 @@ button:disabled {
 .style-card-image-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9; /* Changed from 4 / 3 */
   overflow: hidden;
   background: var(--secondary);
 }
@@ -535,7 +538,7 @@ button:disabled {
    ============================================================ */
 .transition-screen {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 1.5rem 2rem; /* Reduced from 4rem 2rem */
   animation: fadeIn var(--duration) var(--easing);
 }
 
@@ -551,9 +554,9 @@ button:disabled {
 }
 
 .transition-title {
-  font-size: 2.5rem;
+  font-size: 1.75rem; /* Reduced from 2.5rem */
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced from 1rem */
   color: var(--foreground);
   letter-spacing: -0.02em;
 }
@@ -570,7 +573,7 @@ button:disabled {
    Final Reveal
    ============================================================ */
 .final-reveal {
-  padding: 2rem;
+  padding: 1rem 2rem; /* Reduced from 2rem */
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -790,7 +793,7 @@ button:disabled {
 
 /* Results Screen */
 .results-screen {
-  padding: 4rem 2rem;
+  padding: 1.5rem 2rem; /* Reduced from 4rem 2rem */
 }
 
 .results-grid {
@@ -915,8 +918,8 @@ button:disabled {
 
 .choice-container {
   display: flex;
-  gap: 2rem;
-  margin: 3.5rem 0;
+  gap: 1.5rem; /* Reduced from 2rem */
+  margin: 1.5rem 0; /* Reduced from 3.5rem 0 */
   max-width: 900px;
   width: 100%;
 }
