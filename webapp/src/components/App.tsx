@@ -3,6 +3,7 @@ import { GameScreen } from "@/components/GameScreen";
 import { StartScreen } from "@/components/StartScreen";
 import { OnboardingScreen } from "@/components/OnboardingScreen";
 import { TransitionScreen } from "@/components/TransitionScreen";
+import { PreRevealScreen } from "@/components/PreRevealScreen";
 import { AddonScreen } from "@/components/AddonScreen";
 import { StyleDiscoveryScreen } from "@/components/StyleDiscoveryScreen";
 import { StyleDiscoveryResults } from "@/components/StyleDiscoveryResults";
@@ -119,6 +120,10 @@ function AppScreen() {
 
   if (state.phase === "transition-to-lighting" && state.onboarding.room === "living-room") {
     return <TransitionScreen type="rug" selection={state.selection} room={state.onboarding.room} onContinue={continueToNextRound} />;
+  }
+
+  if (state.phase === "transition-to-final") {
+    return <PreRevealScreen room={state.onboarding.room} onContinue={continueToNextRound} />;
   }
 
   if (state.phase === "final" || state.complete) {

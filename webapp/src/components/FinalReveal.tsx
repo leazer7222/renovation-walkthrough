@@ -8,7 +8,15 @@ import {
   getTraitsForSelections,
   countTraits,
   getDominantTraits,
+  generateDesignSummary,
+  generateDesignHeadline,
   formatDisplayLabel,
+  flooringInsight,
+  countertopInsight,
+  cabinetInsight,
+  livingRoomFlooringInsight,
+  seatingInsight,
+  livingRoomWallInsight,
   generatePrompts,
 } from "@/lib/designTraits";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -51,7 +59,10 @@ export function FinalReveal({
   const traits = getTraitsForSelections(selection, room);
   const traitCounts = countTraits(traits);
   const dominantTraits = getDominantTraits(traitCounts);
-const { renovation } = generatePrompts(styles, selection, room);
+  const headline = generateDesignHeadline(dominantTraits);
+  const summary = generateDesignSummary(dominantTraits);
+  const styledDisplay = styles.map(formatDisplayLabel).join(", ");
+  const { renovation } = generatePrompts(styles, selection, room);
 
   const roomRevealTitle = isLivingRoom ? t.livingRoomReveal : (isBathroom ? t.bathroomReveal : t.kitchenReveal);
 
@@ -96,27 +107,66 @@ const { renovation } = generatePrompts(styles, selection, room);
         <h1 className="transition-title">{roomRevealTitle}</h1>
       </header>
 
-      {/* Images — always show side by side; spinner on the right while generating */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "2rem", width: "100%", maxWidth: "936px", marginLeft: "auto", marginRight: "auto" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-          <span style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.05em", opacity: 0.6 }}>Before</span>
-          <img src={finalImageUrl} alt="Reference design" style={{ width: "100%", borderRadius: "8px", objectFit: "cover", aspectRatio: "1/1" }} />
+      {/* AI-generated result — full width, natural aspect ratio */}
+      <div style={{ marginBottom: "2rem", width: "100%", maxWidth: "936px", marginLeft: "auto", marginRight: "auto" }}>
+        {aiImageUrl ? (
+          <img src={aiImageUrl} alt={t.aiGeneratedResult} style={{ width: "100%", borderRadius: "12px", objectFit: "contain", display: "block" }} />
+        ) : (
+          <div style={{ aspectRatio: "16/9", borderRadius: "12px", background: "rgba(0,0,0,0.04)", border: "1px dashed rgba(0,0,0,0.15)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem", color: "var(--muted-foreground)", fontSize: "0.9rem" }}>
+            {isGenerating && <><span className="ai-spinner" />{t.generatingImage}</>}
+            {generateError && !isGenerating && <span style={{ color: "var(--destructive, #e53e3e)", fontSize: "0.85rem", textAlign: "center", padding: "1rem" }}>{generateError}</span>}
+          </div>
+        )}
+      </div>
+
+      {/* Design insight — styles text, headline, summary, why it works */}
+      <div className="design-insight" style={{ marginBottom: "2rem", width: "100%", maxWidth: "936px", marginLeft: "auto", marginRight: "auto" }}>
+        {styles.length > 0 && (
+          <div className="insight-section" style={{ marginBottom: "1.5rem" }}>
+            <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
+              {t.inspiredByYourSelections}
+            </h3>
+            <p style={{ fontSize: "1.125rem", fontWeight: 500 }}>{styledDisplay}</p>
+          </div>
+        )}
+
+        <div className="insight-section" style={{ marginBottom: "1.5rem" }}>
+          <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
+            {t.howYourDesignReflects}
+          </h3>
+          <p style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--foreground)" }}>{headline}</p>
+          <p style={{ fontSize: "1.125rem", lineHeight: 1.5 }}>{summary}</p>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-          <span style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.05em", opacity: 0.6 }}>After</span>
-          {aiImageUrl ? (
-            <img src={aiImageUrl} alt={t.aiGeneratedResult} style={{ width: "100%", borderRadius: "8px", objectFit: "cover", aspectRatio: "1/1" }} />
-          ) : (
-            <div style={{ aspectRatio: "1/1", borderRadius: "8px", background: "rgba(0,0,0,0.04)", border: "1px dashed rgba(0,0,0,0.15)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem", color: "var(--muted-foreground)", fontSize: "0.9rem" }}>
-              {isGenerating && <><span className="ai-spinner" />{t.generatingImage}</>}
-              {generateError && !isGenerating && <span style={{ color: "var(--destructive, #e53e3e)", fontSize: "0.85rem", textAlign: "center", padding: "1rem" }}>{generateError}</span>}
-            </div>
-          )}
+
+        <div className="insight-section" style={{ marginBottom: "1.5rem" }}>
+          <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
+            {t.whyItWorks}
+          </h3>
+          <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem", lineHeight: 1.6, fontSize: "1rem" }}>
+            {selection.flooring && flooringInsight[selection.flooring] && (
+              <li style={{ marginBottom: "0.25rem" }}>{flooringInsight[selection.flooring]}</li>
+            )}
+            {selection.countertop && countertopInsight[selection.countertop] && (
+              <li style={{ marginBottom: "0.25rem" }}>{countertopInsight[selection.countertop]}</li>
+            )}
+            {selection.cabinet && cabinetInsight[selection.cabinet] && (
+              <li style={{ marginBottom: "0.25rem" }}>{cabinetInsight[selection.cabinet]}</li>
+            )}
+            {selection.flooringMaterial && livingRoomFlooringInsight[selection.flooringMaterial] && (
+              <li style={{ marginBottom: "0.25rem" }}>{livingRoomFlooringInsight[selection.flooringMaterial]}</li>
+            )}
+            {selection.seatingConfig && seatingInsight[selection.seatingConfig] && (
+              <li style={{ marginBottom: "0.25rem" }}>{seatingInsight[selection.seatingConfig]}</li>
+            )}
+            {selection.wallTreatment && isLivingRoom && livingRoomWallInsight[selection.wallTreatment] && (
+              <li style={{ marginBottom: "0.25rem" }}>{livingRoomWallInsight[selection.wallTreatment]}</li>
+            )}
+          </ul>
         </div>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", marginBottom: "2rem", alignItems: "start" }}>
-        {/* Inspired by your selections */}
+        {/* Inspired by your selections — badges */}
         {styles.length > 0 && (
           <div>
             <h3 style={{ textTransform: "uppercase", fontSize: "0.75rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.75rem" }}>

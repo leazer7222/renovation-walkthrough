@@ -70,7 +70,7 @@ const nextPhase = (phase: Phase, room: string): Phase => {
     if (phase === "transition-to-mirror-style") return "mirror-style";
     if (phase === "mirror-style") return "transition-to-addons";
     if (phase === "transition-to-addons") return "addons";
-    if (phase === "addons") return "final";
+    if (phase === "addons") return "transition-to-final";
     return "final";
   }
 
@@ -85,7 +85,7 @@ const nextPhase = (phase: Phase, room: string): Phase => {
     if (phase === "transition-to-rug") return "rug";
     if (phase === "rug") return "transition-to-lighting";
     if (phase === "transition-to-lighting") return "lighting";
-    if (phase === "lighting") return "final";
+    if (phase === "lighting") return "transition-to-final";
     return "final";
   }
 
@@ -104,7 +104,8 @@ const nextPhase = (phase: Phase, room: string): Phase => {
   if (phase === "transition-to-countertop") return "countertop";
   if (phase === "countertop") return "transition-to-cabinet";
   if (phase === "transition-to-cabinet") return "cabinet";
-  if (phase === "cabinet") return "final";
+  if (phase === "cabinet") return "transition-to-final";
+  if (phase === "transition-to-final") return "final";
   return "final";
 };
 
