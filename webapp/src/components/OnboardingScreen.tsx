@@ -144,7 +144,7 @@ export function OnboardingScreen({
     }
   };
 
-  const canContinue = step.multi ? answers.styles.length === MAX_STYLES : !!answers[step.id];
+  const canContinue = step.multi ? (answers.styles.length >= 1 && answers.styles.length <= MAX_STYLES) : !!answers[step.id];
 
   return (
     <main className="screen center onboarding-screen">

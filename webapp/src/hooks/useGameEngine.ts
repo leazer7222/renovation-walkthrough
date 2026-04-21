@@ -313,6 +313,16 @@ export const useGameEngine = () => {
     localStorage.removeItem(STORAGE_KEY);
     setState(initialState);
   };
+  
+  const updateFinalStyles = (styles: string[]) => {
+    setState((prev) => ({
+      ...prev,
+      onboarding: {
+        ...prev.onboarding,
+        styles,
+      },
+    }));
+  };
 
   return {
     state,
@@ -325,6 +335,7 @@ export const useGameEngine = () => {
     continueToNextRound,
     selectOption: makeSelection,
     restart,
+    updateFinalStyles,
     currentRound,
   };
 };

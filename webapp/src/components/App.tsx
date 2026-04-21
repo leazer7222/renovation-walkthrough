@@ -123,7 +123,17 @@ function AppScreen() {
   }
 
   if (state.phase === "transition-to-final") {
-    return <PreRevealScreen room={state.onboarding.room} onContinue={continueToNextRound} />;
+    return (
+      <PreRevealScreen
+        room={state.onboarding.room}
+        styles={state.onboarding.styles}
+        discoveryResults={state.selection.discoveryResults}
+        onComplete={(finalStyles) => {
+          updateFinalStyles(finalStyles);
+          continueToNextRound();
+        }}
+      />
+    );
   }
 
   if (state.phase === "final" || state.complete) {
