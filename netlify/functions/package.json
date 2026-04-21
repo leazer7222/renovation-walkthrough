@@ -1,8 +1,0 @@
-{
-  "name": "renovation-walkthrough-functions",
-  "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
-    "busboy": "^1.6.0"
-  }
-}
