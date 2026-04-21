@@ -41,6 +41,7 @@ export function FinalReveal({
   const [isGenerating, setIsGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
   const [limitReached, setLimitReached] = useState(isVisualizationLimitReached());
+  const [isAdminMode, setIsAdminMode] = useState(false);
 
   const finalImageUrl = isLivingRoom
     ? resolveImage("layout", selection, selection.layout || "", room)
@@ -246,6 +247,25 @@ export function FinalReveal({
             <Bookmark size={16} />{t.saveDesign}
           </button>
         </div>
+      </div>
+
+      {/* Admin Mode Toggle */}
+      <div style={{ textAlign: "center", marginTop: "2rem", borderTop: "1px solid var(--border)", paddingTop: "1rem", maxWidth: "800px", marginLeft: "auto", marginRight: "auto" }}>
+        <button 
+          style={{ background: "none", border: "none", color: "var(--muted-foreground)", fontSize: "0.7rem", cursor: "pointer", textDecoration: "underline" }}
+          onClick={() => setIsAdminMode(!isAdminMode)}
+        >
+          {isAdminMode ? "Exit Admin Mode" : "Admin Mode"}
+        </button>
+        
+        {isAdminMode && (
+          <div style={{ marginTop: "1rem", textAlign: "left", background: "#f8f9fa", padding: "1rem", borderRadius: "8px", border: "1px solid #ddd" }}>
+            <h4 style={{ fontSize: "0.8rem", marginBottom: "0.5rem", color: "#666" }}>AI Prompt Used:</h4>
+            <pre style={{ whiteSpace: "pre-wrap", fontSize: "0.75rem", fontFamily: "monospace", color: "#333", margin: 0 }}>
+              {renovation}
+            </pre>
+          </div>
+        )}
       </div>
     </main>
   );
