@@ -26,6 +26,7 @@ function AppScreen() {
     continueToNextRound,
     selectOption,
     restart,
+    updateFinalStyles,
     currentRound
   } = useGameEngine();
 
