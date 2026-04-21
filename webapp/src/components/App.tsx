@@ -164,7 +164,7 @@ export function App() {
     <>
       <Header />
       <LanguageToggle />
-      <div style={{ paddingTop: "60px" }}>
+      <div style={{ paddingTop: "100px" }}>
         <AppScreen />
       </div>
     </>

@@ -108,13 +108,13 @@ export function FinalReveal({
 
   return (
     <main className="screen final-reveal">
-      <header style={{ textAlign: "center", marginBottom: "3rem" }}>
+      <header style={{ textAlign: "center", marginBottom: "1.5rem" }}>
         <p className="selection-label">{t.projectComplete}</p>
-        <h1 className="transition-title">{roomRevealTitle}</h1>
+        <h1 className="transition-title" style={{ fontSize: "2rem", marginBottom: "0" }}>{roomRevealTitle}</h1>
       </header>
 
       {/* AI-generated result — full width, natural aspect ratio */}
-      <div style={{ marginBottom: "2rem", width: "100%", maxWidth: "936px", marginLeft: "auto", marginRight: "auto" }}>
+      <div style={{ marginBottom: "1rem", width: "100%", maxWidth: "800px", marginLeft: "auto", marginRight: "auto" }}>
         {aiImageUrl ? (
           <img src={aiImageUrl} alt={t.aiGeneratedResult} style={{ width: "100%", borderRadius: "12px", objectFit: "contain", display: "block" }} />
         ) : (
@@ -127,7 +127,7 @@ export function FinalReveal({
       </div>
 
       {/* Design insight — styles text, headline, summary, why it works */}
-      <div className="design-insight" style={{ marginBottom: "2rem", width: "100%", maxWidth: "936px", marginLeft: "auto", marginRight: "auto" }}>
+      <div className="design-insight" style={{ marginBottom: "1.5rem", width: "100%", maxWidth: "800px", marginLeft: "auto", marginRight: "auto" }}>
         {styles.length > 0 && (
           <div className="insight-section" style={{ marginBottom: "1.5rem" }}>
             <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
@@ -137,16 +137,16 @@ export function FinalReveal({
           </div>
         )}
 
-        <div className="insight-section" style={{ marginBottom: "1.5rem" }}>
-          <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
+        <div className="insight-section" style={{ marginBottom: "1rem" }}>
+          <h3 style={{ textTransform: "uppercase", fontSize: "0.75rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.25rem" }}>
             {t.howYourDesignReflects}
           </h3>
-          <p style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--foreground)" }}>{headline}</p>
-          <p style={{ fontSize: "1.125rem", lineHeight: 1.5 }}>{summary}</p>
+          <p style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.25rem", color: "var(--foreground)" }}>{headline}</p>
+          <p style={{ fontSize: "1rem", lineHeight: 1.4 }}>{summary}</p>
         </div>
 
-        <div className="insight-section" style={{ marginBottom: "1.5rem" }}>
-          <h3 style={{ textTransform: "uppercase", fontSize: "0.875rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.5rem" }}>
+        <div className="insight-section" style={{ marginBottom: "1rem" }}>
+          <h3 style={{ textTransform: "uppercase", fontSize: "0.75rem", letterSpacing: "0.05em", color: "var(--foreground)", opacity: 0.7, marginBottom: "0.25rem" }}>
             {t.whyItWorks}
           </h3>
           <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem", lineHeight: 1.6, fontSize: "1rem" }}>
@@ -172,7 +172,7 @@ export function FinalReveal({
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem", marginBottom: "2rem", alignItems: "start" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", marginBottom: "1.5rem", alignItems: "start", maxWidth: "800px", marginLeft: "auto", marginRight: "auto" }}>
         {/* Inspired by your selections — badges */}
         {styles.length > 0 && (
           <div>
@@ -220,7 +220,7 @@ export function FinalReveal({
       </div>
 
       {/* Centered buttons */}
-      <div style={{ display: "flex", justifyContent: "space-between", gap: "0.75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: "0.75rem", flexWrap: "wrap", marginBottom: "1rem", maxWidth: "800px", marginLeft: "auto", marginRight: "auto" }}>
         <div style={{ display: "flex", gap: "1em" }}>
           {aiImageUrl && (
             <button className="btn-large btn-secondary" onClick={handleDownloadAiImage} style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
