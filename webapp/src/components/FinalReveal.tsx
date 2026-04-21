@@ -20,7 +20,7 @@ import {
   generatePrompts,
 } from "@/lib/designTraits";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { generateVisualization } from "@/services/visualizationApi";
+import { generateVisualization, isVisualizationLimitReached } from "@/services/visualizationApi";
 
 export function FinalReveal({
   room,
@@ -40,6 +40,7 @@ export function FinalReveal({
   const [aiImageUrl, setAiImageUrl] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
+  const [limitReached, setLimitReached] = useState(isVisualizationLimitReached());
 
   const finalImageUrl = isLivingRoom
     ? resolveImage("layout", selection, selection.layout || "", room)
@@ -75,6 +76,10 @@ export function FinalReveal({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleGenerateAiImage() {
+    if (isVisualizationLimitReached()) {
+      setLimitReached(true);
+      return;
+    }
     setIsGenerating(true);
     setGenerateError(null);
     try {
@@ -87,6 +92,7 @@ export function FinalReveal({
       setAiImageUrl(result.imageDataUrl);
     } catch (err: any) {
       setGenerateError(err?.message ?? t.generateAiError);
+      if (isVisualizationLimitReached()) setLimitReached(true);
     } finally {
       setIsGenerating(false);
     }
@@ -114,7 +120,8 @@ export function FinalReveal({
         ) : (
           <div style={{ aspectRatio: "16/9", borderRadius: "12px", background: "rgba(0,0,0,0.04)", border: "1px dashed rgba(0,0,0,0.15)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem", color: "var(--muted-foreground)", fontSize: "0.9rem" }}>
             {isGenerating && <><span className="ai-spinner" />{t.generatingImage}</>}
-            {generateError && !isGenerating && <span style={{ color: "var(--destructive, #e53e3e)", fontSize: "0.85rem", textAlign: "center", padding: "1rem" }}>{generateError}</span>}
+            {limitReached && <div style={{ color: "var(--brand-teal)", textAlign: "center", padding: "1rem", fontWeight: 600 }}>⚠️ Visualization limit reached (200/200). Please contact us for more.</div>}
+            {generateError && !isGenerating && !limitReached && <span style={{ color: "var(--destructive, #e53e3e)", fontSize: "0.85rem", textAlign: "center", padding: "1rem" }}>{generateError}</span>}
           </div>
         )}
       </div>
@@ -220,12 +227,12 @@ export function FinalReveal({
               <Download size={16} />{t.downloadImage}
             </button>
           )}
-          {(generateError && !isGenerating) && (
+          {(generateError && !isGenerating && !limitReached) && (
             <button className="btn-large" onClick={handleGenerateAiImage} style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
               <RefreshCw size={16} />{t.retryGeneration}
             </button>
           )}
-          {aiImageUrl && (
+          {aiImageUrl && !limitReached && (
             <button className="btn-large" onClick={handleGenerateAiImage} style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
               <RefreshCw size={16} />{t.retryGeneration}
             </button>

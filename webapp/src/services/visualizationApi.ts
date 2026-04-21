@@ -1,4 +1,20 @@
 const REFORM_API_BASE = "/api/v1";
+const VISUALIZATION_COUNT_KEY = "visualization_call_count";
+const VISUALIZATION_LIMIT = 200;
+
+export function getVisualizationCount(): number {
+  const count = localStorage.getItem(VISUALIZATION_COUNT_KEY);
+  return count ? parseInt(count, 10) : 0;
+}
+
+function incrementVisualizationCount() {
+  const count = getVisualizationCount();
+  localStorage.setItem(VISUALIZATION_COUNT_KEY, (count + 1).toString());
+}
+
+export function isVisualizationLimitReached(): boolean {
+  return getVisualizationCount() >= VISUALIZATION_LIMIT;
+}
 
 /** Returns a stable device ID stored in localStorage (mirrors reform-ai's device tracking). */
 function getOrCreateDeviceId(): string {
@@ -46,6 +62,10 @@ export interface GenerateVisualizationResult {
 export async function generateVisualization(
   params: GenerateVisualizationParams,
 ): Promise<GenerateVisualizationResult> {
+  if (isVisualizationLimitReached()) {
+    throw new Error("You have reached the limit of 200 visualizations. Please contact us for more.");
+  }
+
   const roomImage = await imageUrlToFile(params.roomImageUrl);
 
   const formData = new FormData();
@@ -75,6 +95,8 @@ export async function generateVisualization(
     const text = await response.text().catch(() => response.statusText);
     throw new Error(`Visualization API error ${response.status}: ${text}`);
   }
+
+  incrementVisualizationCount();
 
   const json = await response.json();
   const base64: string = json?.data?.image ?? "";
