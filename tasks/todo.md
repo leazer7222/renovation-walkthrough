@@ -87,9 +87,18 @@
 - [ ] Result persistence across sessions
 - [ ] Contractor matching integration
 
+## Phase 10: API Governance & UX Polish ✅ COMPLETE
+- [x] Implement 200-call limit for AI visualizations
+- [x] Optimize all screens for "no-scroll" layout (16:9 images, reduced margins)
+- [x] Establish structural header clearance (80px fixed height)
+- [x] Add Style Clarification step (1-4 styles for Path 1, 1-3 for Path 2)
+- [x] Implement "Admin Mode" prompt display on reveal page
+- [x] Document recurring layout constraints in Lessons Learned
+
 ## Session Result
-- ✅ Style Discovery "Sweet 16" bracket game implemented and live
-- ✅ Branched entry flow (Discovery path vs Build path) integrated
-- ✅ Room-aware AI prompt generation perfected for kitchens AND bathrooms
-- ✅ Complete visual summary and transformation prompts enabled for all project types
+- ✅ API Governance (200-call limit) implemented and tested
+- ✅ App-wide "no-scroll" layout optimized for 1080p
+- ✅ Structural header clearance (80px) secured globally
+- ✅ Style Clarification branched flow added for both paths
+- ✅ Admin Mode for prompt verification added to reveal page
 - ✅ All code committed and pushed to master

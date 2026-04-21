@@ -1,19 +1,19 @@
 # Current State - RenovationWalkthrough Project
 
-## Project Status: PHASE 6 COMPLETE — MULTI-ROOM EXPANSION & BUILD STABILIZED
+## Project Status: PHASE 10 COMPLETE — API GOVERNANCE & UX POLISH
+ 
+ **Date**: April 21, 2026
+ **Phase**: Implementation of AI visualization limits, "no-scroll" UI optimization, and structural layout fixes. Added Style Clarification branched flow and Admin Mode for prompt verification.
 
-**Date**: April 14, 2026
-**Phase**: Multi-room expansion finalized. Bathroom and Living Room modules are now fully functional with robust asset resolution. Netlify build stabilized after TypeScript error resolution.
-
-### Multi-Room Expansion (April 14, 2026)
-- **Living Room Module**: Implemented full decision flow including Layout, Flooring Material, Seating Configuration, Wall Treatment, Rug Style, and Lighting.
-- **Bathroom Module**: Finalized Bathroom flow logic and corrected state machine transitions for the "Add-ons" phase.
-- **Asset Resolution**: Refactored `assetResolver.ts` with room-specific overrides and normalized path handling to support Kitchen, Bathroom, and Living Room modules concurrently.
-- **Bug Fixes**: 
-  - Restored missing Living Room seating options (Sectional, Sofa & Chairs, Minimal Sofa, Lounge Layered).
-  - Fixed "shadowing" bug in `App.tsx` where kitchen transition logic interfered with other rooms.
-  - Corrected asset typos (e.g., `lounge-layerd.png` -> `lounge-layered.png`) on the filesystem.
-- **Build Stability**: Resolved `TS2304` error in `useGameEngine.ts` preventing Netlify deployments; verified fix with successful production `npm run build`.
+### API Governance & UX Polish (April 21, 2026)
+- **AI Visualization Limit**: Implemented a hard 200-call limit in `localStorage` with clear user feedback in `FinalReveal.tsx`.
+- **No-Scroll Optimization**: Redesigned selection cards, image aspect ratios (16:9), and margins across all screens to ensure a strictly scroll-free experience.
+- **Structural Layout Fix**: Established a global `--header-height` constraint and fixed header height (80px) to prevent content/logo overlap regressions.
+- **Style Clarification**: Added a branched confirmation screen before reveal:
+    - Path 1 (Bracket): Multi-select 1-4 top styles.
+    - Path 2 (Build): Refine 1-3 onboarding styles.
+- **Admin Mode**: Added an "Admin Mode" toggle to the reveal page to display the exact AI prompt used for generation.
+- **Lessons Learned**: Created a centralized tracking document for layout constraints and governance rules.
 
 ## Major Updates (April 2, 2026 - Iteration 4)
 
@@ -110,6 +110,14 @@
 ## Phase 7: Results & Matching 📋 PLANNED
 - [ ] Result persistence across sessions
 - [ ] Contractor matching integration
+
+## Phase 10: API Governance & UX Polish ✅ COMPLETE
+- [x] Implement 200-call limit for AI visualizations
+- [x] Optimize all screens for "no-scroll" layout (16:9 images, reduced margins)
+- [x] Establish structural header clearance (80px fixed height)
+- [x] Add Style Clarification step (1-4 styles for Path 1, 1-3 for Path 2)
+- [x] Implement "Admin Mode" prompt display on reveal page
+- [x] Document recurring layout constraints in Lessons Learned
 
 ## Session Result
 - ✅ Design Foundation phase integrated seamlessly with Materials flow
