@@ -50,11 +50,11 @@ export function FinalReveal({
 
   const getLabel = (phase: string, id: string | null) => {
     if (!id) return t.notSelected;
-    const translated = t.phaseOptionLabels[phase]?.[id];
+    const translated = t.phaseOptionLabels?.[phase]?.[id];
     if (translated) return translated;
     const sourceOrder = isLivingRoom ? livingRoomRoundOrder : (isBathroom ? bathroomRoundOrder : roundOrder);
     const round = sourceOrder.find(r => r.phase === phase);
-    return round?.options.find(o => o.id === id)?.label || id;
+    return round?.options?.find(o => o.id === id)?.label || id;
   };
 
   const traits = getTraitsForSelections(selection, room);
